@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQA A-Level PE — Sport Psychology Tutor</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;}
+.header{background:#2d1a44;color:#fff;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header-title{font-size:17px;font-weight:600;letter-spacing:-0.01em;}
+.header-sub{font-size:12px;opacity:.65;margin-top:2px;}
+.header-badge{background:#c9a84c;color:#2d1a44;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.03em;}
+.container{max-width:820px;margin:0 auto;padding:2rem 1.5rem;}
+.tab-bar{display:flex;gap:2px;margin-bottom:1.5rem;background:#e8e7e3;border-radius:10px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;cursor:pointer;border:none;background:transparent;border-radius:8px;color:#555;font-weight:500;}
+.tab.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:1rem;}
+.topic-card{background:#fff;border:1.5px solid #e0dfd8;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s;}
+.topic-card:hover{border-color:#2d1a44;background:#f8f7f4;}
+.topic-card.sel{border-color:#2d1a44;background:#f0ecf7;}
+.tc-name{font-size:13px;font-weight:600;margin-bottom:3px;color:#1a1a1a;}
+.tc-count{font-size:11px;color:#888;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#1a1a1a;transition:all .15s;}
+.btn:hover{background:#f5f4f0;}
+.btn.primary{background:#2d1a44;color:#fff;border-color:#2d1a44;}
+.btn.primary:hover{background:#3d2554;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.qbox{background:#f5f4f0;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.65;margin-bottom:1rem;white-space:pre-wrap;}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-bottom:6px;display:block;}
+textarea,input[type="text"]{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;background:#fafaf8;}
+textarea:focus,input:focus{outline:none;border-color:#2d1a44;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.03em;}
+.b-ao1{background:#dbeafe;color:#1e40af;}
+.b-ao2{background:#fef3c7;color:#92400e;}
+.b-ao3{background:#dcfce7;color:#15803d;}
+.b-m{background:#f0f0ec;color:#555;}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+.fb-text{font-size:14px;line-height:1.75;white-space:pre-wrap;color:#1a1a1a;}
+.er-box{background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;padding:.875rem 1rem;margin-top:1rem;}
+.er-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c3aed;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.er-text{font-size:13px;color:#4c1d95;line-height:1.65;}
+.msg{padding:10px 0;border-bottom:1px solid #f0f0ec;}
+.msg:last-child{border-bottom:none;}
+.msg-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#999;margin-bottom:3px;}
+.msg-text{font-size:14px;line-height:1.65;white-space:pre-wrap;}
+.fu-row{display:flex;gap:8px;margin-top:1rem;}
+.fu-row input{flex:1;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:#2d1a44;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:-1px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.q-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0ec;}
+.q-item:last-child{border-bottom:none;}
+.q-id{font-size:11px;color:#aaa;min-width:28px;padding-top:1px;}
+.q-txt{font-size:13px;flex:1;line-height:1.4;}
+.q-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.section-title{font-size:14px;font-weight:600;margin-bottom:.75rem;color:#2d1a44;}
+.level-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:.875rem 1rem;margin-top:.75rem;font-size:13px;line-height:1.6;color:#78350f;}
+.level-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#b45309;margin-bottom:5px;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="header-title">AQA A-Level PE — Sport Psychology</div>
+    <div class="header-sub">AI tutor · mark-scheme accurate · examiner report feedback</div>
+  </div>
+  <div class="header-badge">60 QUESTIONS</div>
+</div>
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('practice')">Practice</button>
+    <button class="tab" onclick="switchTab('browse')">All Questions</button>
+  </div>
+  <div id="practice-panel"></div>
+  <div id="browse-panel" style="display:none;"></div>
+</div>
+
+<script>
+function getHeaders(){return{'Content-Type':'application/json'}}
+
+const DIAGRAMS = {
+  'Q39': `<svg viewBox="0 0 495 175" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%;display:block;margin:0 auto;font-family:inherit"><rect x="15" y="15" width="145" height="120" fill="#f9f9f7" rx="3" stroke="#ddd" stroke-width="1"/><line x1="35" y1="22" x2="35" y2="127" stroke="#555" stroke-width="1.5"/><line x1="33" y1="125" x2="155" y2="125" stroke="#555" stroke-width="1.5"/><text x="94" y="140" text-anchor="middle" font-size="9" fill="#777">Arousal</text><line x1="37" y1="123" x2="152" y2="28" stroke="#2d1a44" stroke-width="2.5" stroke-linecap="round"/><text x="87" y="163" text-anchor="middle" font-size="14" font-weight="600" fill="#222">A</text><rect x="175" y="15" width="145" height="120" fill="#f9f9f7" rx="3" stroke="#ddd" stroke-width="1"/><line x1="195" y1="22" x2="195" y2="127" stroke="#555" stroke-width="1.5"/><line x1="193" y1="125" x2="315" y2="125" stroke="#555" stroke-width="1.5"/><text x="254" y="140" text-anchor="middle" font-size="9" fill="#777">Arousal</text><path d="M197,123 C202,123 222,27 254,27 C286,27 308,123 313,123" fill="none" stroke="#2d1a44" stroke-width="2.5" stroke-linecap="round"/><text x="247" y="163" text-anchor="middle" font-size="14" font-weight="600" fill="#222">B</text><rect x="335" y="15" width="145" height="120" fill="#f9f9f7" rx="3" stroke="#ddd" stroke-width="1"/><line x1="355" y1="22" x2="355" y2="127" stroke="#555" stroke-width="1.5"/><line x1="353" y1="125" x2="475" y2="125" stroke="#555" stroke-width="1.5"/><text x="414" y="140" text-anchor="middle" font-size="9" fill="#777">Arousal</text><path d="M357,123 C362,123 378,55 397,28 L411,28 L413,123" fill="none" stroke="#2d1a44" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><text x="407" y="163" text-anchor="middle" font-size="14" font-weight="600" fill="#222">C</text><text x="36" y="13" font-size="8" fill="#888">Performance ↑</text><text x="196" y="13" font-size="8" fill="#888">Performance ↑</text><text x="356" y="13" font-size="8" fill="#888">Performance ↑</text></svg>`,
+  'Q50': `<svg viewBox="0 0 420 185" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;width:100%;display:block;margin:0 auto;font-family:inherit"><line x1="55" y1="18" x2="55" y2="150" stroke="#333" stroke-width="1.5"/><line x1="53" y1="148" x2="375" y2="148" stroke="#333" stroke-width="1.5"/><text x="215" y="164" text-anchor="middle" font-size="11" fill="#333">Arousal</text><text x="60" y="161" font-size="9" fill="#888">Low</text><text x="350" y="161" font-size="9" fill="#888">High</text><text x="15" y="85" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90,15,85)">Performance</text><line x1="57" y1="146" x2="370" y2="22" stroke="#2d1a44" stroke-width="2.5" stroke-linecap="round"/><text x="374" y="20" font-size="13" font-weight="700" fill="#2d1a44">X</text><path d="M60,146 C68,146 100,22 215,22 C330,22 360,146 368,146" fill="none" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"/><text x="212" y="17" text-anchor="middle" font-size="13" font-weight="700" fill="#c9a84c">Y</text><rect x="60" y="25" width="70" height="35" fill="white" fill-opacity="0.9" rx="3"/><line x1="65" y1="35" x2="80" y2="35" stroke="#2d1a44" stroke-width="2"/><text x="84" y="39" font-size="10" fill="#333">Theory X</text><line x1="65" y1="50" x2="80" y2="50" stroke="#c9a84c" stroke-width="2"/><text x="84" y="54" font-size="10" fill="#333">Theory Y</text></svg>`
+};
+function getDiagram(id){const d=DIAGRAMS[id];return d?'<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin:.25rem 0 1rem;">'+d+'</div>':''}
+
+const QS = [
+  // AROUSAL & STRESS MANAGEMENT
+  {id:"Q3",sub:"Arousal & Flow",q:"At optimal arousal levels a performer may experience peak flow.\n\nState three characteristics of peak flow experience.",marks:3,ao:"AO1",ms:"• Clear goals. (1)\n• Highly focused on the task / good selective attention / fully absorbed in the activity. (1)\n• Movement feels effortless. (1)\n• High levels of confidence / self-efficacy / belief in ability. (1)\n• Subconscious feelings of control / being on autopilot. (1)\nMax 3 marks",er:"Low mean mark of approximately 1.2 for an AO1 recall question — only 8% accessed all three marks. The most common mark was 1, suggesting this is an underprepared area. The mark scheme was based on one previously published, demonstrating the value of past papers. Students should ensure they can state at least 5 characteristics of peak flow to have a strong chance of scoring 3.",type:"written"},
+  {id:"Q35",sub:"Arousal & Flow",q:"In the build-up to an important competition, athletes often experience stress.\n\nWhich of the following is classed as a cognitive stress management technique?\nA) Biofeedback\nB) Centering\nC) Imagery\nD) Progressive Muscular Relaxation",marks:1,ao:"AO1",ms:"C — Imagery",er:"Imagery is a COGNITIVE technique (mental/thought-based). Biofeedback, centering, and progressive muscular relaxation are SOMATIC techniques (body-based). Students frequently confuse these two categories.",type:"mcq",answer:"C"},
+  {id:"Q39",sub:"Arousal & Flow",q:"The three graphs below show different theories of the relationship between arousal and performance.\n\nWhich one represents the catastrophe theory of arousal?\nA) Graph A\nB) Graph B\nC) Graph C",marks:1,ao:"AO1",ms:"C — The graph showing a sharp/sudden drop in performance after peak arousal (not the smooth inverted-U curve).",er:"96% answered this question correctly. Catastrophe theory is distinguished by the SUDDEN and DRAMATIC drop in performance after peak arousal, not the gradual decline shown by the inverted-U hypothesis.",type:"mcq",answer:"C"},
+  {id:"Q50",sub:"Arousal & Flow",q:"The diagram below shows the relationship between arousal and performance for two different theories X and Y.\n\nIdentify theories X and Y:\nA) X: Catastrophe theory  Y: Drive theory\nB) X: Catastrophe theory  Y: Inverted U theory\nC) X: Drive theory  Y: Inverted U theory\nD) X: Drive theory  Y: Catastrophe theory",marks:1,ao:"AO2",ms:"C — X: Drive theory (linear increase), Y: Inverted U theory (curved peak).",er:"This was the best answered MCQ on the paper with 98% of students correctly identifying drive theory and inverted U theory. Drive theory is a LINEAR positive relationship between arousal and performance; inverted U theory shows performance peaking at moderate arousal then declining.",type:"mcq",answer:"C"},
+  {id:"Q59",sub:"Arousal & Flow",q:"Describe how the nature of a task may affect the optimum level of arousal and the possible impact of under-arousal on performance.",marks:4,ao:"AO1",ms:"Nature of task (sub-max 2):\n• Complex or fine skills need lower levels of arousal. (1)\n• Simple or gross skills need higher levels of arousal. (1)\nImpact of under-arousal (sub-max 2):\n• Poor selective attention / cues missed. (1)\n• Lack of concentration / focus. (1)\n• Social loafing / Ringelmann effect. (1)\n• Slower / poor reaction time / slower decision making. (1)\n• Attentional wastage / attentional narrowing. (1)\n• Failed to reach zone of optimal functioning / peak flow experience. (1)\nMax 4 marks",er:"Students often correctly identified the types of tasks that require higher or lower levels of arousal. However, fewer were able to fully explain the impact of UNDER-AROUSAL beyond stating 'poor selective attention' or 'lack of concentration' — these need elaboration to secure the second mark in each sub-section.",type:"written"},
+  {id:"Q60",sub:"Arousal & Flow",q:"Performers who are over-aroused may use various stress management techniques to control their anxiety and improve their performance.\n\nDescribe how the technique of imagery can be used by the performer.",marks:3,ao:"AO1",ms:"• Formation of mental images of good performance. (1)\n• Formation of images of a calm place away from competition. (1)\n• Formation of images of possible situations and possible outcomes. (1)\n• Formation of emotional responses to specific situations. (1)\n• Internal imagery: creates kinaesthetic feeling / feeling of the movement. (1)\n• External imagery: seeing themselves completing the movement. (1)\nMax 3 marks",er:"Only 10% provided sufficient detail to access maximum marks. Too often responses were limited to stating imagery 'involved the formation of mental images of good performance'. Many students stated imagery could be internal or external but FAILED to elaborate or explain what those terms mean. Describing BOTH internal and external imagery with definitions is the route to full marks.",type:"written"},
+
+  // ANXIETY
+  {id:"Q4",sub:"Anxiety",q:"Name two types of anxiety experienced in sport. Give a sporting example of each.\n\nType 1:\nSporting example:\n\nType 2:\nSporting example:",marks:4,ao:"AO1/AO2",ms:"• Cognitive (1): negative thoughts / worry — e.g. negative thoughts about an upcoming putt in golf. (1)\n• Somatic (1): physical symptoms — e.g. getting butterflies / sweating before kick-off in a big football match. (1)\n• (Competitive) trait (1): general predisposition to anxiety — e.g. feeling anxious before all tennis matches. (1)\n• (Competitive) state (1): situational anxiety — e.g. feeling anxious when taking a penalty flick in hockey. (1)\nAny two types with appropriate examples. Max 4 marks",er:"A very well answered question — 70% of students achieved all 4 marks; 85% named two types of anxiety. Cognitive and somatic anxiety were consistently well applied. Application of STATE and TRAIT anxiety sometimes became confused — trait is a GENERAL predisposition across all situations, state is a SPECIFIC response to a particular situation.",type:"written"},
+  {id:"Q18",sub:"Anxiety",q:"Evaluate the effectiveness of using questionnaires to measure the anxiety levels of all the players in a rugby squad.",marks:3,ao:"AO3",ms:"Effective:\n• Would only require one person to collect the views of the whole rugby squad — making it quick/cheap/efficient. (1)\n• The data produced can be interpreted and analysed quickly so the rugby squad could start seeing benefits sooner. (1)\nNot effective:\n• Rugby players may give socially desirable responses, affecting validity/reliability. (1)\n• To elicit valid responses questionnaires should be taken close to a game; however this can lead to rushed answers/the result affecting responses. (1)\nMax 3 marks — must include BOTH for and against. Impact must be stated after each point.",er:"Mean mark approximately 0.9, with less than 2% achieving full marks. Students did not register that the question referred to effectiveness to measure anxiety levels IN A RUGBY SQUAD. Generic pros and cons of questionnaires not linked to measuring anxiety in sport were not creditworthy. This was an evaluate question requiring reason AND result — e.g. 'quick/cheap/efficient SO THAT one person can conduct all questionnaires for the whole squad'.",type:"written"},
+  {id:"Q42",sub:"Anxiety",q:"'A nervous response to a specific sporting situation.'\n\nWhich type of anxiety does this statement best describe?\nA) Cognitive anxiety\nB) Competitive state anxiety\nC) Competitive trait anxiety\nD) Somatic anxiety",marks:1,ao:"AO1",ms:"B — Competitive state anxiety",er:"Around 93% of students correctly identified competitive state anxiety. State anxiety is situational and specific; trait anxiety is a general predisposition. The key word is 'specific sporting situation' which signals STATE, not TRAIT.",type:"mcq",answer:"B"},
+
+  // SELF-EFFICACY & CONFIDENCE
+  {id:"Q2",sub:"Self-Efficacy & Confidence",q:"A high jumper observes a performer of a similar ability successfully completing their jump.\n\nWhich factor from Bandura's model of self-efficacy is this an example of?\nA) Emotional arousal\nB) Performance accomplishment\nC) Verbal persuasion\nD) Vicarious experience",marks:1,ao:"AO2",ms:"D — Vicarious experience",er:"Vicarious experience is watching OTHERS (especially similar others) perform successfully. This raises self-efficacy because the performer thinks 'if they can do it, so can I'. Performance accomplishment is based on the performer's OWN past success.",type:"mcq",answer:"D"},
+  {id:"Q8",sub:"Self-Efficacy & Confidence",q:"Bandura's model outlines four factors which will affect a performer's self-efficacy.\n\nDescribe three of these factors.",marks:3,ao:"AO1",ms:"• Performance accomplishment: how a performer has done in a task before. (1)\n• Vicarious experience: if a performer has seen someone similar perform the task successfully. (1)\n• Verbal persuasion: if a performer is given reinforcement/feedback from others. (1)\n• Emotional arousal: if the performer is optimally aroused to perform the task. (1)\nMax 3 marks",er:"Most students managed 1 or 2 marks; very few got all 3. Emotional arousal was the LEAST well described factor. Performance accomplishment was the most common and best described. A minority of students saw 'Bandura' in the question and wrote about attention/retention from observational learning — a clear error of confusing two different theories. Students must distinguish between Bandura's self-efficacy model and his observational learning model.",type:"written"},
+  {id:"Q12",sub:"Self-Efficacy & Confidence",q:"'The belief in your ability to master a specific sporting situation.'\n\nWhich term is described in this statement?\nA) Self-confidence\nB) Self-efficacy\nC) Self-esteem",marks:1,ao:"AO1",ms:"B — Self-efficacy",er:"Around 78% of students correctly identified self-efficacy. Self-efficacy is task-specific and situation-specific; self-confidence is more general; self-esteem relates to overall self-worth. The key distinguishing phrase is 'SPECIFIC sporting situation'.",type:"mcq",answer:"B"},
+  {id:"Q36",sub:"Self-Efficacy & Confidence",q:"Learned helplessness can be general or specific.\n\nDefine both of these terms.\n\nGeneral learned helplessness:\nSpecific learned helplessness:",marks:2,ao:"AO1",ms:"General learned helplessness: Self-doubt or a lack of belief that affects an individual in a RANGE of situations / the belief they are unable to perform in all aspects of a sport or even all sports. (1)\nSpecific learned helplessness: Self-doubt or a lack of belief that affects an individual in a SPECIFIC situation / a performer feeling they are unable to perform well in one particular position or when executing one type of tactic. (1)\nMax 2 marks",er:"The distinction between general and specific is critical. GENERAL = affects performance across many/all sports or aspects of sport. SPECIFIC = affects performance only in one particular skill, position, or situation. Students often write vague definitions that do not distinguish clearly between the two.",type:"written"},
+  {id:"Q52",sub:"Self-Efficacy & Confidence",q:"A performer with a 'need to achieve' (NaCh) personality often demonstrates approach behaviour.\n\nIdentify three other characteristics of an individual with a need to achieve (NaCh) personality.",marks:3,ao:"AO1",ms:"Accept first three answers:\n• Seeks out challenging situations / competitive. (1)\n• Takes risks. (1)\n• Task persistence / mastery orientation. (1)\n• Not afraid of failure. (1)\n• Values feedback from others / accepts criticism. (1)\n• Attributes performance to internal factors / attributes failure to external factors. (1)\nMax 3 marks",er:"The full range of marks was awarded, which was slightly surprising for a recall question. Students needed to ensure answers were EXCLUSIVELY related to a NaCh (approach) personality — not general traits such as 'confidence', 'motivation', or 'pressure'. Be precise: these characteristics must distinguish NaCh from NaF (avoidance behaviour).",type:"written"},
+  {id:"Q53",sub:"Self-Efficacy & Confidence",q:"Identify and describe one strategy a coach could use to develop approach behaviour. Use a sporting example to support your answer.",marks:3,ao:"AO1/AO2",ms:"Award 1 mark for identification, 1 for description, 1 for sporting example:\n• Reinforcement (1): coach offers rewards/praise when player does well so they maintain the desire to succeed (1). E.g. coach congratulates a player each time they score (1).\n• Attribution retraining (1): coach tells the player their success was due to their own effort/ability (1). E.g. coach acknowledges how much effort a player put in which helped them win (1).\n• Allow success (1): coach makes tasks easier to build confidence (1). E.g. easier drills that can be accomplished during training (1).\n• Goal setting (1): coach sets achievable goals that can be met with effort (1). E.g. to score 5 lay-ups in the next game (1).\nMax 3 marks",er:"A quarter of students achieved zero marks. The most common mistake was OMITTING the specific identification of a strategy — students often described and gave an example but didn't name the strategy, limiting them to 2 marks. Most commonly awarded: reinforcement and allow success. Only 20% achieved full marks — students must address ALL THREE components: identify, describe, AND give an example.",type:"written"},
+  {id:"Q56",sub:"Self-Efficacy & Confidence",q:"Elite performers may display different levels of confidence.\n\nOutline how learned helplessness can affect the performance of an individual.",marks:3,ao:"AO1",ms:"• Performer perceives failure is inevitable / only option. (1)\n• Feels they have no control over the situation. (1)\n• Causes avoidance behaviour / no task persistence / giving up. (1)\n• Causes general learned helplessness — affects general sporting situations. (1)\n• Causes specific learned helplessness — affects specific situations. (1)\nMax 3 marks",er:"Answers produced a range of marks with approximately a third of students achieving each level. Most were able to provide a basic explanation. The stronger responses explained BOTH general and specific learned helplessness with clear descriptions of how each affects different aspects of performance.",type:"written"},
+  {id:"Q57",sub:"Self-Efficacy & Confidence",q:"Outline four strategies a coach could use to avoid a performer experiencing learned helplessness.",marks:4,ao:"AO1",ms:"Any 4 of:\n• Performance accomplishments / reminding performer of previous success. (1)\n• Ensure success / gradually increase task difficulty / avoid failure. (1)\n• Vicarious experiences / watching successful performances. (1)\n• Verbal persuasion / encouragement / positive feedback from coach. (1)\n• Control emotional arousal / stress management techniques / mental rehearsal. (1)\n• Set goals / performance goals rather than outcome goals. (1)\n• Avoid social comparison with other performers. (1)\n• Use attributions correctly / attribution retraining / encourage self-serving bias. (1)\nMax 4 marks",er:"Over two thirds of students achieved 3 or 4 marks, demonstrating good applied knowledge. Many supported basic answers with relevant examples. Strategies were often structured around Bandura's self-efficacy model — a useful scaffold for students to remember a range of strategies.",type:"written"},
+
+  // ATTRIBUTION THEORY
+  {id:"Q7",sub:"Attribution Theory",q:"Which one of the following attributions would be categorised as unstable and external?\nA) I tried hard\nB) I had a favourable refereeing decision\nC) I was the better player\nD) The opposition were poor",marks:1,ao:"AO2",ms:"B — I had a favourable refereeing decision",er:"Around 68% of students answered correctly. The Weiner attribution matrix: LOCUS OF CAUSALITY (internal/external) × STABILITY (stable/unstable). A refereeing decision is EXTERNAL (not within the performer's control) and UNSTABLE (may not recur). 'I tried hard' is internal/unstable; 'I was the better player' is internal/stable; 'The opposition were poor' is external/stable.",type:"mcq",answer:"B"},
+  {id:"Q14",sub:"Attribution Theory",q:"Define the term 'attribution'.",marks:1,ao:"AO1",ms:"• Perceived (or suitable alternative) reason for success or failure. (1)\nMax 1 mark",er:"Only 27% of students answered correctly because they used the word 'reason' instead of 'perception/belief/perceived'. Attribution is not simply identifying a reason — it is about the PERCEIVED or BELIEVED reason. Without this qualifier, the definition is inaccurate and will not be credited.",type:"written"},
+  {id:"Q15",sub:"Attribution Theory",q:"Describe the link between attribution and task persistence when an athlete encounters:\n• success\n• failure.",marks:2,ao:"AO1",ms:"Success (sub max 1):\n• Where success is attributed to internal stable factors/ability, task persistence will be higher. (1)\n• Where success is attributed to unstable factors/luck, persistence will be lower. (1)\nFailure (sub max 1):\n• Where failure is attributed to internal stable factors/ability, task persistence will be lower. (1)\n• Where failure is attributed to unstable factors/effort/luck, persistence will be higher. (1)\nMax 2 marks — must address BOTH success and failure.",er:"Mean mark around 0.6. Students did not refer to TASK PERSISTENCE — the question explicitly asked about it but students wrote generally about attribution. Many also referred to attributions as simply 'internal' and 'external' rather than specifying 'internal-stable'. Those who got marks knew attribution-persistence links and were able to apply the reverse for success/failure.",type:"written"},
+
+  // GOAL SETTING
+  {id:"Q9",sub:"Goal Setting",q:"Describe a 'performance-related goal'. Give an example from the event of javelin.",marks:2,ao:"AO1/AO2",ms:"AO1 Description: A goal set to improve own personal standards / does not involve comparisons to others. (1)\nAO2 Example: E.g. beating a personal best by 1m. (1)\nMax 2 marks",er:"Many students got the example mark but not the definition — they simply said a performance goal 'focused on performance'. Some confused performance goals with process goals, focusing on technique in both definition and example. A small but significant number gave examples from the wrong event or sport — examples MUST be from javelin in this question.",type:"written"},
+  {id:"Q10",sub:"Goal Setting",q:"Give examples of how a javelin thrower can make sure their performance-related goal is measurable and realistic.\n\nMeasurable:\nRealistic:",marks:2,ao:"AO2",ms:"• Measurable: aiming to increase the distance of their throw by 1m (or accept other specific distance). (1)\n• Realistic: setting a distance of improving personal best by 1m is more likely to be achieved than aiming to increase by significantly more. (1)\nMax 2 marks — must be examples, not generic definitions.",er:"Mean mark approximately 1 out of 2. Students either described what realistic means rather than giving a javelin example, or didn't relate measurable to a performance-related goal. The question asks for EXAMPLES linked to javelin — not definitions of measurable and realistic.",type:"written"},
+  {id:"Q25",sub:"Goal Setting",q:"A golfer sets herself the goal of keeping her head still throughout her swing. Identify which type of goal this is.\nA) Outcome\nB) Performance\nC) Process",marks:1,ao:"AO2",ms:"C — Process",er:"Approximately half of students correctly identified this as a process goal. A PROCESS goal focuses on a specific aspect of TECHNIQUE or movement execution. A PERFORMANCE goal focuses on improving a personal standard. An OUTCOME goal focuses on the result compared to others.",type:"mcq",answer:"C"},
+  {id:"Q46",sub:"Goal Setting",q:"(a) Describe an outcome-orientated goal.\n\n(b) Evaluate the impact of an outcome-orientated goal on the confidence of a 100m sprinter.",marks:3,ao:"AO1/AO3",ms:"(a) AO1: A goal set against the performance of others / based on a result. (1)\n(b) AO3 — 2 marks:\n• The impact could be POSITIVE on confidence if the goal is achieved. (1)\n• The impact could be NEGATIVE on confidence if the goal is not achieved. (1)\n• Task/performance/process goals may be more appropriate to raise confidence / focusing on a personal best would better increase a performer's confidence. (1)\nMax 3 marks",er:"(a) Around 67% got the mark. Where students scored 0, it was because they described outcome goals as 'goals focused on the outcome' — restating the question. Students must find ALTERNATIVE words. Giving only an example was also insufficient for the description mark.\n(b) A large proportion achieved 1 mark but only a very small minority got both. Many referred to impact on MOTIVATION rather than CONFIDENCE. Of those who focused on confidence, many only identified the POSITIVE impact. The second mark often required identifying that OTHER goal types would better enhance confidence as they don't involve comparison to others.",type:"written"},
+  {id:"Q47",sub:"Goal Setting",q:"Which type of goal is concerned with improvements in technique?\nA) Outcome goal\nB) Performance goal\nC) Process goal\nD) Product goal",marks:1,ao:"AO1",ms:"C — Process goal",er:"Approximately half of students correctly identified process goal. Improvements in TECHNIQUE = process goal. Improvements in PERSONAL STANDARD = performance goal. Beating OTHERS / results = outcome goal.",type:"mcq",answer:"C"},
+
+  // PERSONALITY
+  {id:"Q22",sub:"Personality",q:"Hollander's model is one example of an interactionist perspective of personality.\n\nExplain how a coach can apply knowledge of Hollander's model of personality to improve performance. Refer to each level of the model in your answer.",marks:3,ao:"AO2",ms:"• Psychological core: coach may see signs of impending aggressive response and substitute/call time out to remove performer from environment. (1)\n• Typical responses: coach can simulate trigger situations in training and introduce strategies to condition performers to respond differently. (1)\n• Role-related behaviour: coach gives responsibility (e.g. captaincy) leading to a different response due to perceived importance to the team. (1)\nMax 3 marks",er:"The hardest question across the entire series — mean mark less than 0.2. Most students lacked the fundamental knowledge of Hollander's model required. This may indicate students narrowed their focus on advance information. Where students had the knowledge, they still couldn't consider how it might help a COACH IMPROVE PERFORMANCE. Past paper questions are an excellent resource — similar questions have been asked before. Students MUST know all three levels: psychological core, typical responses, role-related behaviour.",type:"written"},
+  {id:"Q37",sub:"Personality",q:"The work of Hollander and Lewin are examples of an interactionist perspective of personality.\n\nExplain how interactionist perspectives account for the varied behaviour of a netballer who is repeatedly fouled during two different games.",marks:4,ao:"AO2",ms:"• Netball player may react aggressively in one game and calmly in the other. (1)\n• Reactions in one match could be due to the player's trait / psychological core is to stay calm or be aggressive. (1)\n• In the other match, react differently due to environmental factors / learned differently. (1)\n• Such as if it is an important match / against a rival / team is losing/winning. (1)\n• Response can be controlled in certain circumstances, e.g. when the umpire or coach is watching. (1)\n• If the player has a position of responsibility (e.g. captain), less likely to respond angrily. (1)\nMax 4 marks",er:"Good differentiation question. Those with knowledge produced detailed answers, often quoting Lewin and Hollander with specific terminology. Better answers included an applied example demonstrating in-depth understanding. Key: the interactionist view is that behaviour = f(person × environment) — both the trait AND the situation determine behaviour.",type:"written"},
+  {id:"Q58",sub:"Personality",q:"Outline how the interactionist perspective of personality explains the differing behaviour of individual players.",marks:4,ao:"AO1",ms:"Any 4 of:\n• Behaviour affected by traits AND situation / combination of trait and social learning theory. (1)\n• Players can change their behaviour depending on the situation. (1)\n• Lewin: B = f(P.e) — Behaviour is a function of Personality and environment. (1)\n• Hollander's three inter-related levels: psychological core / typical responses / role-related behaviour. (1)\n• Psychological core: inner traits/values/beliefs. (1)\n• Typical responses: usual behaviour in a situation. (1)\n• Role-related behaviour: specific behaviour due to the situation. (1)\n• Applied example: e.g. a player may normally be quiet but in a match be more outspoken. (1)\nMax 4 marks",er:"Good differentiation question allowing those with topic knowledge to produce detailed answers. Better answers included Lewin's formula B=f(P.e) and Hollander's three levels with specific terminology, plus an applied example demonstrating in-depth understanding.",type:"written"},
+
+  // ATTITUDES
+  {id:"Q20",sub:"Attitudes",q:"Which component of an attitude involves a person's emotions?\nA) Affective\nB) Behavioural\nC) Cognitive",marks:1,ao:"AO1",ms:"A — Affective",er:"Mean approximately 0.9 — a straightforward AO1 recall question. The triadic model: AFFECTIVE = feelings/emotions, BEHAVIOURAL = actions/intentions, COGNITIVE = thoughts/beliefs.",type:"mcq",answer:"A"},
+  {id:"Q21",sub:"Attitudes",q:"A performer's likelihood of success is influenced by them having a positive attitude.\n\nDescribe four factors which may lead to the formation of a positive attitude.",marks:4,ao:"AO1",ms:"Any 4 of:\n• Socialisation: observing a positive attitude in others (family/peers/teammates/media). (1)\n• Conditioning: others reinforcing that a positive attitude is desirable / praising/rewarding a positive attitude. (1)\n• Past experiences: having been successful in the past. (1)\n• Familiarity: experienced something a lot (via media) / if an activity is familiar/fun/engaging/challenging/competitive. (1)\nMax 4 marks",er:"Mean approximately 1.8. Students identified factors but often demonstrated a NARROW knowledge base — multiple examples of socialisation given without exploring other factors. This lack of breadth limited marks. Students need to know ALL FOUR distinct routes to attitude formation, not just socialisation.",type:"written"},
+  {id:"Q31",sub:"Attitudes",q:"Explain why girls may form a negative attitude towards the sport of cricket.",marks:2,ao:"AO2",ms:"• Negative opinions about cricket not being for girls from family/peers/significant others / not complying with social norms. (1)\n• Girls may have had a bad experience when previously playing cricket / became bored/disinterested. (1)\n• Lack of female role models in cricket — players/coaches/teachers. (1)\n• Lack of media coverage of female cricket — less promotion of the game. (1)\nMax 2 marks",er:"Answers must be CONTEXTUALISED to cricket. Generic reasons for forming negative attitudes without reference to cricket or girls specifically will not receive full marks. Students should think about socialisation, past experience, role models, and media representation in this specific context.",type:"written"},
+
+  // AGGRESSION
+  {id:"Q26",sub:"Aggression",q:"Define 'aggression' and 'assertive behaviour'. Give a sporting example of each.",marks:4,ao:"AO1/AO2",ms:"Aggression:\n• AO1: Intent to cause harm OUTSIDE of the rules of the sport. (1)\n• AO2: E.g. punching/kicking an opponent in rugby/football. (1)\nAssertive behaviour:\n• AO1: A forceful act WITHIN the rules of the sport. (1)\n• AO2: E.g. tackling an opponent forcefully but legally in football/rugby/hockey. (1)\nMax 4 marks",er:"The KEY DISTINCTION: aggression involves INTENT TO HARM and is OUTSIDE the rules. Assertive behaviour is forceful but WITHIN the rules with no intent to harm. Students frequently blur this distinction. The sporting example must clearly reflect the definition given.",type:"written"},
+  {id:"Q27",sub:"Aggression",q:"State three strategies a coach can use to prevent a performer behaving aggressively in a competitive situation.",marks:3,ao:"AO1",ms:"Any 3 of:\n• Punish/substitute the performer for behaving aggressively. (1)\n• Reinforce non-aggressive behaviour / promote non-aggressive role models. (1)\n• Talk to the performer during a break in play. (1)\n• Practise thought-stopping/mental rehearsal/imagery/stress management techniques in training. (1)\n• Assign the performer to a position of responsibility in the team. (1)\nMax 3 marks",er:"A recall question where students need to provide three distinct strategies. Students should avoid listing similar strategies (e.g. two types of stress management technique) that might be considered overlapping.",type:"written"},
+  {id:"Q41",sub:"Aggression",q:"(a) Describe the frustration-aggression hypothesis.\n\n(b) Suggest why a bad tackle may take place. Refer to the frustration-aggression hypothesis.",marks:3,ao:"AO1/AO3",ms:"(a) AO1: Frustration-aggression theory states that when goals are blocked, frustration occurs, which then leads to aggression. (1)\n(b) AO3 — 2 marks:\n• The player may have been prevented from achieving their goal (e.g. beating their opponent) which leads to a blocked goal, which results in frustration. (1)\n• This leads to an aggressive act (bad tackle) which achieves catharsis — aggression released / frustration lowered. (1)\n• However, if the player is punished this could lead to further frustration and subsequent further aggression. (1)\nMax 3 marks",er:"(a) Only 32% successfully described the frustration-aggression hypothesis. Students MUST identify THREE elements: goal is blocked → frustration → aggression. Missing any element means the mark cannot be awarded.\n(b) Students often struggled because they had not successfully described the theory in part (a). Students frequently missed a key component — especially CATHARSIS, which is the reduction of frustration/aggression through the release of the aggressive act.",type:"written"},
+
+  // MOTIVATION
+  {id:"Q1",sub:"Motivation",q:"Which one of the following is an effective strategy to develop approach behaviours in the early stages of skill development?\nA) Allow success with little effort\nB) Attribute success externally\nC) Set outcome goals\nD) Use of punishments",marks:1,ao:"AO1",ms:"A — Allow success with little effort",er:"Allowing success with little effort builds initial confidence and positive associations (approach behaviour). Attributing success externally, setting outcome goals, and using punishment all work against developing approach behaviour in early learners.",type:"mcq",answer:"A"},
+  {id:"Q23",sub:"Motivation",q:"Evaluate the impact of extrinsic rewards on a performer's motivation.",marks:3,ao:"AO3",ms:"Positive impact (sub max 2):\n• Can enhance motivation as it gives the performer something to aim for / work towards. (1)\n• Can enhance motivation for activities the performer finds particularly difficult/unenjoyable/tedious. (1)\nNegative impact (sub max 2):\n• Could damage intrinsic motivation / athlete becomes reliant on extrinsic rewards and may not want to continue without them. (1)\n• If the performer doesn't achieve the extrinsic reward, this could damage motivation as they feel they have failed. (1)\nMax 3 marks — must include BOTH positive and negative impacts.",er:"Mean just over 1, less than 1.5% achieved maximum marks; nearly 80% accessed at least 1 mark. The most common mark was for identifying that extrinsic rewards give a performer something to work towards. Many students DESCRIBED what extrinsic rewards are and defined tangible/intangible — this is not creditworthy for an evaluate question. The command word 'evaluate' signals AO3 — students should not have been defining terms.",type:"written"},
+  {id:"Q29",sub:"Motivation",q:"Which of the following is an example of intangible extrinsic motivation?\nA) Certificate\nB) Praise\nC) Prize money\nD) Trophy",marks:1,ao:"AO1",ms:"B — Praise",er:"Praise is intangible (cannot be physically held or displayed). Certificates, trophies and prize money are TANGIBLE extrinsic rewards (physical objects). INTANGIBLE = things you cannot physically hold, such as praise, recognition, applause.",type:"mcq",answer:"B"},
+  {id:"Q43",sub:"Motivation",q:"Which one of these is an example of an intangible reward?\nA) Certificate\nB) Money\nC) Praise\nD) Trophy",marks:1,ao:"AO2",ms:"C — Praise",er:"Around 98% of students correctly identified praise. This was the best answered MCQ on the paper. Intangible = cannot be held/touched physically. Tangible = physical objects (certificate, money, trophy).",type:"mcq",answer:"C"},
+
+  // SOCIAL FACILITATION
+  {id:"Q11",sub:"Social Facilitation",q:"Two dancers perform in front of a large crowd.\n\nAnalyse why the presence of an audience may impact the performances of each of the two dancers differently.",marks:3,ao:"AO3",ms:"• One dancer might be a cognitive performer — presence of a crowd increases likelihood of dominant response occurring which is likely to be incorrect = social inhibition. (1)\n• One dancer might be an autonomous performer — presence of a crowd increases likelihood of dominant response occurring which is likely to be correct = social facilitation. (1)\n• One of the dancers may feel evaluated/judged (evaluation apprehension) which would increase the effect of the audience on that performer. (1)\nMax 3 marks",er:"Not very well answered. Many students wrote generally about how audiences help some performers and not others but didn't relate this to DOMINANT RESPONSE or EVALUATION APPREHENSION. Some picked up one mark for evaluation apprehension but only infrequently. The model requires reference to stage of learning (cognitive vs autonomous) and the effect on the dominant response being correct or incorrect.",type:"written"},
+  {id:"Q13",sub:"Social Facilitation",q:"Zajonc classified 'others present in sport' into four categories.\n\nWhile participating in badminton there are players involved in a match on the court next to yours.\n\nWhich one of these categories would these players be placed in?\nA) Audience\nB) Co-actor\nC) Competitive co-actor\nD) Social reinforcer",marks:1,ao:"AO2",ms:"B — Co-actor",er:"Around 74% of students correctly identified co-actor. A CO-ACTOR performs the same task but not in direct competition. A COMPETITIVE CO-ACTOR performs the same task in direct competition. A passive AUDIENCE simply watches. Social reinforcers are coaches, parents, significant others who provide feedback/support.",type:"mcq",answer:"B"},
+  {id:"Q32",sub:"Social Facilitation",q:"Zajonc's model shows the effect of the presence of others on performance.\n\nExplain how the presence of others will affect the performance of an individual in the autonomous stage of learning.",marks:2,ao:"AO2",ms:"• The individual will perceive the presence of others positively / be motivated by those watching. (1)\n• The individual will be able to control/utilise/cope with any increased arousal. (1)\n• The individual will have better skill levels / dominant response due to being in the autonomous stage. (1)\n• The individual will therefore experience social FACILITATION. (1)\nMax 2 marks",er:"For an AUTONOMOUS performer: their dominant response is CORRECT (well-learned), so increased arousal from others' presence drives better performance — social facilitation. Students must explain the MECHANISM (dominant response is correct at autonomous stage) not just state 'social facilitation occurs'.",type:"written"},
+  {id:"Q33",sub:"Social Facilitation",q:"State two strategies a coach could use to reduce social inhibition.",marks:2,ao:"AO1",ms:"Any 2 of:\n• Train in front of audiences of increasing sizes. (1)\n• Overlearn skills. (1)\n• Increase evaluation gradually. (1)\n• Improve selective attention/focus. (1)\nMax 2 marks",er:"Strategies to reduce social inhibition all aim to ensure skills are well-learned (so dominant response is correct) and that the performer is habituated to being watched. Both overlearning and gradual audience exposure are key strategies.",type:"written"},
+  {id:"Q44",sub:"Social Facilitation",q:"Zajonc developed a model to show the effect of the presence of others on performance.\n\nExplain the possible impact of an audience on a performer in the cognitive stage of learning.",marks:3,ao:"AO2",ms:"• Presence of an audience increases arousal. (1)\n• Increased arousal leads to increased likelihood of dominant response occurring. (1)\n• Dominant response of a cognitive performer will be INCORRECT (skill not yet learned). (1)\n• This is known as social INHIBITION. (1)\n• Evaluation apprehension — performance decreases through the perception of being judged. (1)\nMax 3 marks",er:"Well answered by most students — many correctly identified that for a cognitive performer an audience leads to social inhibition. Many made good use of Zajonc's model and discussed the dominant response. Evaluation apprehension was credited BUT only if EXPLAINED — listed terms without explanation were not credited.",type:"written"},
+  {id:"Q45",sub:"Social Facilitation",q:"Explain the strategies a coach may use to reduce the negative effects of the presence of others on performance.",marks:4,ao:"AO2",ms:"Any 4 of:\n• Introduce an audience in training so players get used to being watched. (1)\n• Gradually introduce assessment and evaluation in training so players cope with being under review. (1)\n• Improve selective attention during a game so they focus on important cues rather than the audience. (1)\n• Reduce the importance of a game so players do not feel under too much pressure. (1)\n• Encourage others to be supportive / provide positive feedback so they do not feel threatened. (1)\n• Introduce/encourage use of stress management techniques so the performer remains calm. (1)\n• Ensure skills are well learned so the dominant response becomes correct when arousal increases. (1)\nStrategies must be EXPLAINED to be credited. Max 4 marks",er:"Over 60% achieved 2+ marks. Most commonly awarded: familiarising performers with an audience and improving selective attention. Those who didn't perform well LISTED strategies without explaining them — the question asks HOW the strategies reduce the negative effects. Students who focused on only one point in great detail could only score 1 mark.",type:"written"},
+  {id:"Q48",sub:"Social Facilitation",q:"Evaluate how the presence of others can impact on the player taking the penalty kick.\n\n(Level-marked response — 6 marks)",marks:6,ao:"AO2/AO3",ms:"Level 3 (5-6 marks): Clear and detailed knowledge of performing in the presence of others, applied to penalty taking. Impact is evaluated with detailed links to the specific scenario. Relevant terminology normally used.\nLevel 2 (3-4 marks): Knowledge evident with some application to a penalty taker. Some evaluation with occasional use of terminology.\nLevel 1 (1-2 marks): Limited knowledge, limited application, little/no evaluation.\n\nKey content to include:\nAO2: Social facilitation (audience improves performance) vs social inhibition (audience decreases performance). Evaluation apprehension = perceived fear of being judged.\nAO3: Passive audience (spectators), interactive others (competitive co-actors — opposition players try to influence the taker). Social reinforcers (coaches, parents). Evaluation apprehension affecting concentration. Impact depends on performer's experience/personality/skill level. Elite performer + simple skill = facilitation. Novice + complex skill = inhibition. Dominant response effect. Must evaluate how these factors IMPACT on the penalty taker specifically.",er:"A challenging 6-mark question but some excellent responses were seen. Successful responses identified the command word (evaluate), the word 'impact', and applied to a PENALTY KICK specifically. Some students identified incorrect theory or just regurgitated key facts without applying to context or evaluating. Students need to appreciate that AO2 and AO3 are assessed in shorter questions too, not just extended answers.",type:"written",levelled:true},
+  {id:"Q51",sub:"Social Facilitation",q:"Which of these statements describes social inhibition?\nA) The facilitated effect of the presence of others on performance\nB) The negative effect of the presence of others on performance\nC) The positive effect of the presence of others on performance\nD) The potential effect of the presence of others on performance",marks:1,ao:"AO1",ms:"B — The negative effect of the presence of others on performance",er:"91% correctly identified social inhibition. Social INHIBITION = NEGATIVE effect (performance decreases). Social FACILITATION = POSITIVE effect (performance improves).",type:"mcq",answer:"B"},
+
+  // GROUP DYNAMICS
+  {id:"Q6",sub:"Group Dynamics",q:"Which one of the following terms is defined as 'individual productivity declining as group size increases'?\nA) Co-ordinational loss\nB) Faulty group process\nC) Motivation loss\nD) Ringelmann effect",marks:1,ao:"AO1",ms:"D — Ringelmann effect",er:"Around 88% of students correctly identified the Ringelmann effect. The Ringelmann effect specifically describes the decline in INDIVIDUAL productivity as GROUP SIZE increases — also linked to social loafing. Co-ordinational loss and motivation loss are components of faulty processes within Steiner's model.",type:"mcq",answer:"D"},
+  {id:"Q16",sub:"Group Dynamics",q:"Outline Steiner's model of group productivity.",marks:1,ao:"AO1",ms:"Actual productivity = potential productivity − (losses due to) faulty processes.\nMax 1 mark",er:"Around 45% could correctly outline Steiner's model. The formula must capture all three elements: ACTUAL productivity, POTENTIAL productivity, and FAULTY PROCESSES (losses). Simply stating that teams don't reach their potential is not sufficient.",type:"written"},
+  {id:"Q17",sub:"Group Dynamics",q:"Explain how Steiner's model accounts for a team winning against a significantly higher-ranked opponent.",marks:3,ao:"AO2",ms:"• The lower-ranked team's actual productivity is at/close to their potential productivity. (1)\n• The higher-ranked team's actual productivity is BELOW their potential productivity. (1)\n• Motivational losses: higher-ranked team players may not believe they have to try as hard / social loafing occurs. (1)\n• Co-ordinational losses: higher-ranked team do not concentrate on applying tactics as well as they can. (1)\nMax 3 marks",er:"Only ~3% gained full marks. Students discussed generally about the weaker team having more cohesion or motivation rather than specifically applying STEINER'S MODEL with its terminology. Where students referred to co-ordination/motivation losses, they weren't EXPLAINED. The answer requires: both teams' actual/potential productivity stated, plus faulty processes named and explained for the higher-ranked team.",type:"written"},
+  {id:"Q19",sub:"Group Dynamics",q:"'Interpersonal differences begin to be resolved and a sense of cohesion emerges.'\n\nWhich stage of Tuckman's model is described in this statement?\nA) Forming\nB) Norming\nC) Performing\nD) Storming",marks:1,ao:"AO1",ms:"B — Norming",er:"Mean approximately 0.7 — a straightforward AO1 recall question. Norming = differences resolved, cohesion emerges, norms established. Forming = initial meeting/polite. Storming = conflict/competition for roles. Performing = effective teamwork achieved.",type:"mcq",answer:"B"},
+  {id:"Q24",sub:"Group Dynamics",q:"Which one of the following is the second stage of group formation according to Tuckman's model?\nA) Forming\nB) Norming\nC) Performing\nD) Storming",marks:1,ao:"AO1",ms:"D — Storming",er:"The correct order is: Forming → Storming → Norming → Performing. Storming is the second stage, characterised by conflict and competition for roles/positions within the group.",type:"mcq",answer:"D"},
+  {id:"Q28",sub:"Group Dynamics",q:"Evaluate the impact of task and social cohesion on the performance of a rowing crew.",marks:3,ao:"AO3",ms:"Task cohesion (sub max 1):\n• Strong task cohesion is most important — co-ordination/motivation to achieve a common goal is crucial for successful rowing. (1)\nSocial cohesion (sub max 2):\n• Social cohesion can impact positively — crew who socialise together may exert more effort in training/competition. (1)\n• Social cohesion could be detrimental — if cliques form, increasing likelihood of social loafing, reducing effort/agreement to execute tactics. (1)\n• High levels of BOTH task and social cohesion may bring about better performances than either alone. (1)\nMax 3 marks — must address BOTH task and social cohesion.",er:"Both task cohesion and social cohesion must be addressed. Social cohesion must be evaluated (positive AND negative) to access full marks. The key insight for rowing: task cohesion is arguably more important for performance because the rowers must co-ordinate precisely, but social cohesion can enhance or disrupt this.",type:"written"},
+  {id:"Q30",sub:"Group Dynamics",q:"Define the storming stage of Tuckman's model of group formation. Give a sporting example.",marks:2,ao:"AO1/AO2",ms:"AO1: Storming — stage of conflict / competing for positions/roles/status within the group. (1)\nAO2: E.g. competing to be the striker / midfield player / captain / penalty taker / free-kick taker. (1)\nMax 2 marks",er:"The STORMING stage is defined by CONFLICT and competition for ROLES/POSITIONS/STATUS. Students should give a specific sporting role that players might compete for — not a generic sporting example.",type:"written"},
+  {id:"Q38",sub:"Group Dynamics",q:"The table shows England cricket team's home and away results 2012–2018:\nHome: Wins 23, Losses 11\nAway: Wins 7, Losses 23\n\nEvaluate the impact of home field advantage on the England cricket team's results. Use the information in the table in your answer.",marks:4,ao:"AO3",ms:"Positive effects (sub max 3):\n• England won majority of home matches but only a minority of away matches — e.g. 23 wins at home vs 7 away. (1)\n• Home support increases motivation/confidence due to noise/proximity/support of crowd. (1)\n• No fatigue/tiredness from travelling — more energetic performance. (1)\n• Familiarity of surroundings — more comfortable, optimal arousal maintained. (1)\n• Crowd hostility causes opposition players to become anxious/lose concentration. (1)\n• Proximity of crowd to opposition reduces their performance, particularly when fielding near boundary. (1)\nNegative effects:\n• Expectation of crowd adds pressure / fear of failure on home team. (1)\nMust use DATA from the table. Max 4 marks",er:"Answers MUST relate to England playing AT HOME. Answers must include reference to specific DATA from the table (e.g. 23 home wins vs 7 away). Both positive and negative impacts should be addressed for full marks. Students who only wrote about general home advantage without applying to cricket or using the data were not credited.",type:"written"},
+  {id:"Q40",sub:"Group Dynamics",q:"A hockey team has lost its last few matches and the coach is worried that faulty processes are preventing them from reaching their potential.\n\n(a) Explain how co-ordination losses could be the cause of the team's recent defeats. Use practical examples.\n\n(b) Explain how the hockey coach could overcome co-ordination losses within the team. Use practical examples.",marks:6,ao:"AO2",ms:"(a) 3 marks — must use practical examples:\n• Players fail to listen to coach's instructions — e.g. not tracking back. (1)\n• Players do not understand tactics — e.g. not understanding the importance of retaining possession. (1)\n• Players fail to communicate — e.g. leaving a player unmarked to receive a pass. (1)\n• Players fail to understand their role in set pieces — e.g. standing in the wrong position at a corner. (1)\n(b) 3 marks — must use practical examples:\n• Coach sets team/individual targets — e.g. retaining possession for a set number of passes. (1)\n• Coach works on specific tactics/drills — e.g. man marking. (1)\n• Team talks — e.g. explaining tactics and strategy. (1)\n• Coach ensures everyone understands their role — e.g. positions/systems. (1)\n• Video analysis to highlight co-ordination errors. (1)\nMax 6 marks — practical examples REQUIRED throughout.",er:"(a) Proved very challenging. Students talked too GENERALLY about productivity and faulty processes, often including motivational factors and social loafing — which are DIFFERENT from co-ordinational losses. Even where co-ordinational factors were identified, they were often not applied with practical examples.\n(b) Students lost marks by not using practical examples for any solutions. Every strategy mentioned must be illustrated with a specific hockey example.",type:"written"},
+  {id:"Q49",sub:"Group Dynamics",q:"Suggest strategies that a coach may use to reduce the effects of social loafing in a team game and the impact these may have on performance.",marks:4,ao:"AO1/AO3",ms:"AO1 Strategies (sub max 2):\n• Recognise and reward individual effort. (1)\n• Give players specific roles and/or responsibilities. (1)\n• Set individual goals/SMARTER targets. (1)\n• Avoid situations in which social loafing could occur. (1)\n• Organise team-bonding activities / create group identity. (1)\nAO3 Impacts (sub max 2):\n• Players feel more motivated/valued/confident — work harder. (1)\n• Improved relationships/team dynamics. (1)\n• Reduce faulty processes / better teamwork / bigger contribution. (1)\n• Improved productivity across all players. (1)\nMax 4 marks — sub max 2 each for strategies and impacts.",er:"Most students picked up some marks. Some strategies identified would NOT alter social loafing — more careful identification was needed. Many students failed to consider the IMPACT of the strategies, which was the second sub-section. Sub-max of 2 for strategies means students cannot get all 4 marks from strategies alone.",type:"written"},
+
+  // LEADERSHIP
+  {id:"Q5",sub:"Leadership",q:"Evaluate the effectiveness of an autocratic style of leadership when coaching gymnastics.",marks:3,ao:"AO3",ms:"Most effective (sub max 2):\n• Time efficient — useful if coach has many instructions / gymnasts need lots of time to practise. (1)\n• Useful as gymnastics can be dangerous — keeps performers safe. (1)\n• Useful if gymnasts are novices — gives clear guidance on what is required. (1)\nNot effective (sub max 2):\n• Can limit gymnast's creativity / decision-making meaning they are less independent when devising routines. (1)\n• Less effective with experienced gymnasts who may want to be involved in decision-making. (1)\n• Can be demotivating — limits gymnast's effort. (1)\nAlternative styles can only be credited if linked to limitations of autocratic. Max 3 marks",er:"Mean pushing towards 1.4 — a positive increase for this type of AO3 question. Must include BOTH effective and not effective points. Where alternative leadership styles were suggested, they were only credited if linked to the LIMITATIONS of the autocratic style — not just described in isolation.",type:"written"},
+  {id:"Q34",sub:"Leadership",q:"According to Fiedler's contingency theory, the most appropriate leadership style is influenced by the situation the leader is in.\n\nWhich situation would a person-orientated leadership style be most effective in?\nA) Least favourable\nB) Moderately favourable\nC) Most favourable",marks:1,ao:"AO1",ms:"B — Moderately favourable",er:"Person-orientated (democratic/relationship-focused) leadership is most effective in MODERATELY favourable situations. Task-orientated (autocratic) leadership is most effective in MOST favourable OR LEAST favourable situations. This counter-intuitive pattern is a common exam focus.",type:"mcq",answer:"B"},
+  {id:"Q54",sub:"Leadership",q:"Outline the autocratic and laissez-faire styles of leadership.",marks:2,ao:"AO1",ms:"Autocratic: Task oriented / dictator style / leader makes all the decisions / very direct in approach. (1)\nLaissez-faire: Provides little support or input / lets team members do as they wish. (1)\nMax 2 marks",er:"69% achieved full marks — the most accessible short answer question on the paper. Students correctly approached this from the STYLES of leadership rather than describing what a coach would DO when adopting these styles. Keep definitions to the essential distinguishing characteristics.",type:"written"},
+  {id:"Q55",sub:"Leadership",q:"Explain when a coach would use the autocratic and laissez-faire styles in a sporting context.",marks:2,ao:"AO2",ms:"Autocratic — when:\n• Quick decisions need to be made / large groups / discipline needed / inexperienced/novice/cognitive learners / dangerous situations / least or most favourable situations. (1)\nLaissez-faire — when:\n• Time is available / experienced performers / autonomous learners / more motivated performers / no danger. (1)\nMax 2 marks",er:"47% achieved full marks. Commonly referenced: stage of learning required for each style, time available, and danger/safety element. Students need to clearly differentiate WHEN each style is appropriate.",type:"written"},
+];
+
+const SUBTOPICS = [...new Set(QS.map(q=>q.sub))];
+let selSub=null,curQ=null,phase='select',ans='',conv=[],loading=false,currentTab='practice';
+
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='practice')||(i===1&&t==='browse')));
+  document.getElementById('practice-panel').style.display=t==='practice'?'':'none';
+  document.getElementById('browse-panel').style.display=t==='browse'?'':'none';
+  if(t==='browse') renderBrowse();
+  if(t==='practice') renderPractice();
+}
+
+function renderPractice(){
+  const p=document.getElementById('practice-panel');
+  if(phase==='select'){
+    const counts={};
+    QS.forEach(q=>{counts[q.sub]=(counts[q.sub]||0)+1;});
+    p.innerHTML=`
+      <div class="section-title">Select a subtopic to practise</div>
+      <div class="topic-grid">${SUBTOPICS.map(s=>`
+        <div class="topic-card${selSub===s?' sel':''}" onclick="selSub='${s}';renderPractice()">
+          <div class="tc-name">${s}</div>
+          <div class="tc-count">${counts[s]} question${counts[s]>1?'s':''}</div>
+        </div>`).join('')}
+      </div>
+      ${selSub?`<div class="btn-row">
+        <button class="btn primary" onclick="startQ()">Get a question &rarr;</button>
+        <button class="btn" onclick="selSub=null;renderPractice()">Clear</button>
+      </div>`:''}`;
+  } else if(phase==='answer'){
+    const isLevelled = curQ.levelled;
+    p.innerHTML=`
+      <div class="meta">
+        <button class="btn" onclick="phase='select';renderPractice()">&#8592; Back</button>
+        <span class="badge b-m">${curQ.marks} mark${curQ.marks>1?'s':''}</span>
+        ${curQ.ao.split('/').map(a=>`<span class="badge b-${a.toLowerCase()}">${a}</span>`).join('')}
+        ${isLevelled?'<span class="badge" style="background:#fef9c3;color:#854d0e;">Level-marked</span>':''}
+        <span style="font-size:12px;color:#888;">${curQ.id} &middot; ${curQ.sub}</span>
+      </div>
+      <div class="qbox">${curQ.q}</div>${getDiagram(curQ.id)}
+      ${curQ.type==='mcq'?`
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="label">Select your answer</div>
+          ${['A','B','C','D'].filter(opt=>curQ.q.includes(opt+')')).map(opt=>`
+            <label style="display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:14px;">
+              <input type="radio" name="mcq" value="${opt}" style="width:auto;"> ${opt})
+            </label>`).join('')}
+        </div>
+        <div class="btn-row">
+          <button class="btn primary" onclick="submitMCQ()">Check answer &rarr;</button>
+          <button class="btn" onclick="newQ()">Different question</button>
+        </div>`:`
+        <div style="margin-bottom:12px;">
+          <label class="label">Your answer${isLevelled?' (write in full sentences — this is a level-marked question)':''}</label>
+          <textarea id="ansbox" rows="${curQ.marks>=4?10:7}" placeholder="Write your answer here...">${ans}</textarea>
+        </div>
+        <div class="btn-row">
+          <button class="btn primary" onclick="submitAns()">Submit for marking &rarr;</button>
+          <button class="btn" onclick="newQ()">Different question</button>
+        </div>`}`;
+    const box=document.getElementById('ansbox');
+    if(box) box.addEventListener('input',e=>ans=e.target.value);
+  } else if(phase==='feedback'){
+    p.innerHTML=`
+      <div class="meta" style="margin-bottom:1rem;">
+        <button class="btn" onclick="phase='answer';renderPractice()">&#8592; Edit answer</button>
+        <button class="btn" onclick="phase='select';conv=[];ans='';renderPractice()">New topic</button>
+        <button class="btn" onclick="newQ()">Next question</button>
+      </div>
+      <div class="qbox">${curQ.q}</div>${getDiagram(curQ.id)}
+      <div class="card">
+        <div class="msg-role">Your answer</div>
+        <div class="msg-text">${ans||'[MCQ selected]'}</div>
+      </div>
+      <div class="card" id="fb-card">
+        <div class="msg-role">Examiner feedback</div>
+        <div id="fb-content" style="font-size:14px;line-height:1.75;white-space:pre-wrap;">${loading?'<span class="spinner"></span>Marking your answer...':''}</div>
+        ${curQ.er?`<div class="er-box" id="er-box" style="display:none;">
+          <div class="er-label">&#128196; Examiner Report — what the chief examiner said about this question</div>
+          <div class="er-text">${curQ.er}</div>
+        </div>`:''}
+      </div>
+      ${!loading&&conv.length>0?`
+        <div class="card" id="fu-card" style="display:none;"><div id="fu-msgs"></div></div>
+        <div class="fu-row">
+          <input type="text" id="fu-input" placeholder="Ask a follow-up question about this feedback..." />
+          <button class="btn primary" onclick="sendFU()">Ask &rarr;</button>
+        </div>`:''}`;
+  }
+}
+
+function startQ(){
+  const pool=QS.filter(q=>q.sub===selSub);
+  curQ=pool[Math.floor(Math.random()*pool.length)];
+  ans='';conv=[];phase='answer';
+  renderPractice();
+}
+
+function newQ(){
+  const pool=QS.filter(q=>q.sub===selSub);
+  curQ=pool[Math.floor(Math.random()*pool.length)];
+  ans='';conv=[];phase='answer';
+  renderPractice();
+}
+
+function submitMCQ(){
+  const selected=document.querySelector('input[name="mcq"]:checked');
+  if(!selected) return;
+  ans='Selected: '+selected.value;
+  phase='feedback';loading=true;
+  renderPractice();
+  const correct=curQ.answer;
+  const isRight=selected.value===correct;
+  const text=isRight?
+    `CORRECT — ${selected.value} is the right answer.\n\nWHY THIS IS CORRECT:\n${curQ.ms}\n\nEXAMINER REPORT COMMENTARY:\n${curQ.er||'No specific examiner report for this question.'}\n\nTip: Make sure you understand WHY this is correct — the examiner may ask this as a written question in future.`:
+    `INCORRECT — You selected ${selected.value}, but the correct answer is ${correct}.\n\nCORRECT ANSWER:\n${curQ.ms}\n\nEXAMINER REPORT COMMENTARY:\n${curQ.er||'No specific examiner report for this question.'}\n\nWHY STUDENTS GET THIS WRONG:\nThis is a common error area. Review the key distinctions carefully.`;
+  conv=[{role:'user',content:`Q${curQ.id} MCQ — Student selected: ${selected.value}`},{role:'assistant',content:text}];
+  loading=false;
+  renderPractice();
+  const el=document.getElementById('fb-content');
+  if(el) el.textContent=text;
+  const er=document.getElementById('er-box');
+  if(er) er.style.display='';
+  const fu=document.getElementById('fu-card');
+  if(fu) fu.style.display='';
+}
+
+async function submitAns(){
+  if(!ans.trim()) return;
+  phase='feedback';loading=true;
+  renderPractice();
+
+  const isLevelled = curQ.levelled;
+  const levelNote = isLevelled ? `\n\nIMPORTANT: This is a LEVEL-MARKED question (not point-marked). You must award a level (1, 2 or 3) and a mark within that level. The mark scheme uses the following level descriptors:\n- Level 3 (5-6): Clear, detailed, well-applied, evaluated, relevant terminology normally used, coherent and focused.\n- Level 2 (3-4): Evident knowledge with some application/evaluation, terminology occasionally used, may lack coherence.\n- Level 1 (1-2): Limited knowledge, limited application, little/no evaluation, lacks substantiated reasoning.\nExplain which level and why, then give the specific mark within that level.` : '';
+
+  const sys=`You are an experienced AQA A-Level Physical Education examiner marking Sport Psychology answers with precision and high standards.
+
+MARKING RULES:
+- Award marks strictly according to the mark scheme. Do not award marks for vague or inaccurate statements.
+- If a student makes the correct point but phrases it differently, award the mark.
+- Be specific about which mark-scheme point each mark corresponds to.
+- Be honest — waffle does not earn marks.${levelNote}
+
+EXAMINER REPORT FOR THIS QUESTION (${curQ.id}):
+${curQ.er||'No specific examiner report available.'}
+
+You MUST reference the examiner report in your feedback. Tell the student specifically how their response compares to typical candidate profiles described by the examiner.
+
+ASSESSMENT OBJECTIVES: ${curQ.ao}
+TOTAL MARKS: ${curQ.marks}
+
+FEEDBACK FORMAT — use exactly this structure:
+
+${isLevelled?`LEVEL AWARDED: [Level X — Y marks / ${curQ.marks}]
+
+WHAT PLACES THIS AT LEVEL X:
+[Explain specifically what characteristics of the student's response determined the level]`:`MARKS AWARDED: [X] / [${curQ.marks}]
+
+WHAT YOU GOT RIGHT:
+[For each awarded mark: state what the student said and which mark-scheme point it earns. If nothing, write "No marks could be awarded."]
+
+WHAT WAS MISSING:
+[For each unawarded mark: state precisely what the mark scheme requires that the student didn't include.]`}
+
+EXAMINER REPORT COMMENTARY:
+[Directly reference what the chief examiner said about common errors or success patterns for this specific question. Tell the student whether their response matches the typical high or low performer profile. Be specific.]
+
+HOW TO IMPROVE (B-U-C):
+Basic — What is the minimum correct answer?
+Use your knowledge — What deeper knowledge/terminology earns marks?
+Connect — What contextual links or evaluative points lift this to full marks?
+
+MARK SCHEME (your reference — do not quote verbatim):
+${curQ.ms}`;
+
+  const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
+  try{
+    const res=await fetch('https://dark-voice-2fd9.tom-eisenhuth.workers.dev',{method:'POST',headers:getHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'Unable to generate feedback.';
+    conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
+    loading=false;
+    renderPractice();
+    const el=document.getElementById('fb-content');
+    if(el) el.textContent=text;
+    const er=document.getElementById('er-box');
+    if(er) er.style.display='';
+    const fu=document.getElementById('fu-card');
+    if(fu) fu.style.display='';
+  } catch(e){
+    loading=false;
+    const el=document.getElementById('fb-content');
+    if(el) el.textContent='Error connecting to AI. Please try again.';
+  }
+}
+
+async function sendFU(){
+  const input=document.getElementById('fu-input');
+  if(!input||!input.value.trim()) return;
+  const q=input.value.trim();
+  input.value='';
+  const fuMsgs=document.getElementById('fu-msgs');
+  const fuCard=document.getElementById('fu-card');
+  if(fuCard) fuCard.style.display='';
+  if(fuMsgs){
+    fuMsgs.innerHTML+=`<div class="msg"><div class="msg-role">You</div><div class="msg-text">${q}</div></div>`;
+    fuMsgs.innerHTML+=`<div class="msg" id="fu-loading"><div class="msg-role">Tutor</div><div class="msg-text"><span class="spinner"></span>Thinking...</div></div>`;
+  }
+  const sys=`You are an AQA A-Level PE Sport Psychology examiner providing follow-up tutoring. The question was: "${curQ.q}". Examiner report: "${curQ.er||''}". Help the student understand the mark scheme reasoning without just handing them the answers. Use Socratic questioning where appropriate.`;
+  const msgs=conv.map(m=>({role:m.role,content:m.content}));
+  msgs.push({role:'user',content:q});
+  try{
+    const res=await fetch('https://dark-voice-2fd9.tom-eisenhuth.workers.dev',{method:'POST',headers:getHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:sys,messages:msgs})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'';
+    conv.push({role:'user',content:q},{role:'assistant',content:text});
+    const l=document.getElementById('fu-loading');
+    if(l) l.querySelector('.msg-text').textContent=text;
+  } catch(e){
+    const l=document.getElementById('fu-loading');
+    if(l) l.querySelector('.msg-text').textContent='Error. Please try again.';
+  }
+}
+
+function renderBrowse(){
+  const p=document.getElementById('browse-panel');
+  const byTopic={};
+  QS.forEach(q=>{if(!byTopic[q.sub]) byTopic[q.sub]=[];byTopic[q.sub].push(q);});
+  p.innerHTML=Object.keys(byTopic).map(sub=>`
+    <div class="section-title">${sub}</div>
+    <div class="card" style="margin-bottom:1.25rem;">
+      ${byTopic[sub].map(q=>`
+        <div class="q-item">
+          <div class="q-id">${q.id}</div>
+          <div class="q-txt">${q.q.split('\n')[0].substring(0,85)}${q.q.split('\n')[0].length>85?'...':''}</div>
+          <div class="q-actions">
+            <span class="badge b-m">${q.marks}m</span>
+            ${q.type==='mcq'?'<span class="badge" style="background:#f3e8ff;color:#7c3aed;">MCQ</span>':''}
+            ${q.levelled?'<span class="badge" style="background:#fef9c3;color:#854d0e;">Level</span>':''}
+            <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="practiseQ('${q.id}')">Practise</button>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function practiseQ(id){
+  curQ=QS.find(q=>q.id===id);
+  selSub=curQ.sub;
+  ans='';conv=[];phase='answer';
+  switchTab('practice');
+}
+
+renderPractice();
+</script>
+</body>
+</html>
