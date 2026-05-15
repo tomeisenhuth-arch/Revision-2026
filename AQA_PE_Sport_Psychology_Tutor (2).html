@@ -77,7 +77,7 @@ textarea:focus,input:focus{outline:none;border-color:#2d1a44;}
 </div>
 
 <script>
-function getHeaders(){return{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'}}
+function getHeaders(){return{'Content-Type':'application/json'}}
 
 const DIAGRAMS = {
   'Q39': `<svg viewBox="0 0 495 175" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%;display:block;margin:0 auto;font-family:inherit"><rect x="15" y="15" width="145" height="120" fill="#f9f9f7" rx="3" stroke="#ddd" stroke-width="1"/><line x1="35" y1="22" x2="35" y2="127" stroke="#555" stroke-width="1.5"/><line x1="33" y1="125" x2="155" y2="125" stroke="#555" stroke-width="1.5"/><text x="94" y="140" text-anchor="middle" font-size="9" fill="#777">Arousal</text><line x1="37" y1="123" x2="152" y2="28" stroke="#2d1a44" stroke-width="2.5" stroke-linecap="round"/><text x="87" y="163" text-anchor="middle" font-size="14" font-weight="600" fill="#222">A</text><rect x="175" y="15" width="145" height="120" fill="#f9f9f7" rx="3" stroke="#ddd" stroke-width="1"/><line x1="195" y1="22" x2="195" y2="127" stroke="#555" stroke-width="1.5"/><line x1="193" y1="125" x2="315" y2="125" stroke="#555" stroke-width="1.5"/><text x="254" y="140" text-anchor="middle" font-size="9" fill="#777">Arousal</text><path d="M197,123 C202,123 222,27 254,27 C286,27 308,123 313,123" fill="none" stroke="#2d1a44" stroke-width="2.5" stroke-linecap="round"/><text x="247" y="163" text-anchor="middle" font-size="14" font-weight="600" fill="#222">B</text><rect x="335" y="15" width="145" height="120" fill="#f9f9f7" rx="3" stroke="#ddd" stroke-width="1"/><line x1="355" y1="22" x2="355" y2="127" stroke="#555" stroke-width="1.5"/><line x1="353" y1="125" x2="475" y2="125" stroke="#555" stroke-width="1.5"/><text x="414" y="140" text-anchor="middle" font-size="9" fill="#777">Arousal</text><path d="M357,123 C362,123 378,55 397,28 L411,28 L413,123" fill="none" stroke="#2d1a44" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><text x="407" y="163" text-anchor="middle" font-size="14" font-weight="600" fill="#222">C</text><text x="36" y="13" font-size="8" fill="#888">Performance ↑</text><text x="196" y="13" font-size="8" fill="#888">Performance ↑</text><text x="356" y="13" font-size="8" fill="#888">Performance ↑</text></svg>`,
@@ -348,7 +348,7 @@ ${curQ.ms}`;
 
   const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:getHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages})});
+    const res=await fetch('https://dark-voice-2fd9.tom-eisenhuth.workers.dev',{method:'POST',headers:getHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages})});
     const data=await res.json();
     const text=data.content?.find(b=>b.type==='text')?.text||'Unable to generate feedback.';
     conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
@@ -383,7 +383,7 @@ async function sendFU(){
   const msgs=conv.map(m=>({role:m.role,content:m.content}));
   msgs.push({role:'user',content:q});
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:getHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:sys,messages:msgs})});
+    const res=await fetch('https://dark-voice-2fd9.tom-eisenhuth.workers.dev',{method:'POST',headers:getHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:sys,messages:msgs})});
     const data=await res.json();
     const text=data.content?.find(b=>b.type==='text')?.text||'';
     conv.push({role:'user',content:q},{role:'assistant',content:text});
