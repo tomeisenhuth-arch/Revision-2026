@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQA A-Level PE — Sport Psychology Extended Responses</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;}
+.header{background:#2d1a44;color:#fff;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header-title{font-size:17px;font-weight:600;}
+.header-sub{font-size:12px;opacity:.65;margin-top:2px;}
+.header-badge{background:#c9a84c;color:#2d1a44;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.container{max-width:820px;margin:0 auto;padding:2rem 1.5rem;}
+.tab-bar{display:flex;gap:2px;margin-bottom:1.5rem;background:#e8e7e3;border-radius:10px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;cursor:pointer;border:none;background:transparent;border-radius:8px;color:#555;font-weight:500;}
+.tab.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:1rem;}
+.topic-card{background:#fff;border:1.5px solid #e0dfd8;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s;}
+.topic-card:hover{border-color:#2d1a44;background:#f8f7f4;}
+.topic-card.sel{border-color:#2d1a44;background:#f0ecf7;}
+.tc-name{font-size:13px;font-weight:600;margin-bottom:3px;}
+.tc-sub{font-size:11px;color:#888;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#1a1a1a;transition:all .15s;}
+.btn:hover{background:#f5f4f0;}
+.btn.primary{background:#2d1a44;color:#fff;border-color:#2d1a44;}
+.btn.primary:hover{background:#3d2554;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.qbox{background:#f5f4f0;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.65;margin-bottom:1rem;white-space:pre-wrap;}
+.level-guide{background:#fff;border:1px solid #e0dfd8;border-radius:8px;margin-bottom:1rem;overflow:hidden;}
+.level-guide-header{background:#2d1a44;color:#fff;padding:.625rem 1rem;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.level-guide-body{padding:.75rem;display:none;}
+.level-row{display:grid;grid-template-columns:60px 60px 1fr;gap:.5rem;padding:.5rem 0;border-bottom:1px solid #f0f0ec;font-size:12px;line-height:1.5;}
+.level-row:last-child{border-bottom:none;}
+.level-num{font-weight:700;color:#2d1a44;}
+.level-marks{color:#888;}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-bottom:6px;display:block;}
+textarea{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;background:#fafaf8;resize:vertical;}
+textarea:focus{outline:none;border-color:#2d1a44;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.03em;}
+.b-8{background:#dbeafe;color:#1e40af;}
+.b-15{background:#fef3c7;color:#92400e;}
+.b-ao{background:#f0f0ec;color:#555;}
+.b-syn{background:#fce7f3;color:#9d174d;}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+.er-box{background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;padding:.875rem 1rem;margin-top:1rem;}
+.er-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c3aed;margin-bottom:5px;}
+.er-text{font-size:13px;color:#4c1d95;line-height:1.65;}
+.msg{padding:10px 0;border-bottom:1px solid #f0f0ec;}
+.msg:last-child{border-bottom:none;}
+.msg-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#999;margin-bottom:3px;}
+.msg-text{font-size:14px;line-height:1.65;white-space:pre-wrap;}
+.fu-row{display:flex;gap:8px;margin-top:1rem;}
+.fu-row input{flex:1;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;background:#fafaf8;}
+.fu-row input:focus{outline:none;border-color:#2d1a44;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:#2d1a44;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:-1px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.q-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0ec;}
+.q-item:last-child{border-bottom:none;}
+.q-num{font-size:11px;color:#aaa;min-width:28px;padding-top:1px;font-weight:600;}
+.q-txt{font-size:13px;flex:1;line-height:1.4;}
+.q-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.section-title{font-size:14px;font-weight:600;margin-bottom:.75rem;color:#2d1a44;}
+.tip-box{background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;padding:.875rem 1rem;margin-bottom:1rem;font-size:13px;line-height:1.6;color:#4c1d95;}
+.tip-label{font-size:11px;font-weight:700;text-transform:uppercase;color:#7c3aed;margin-bottom:4px;}
+table.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:.75rem 0;}
+table.data-table th,table.data-table td{border:1px solid #ddd;padding:6px 10px;text-align:center;}
+table.data-table th{background:#2d1a44;color:#fff;font-weight:600;}
+table.data-table td:first-child{font-weight:600;text-align:left;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="header-title">AQA A-Level PE — Sport Psychology Extended Responses</div>
+    <div class="header-sub">Level-descriptor marking · AO1/AO2/AO3 balance · Examiner report feedback</div>
+  </div>
+  <div class="header-badge">22 QUESTIONS</div>
+</div>
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('practice')">Practice</button>
+    <button class="tab" onclick="switchTab('browse')">All Questions</button>
+  </div>
+  <div id="practice-panel"></div>
+  <div id="browse-panel" style="display:none;"></div>
+</div>
+
+<script>
+const PROXY = 'https://keen-sawine-d41a7a.netlify.app/.netlify/functions/proxy';
+const MODEL = 'claude-sonnet-4-5';
+
+const RED_CARDS_TABLE = `<table class="data-table"><thead><tr><th>Season</th><th>Number of Red Cards</th></tr></thead><tbody><tr><td>2013/2014</td><td>73</td></tr><tr><td>2014/2015</td><td>58</td></tr><tr><td>2015/2016</td><td>45</td></tr><tr><td>2016/2017</td><td>41</td></tr></tbody></table>`;
+
+const L4 = [
+  {l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used. Answer usually demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence. Terminology sometimes used."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation. Terminology occasionally used."}
+];
+const L5 = [
+  {l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence. Terminology used but may sometimes be missing."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence. Terminology occasionally used."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation. Terminology very occasionally used."}
+];
+
+const QS = [
+  // AGGRESSION
+  {id:"Q1",sub:"Aggression",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`A footballer kicks an opponent because they think they have been fouled. They then get their first ever red card. After the game, they apologise to the opponent and their teammates.\n\nEvaluate whether instinct theory or social learning theory of aggression best accounts for the player's actions.`,
+  levels:L4,
+  ms:`AO1: Instinct theory — all performers born with aggressive instinct surfacing with enough provocation; innate; cathartic effect calms player. Social learning theory — aggression is learned response copied from others; more likely to copy actions reinforced/rewarded; more likely to copy actions of significant others.
+AO2: Instinct theory applied — level of provocation reached by the foul; innate aggressive response occurred; cathartic/calming effect after the game (apologised). Social learning theory applied — footballer may have seen a role model kick opponent in similar situation; if not punished this increases likelihood of copying; player was punished/no reinforcement so realised actions were wrong and apologised.
+AO3 Evaluation: FOR INSTINCT — aggressive act appears spontaneous/instinctive due to perceived foul, not pre-planned; player calming down and apologising supports cathartic effect. AGAINST INSTINCT — player would have been fouled before; first time sent off, something must have been different. FOR SOCIAL LEARNING — if footballer has previously seen a player kick someone, social learning theory explains actions. AGAINST SOCIAL LEARNING — we have no evidence they have; people act aggressively without having learned to do so. Most likely: combination of traits and social learning plus situational factors all combined.`,
+  er:"Mean mark over 4.5 — level 1 was the least awarded of the four bands. Best answers suggested strengths and weaknesses of EACH theory in describing the player's actions. Top 10% could do this. Lower-scoring students achieved marks for knowledge and application but evaluation lacked breadth — focused very specifically on merits of one theory rather than both."},
+
+  {id:"Q22",sub:"Aggression",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:true,
+  q:`The table below shows the number of red cards awarded in the Football Premier League each season.\n\nInstinct theory and the frustration-aggression hypothesis are psychological theories relating to aggression in sport.\n\nUse these theories to analyse why aggressive acts still exist in football AND evaluate the effectiveness of strategies used to prevent player violence.`,
+  diagram: RED_CARDS_TABLE,
+  levels:L5,
+  ms:`AO1: Instinct theory = aggressive behaviour inherited genetically; trait of violence within everyone. Frustration-aggression hypothesis = frustration develops when goal-directed behaviour is blocked; catharsis achieved through successful release of aggression. Strategies: bans, fines, substitution, fair play awards, code of conduct, improved refereeing, self-talk.
+AO2: Frustration-aggression in football: blocked goal due to poor refereeing/other team winning; player fouled when running through towards goal and retaliates. Strategies applied: bans from games can influence pay. Table data should be referenced.
+AO3: Strategies have been effective — decrease in red cards shown in table (73→41). HOWEVER strategies not fully effective — player violence still exists/red cards still awarded. Bans and losing pay may not be effective in football due to huge salaries. Instinct theory suggests aggression is innate so strategies may only suppress rather than eliminate. Frustration-aggression: if goal-blocking remains, frustration and aggression will remain regardless of strategies.`,
+  er:"Two theories of aggression were named — many students aware of them and could apply to football. Strategies were sometimes discussed in depth, other times breadth route. Students who referenced the table data added an extra evaluative dimension. As with many extended questions, many failed to show detailed AO3 evaluation."},
+
+  // ATTITUDES & PERSONALITY
+  {id:"Q2",sub:"Attitudes & Personality",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:`Analyse why a games player may form a poor attitude towards training AND how a coach could change this attitude using knowledge of attitude formation and cognitive dissonance.`,
+  levels:L5,
+  ms:`AO1: Attitude formation affected by: past experiences; socialisation; conditioning; familiarity. Cognitive dissonance = new information given to cause unease (dissonance) between attitude components to motivate change. Three components: Cognitive (how they think); Affective (how they feel); Behavioural (how they act).
+AO2: Poor attitude — Cognitive: thinks training not beneficial. Affective: feels bored when training. Behavioural: doesn't try hard. Past experiences: negative experience of low-quality training. Socialisation: observed role models who didn't value training. Conditioning: never been praised for training hard. Familiarity: came from environment where not much training done.
+AO3 Analysis of how coach could change attitude: Past experiences — provide high quality enjoyable training. Socialisation — show examples of role models/teammates who train hard. Conditioning — reward player when they show effort. Familiarity — use extrinsic motivation to encourage regular training. Cognitive dissonance: Cognitive component — monitor progress so player sees benefits. Affective component — games-based approach to make sessions fun. Behavioural component — extrinsic motivation to encourage hard work in short term.`,
+  er:"A very broad question covering large portion of specification. Some students missed focus of the question and drew on other psychological content (attribution theory/group dynamics) — rarely creditworthy. Best answers were firmly based around the triadic model with examples from different attitude formation influences, then clearly and accurately analysed cognitive dissonance in context. Mean mark of 7. Less than 5% achieved top band; most commonly awarded marks were 8-9 (top of Level 3)."},
+
+  {id:"Q3",sub:"Attitudes & Personality",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`A performer responds badly to losing and gives up easily when faced with challenging situations.\n\nThe performer's coach does NOT think that these personality traits can be changed.\n\nEvaluate whether the coach's view is correct. Refer to personality theories in your answer.`,
+  levels:L4,
+  ms:`AO1: Trait theory — born with personality/innate; stable/predictable/enduring. Social learning theory — learned through observation and imitation; experiences/reinforcement shape personality. Interactionist perspective — combination of traits and environmental influences; generally stable but change of environment can change behaviour.
+AO2: Trait theory — performer's anger when losing was a trait which could not be changed. Social learning theory — performer would have observed others behaving badly when losing and copied; may have received reinforcement (praise/avoided punishment) despite reacting badly. Interactionist theory — performer may have innate trait of responding badly but environmental factors (important competition) could increase this behaviour.
+AO3 FOR (coach is correct): Trait theory supports coach's view — personality tends to be stable; some traits difficult to change. AGAINST (coach is incorrect): Social learning — performer can change through positive experiences (positive reinforcement when they don't give up); can learn to lose graciously through watching positive role models. Interactionist — even if performer has negative traits, giving them responsibility (making them captain) may change behaviour in that role.`,
+  er:"Mean approximately 3. Less than 25% accessed Level 3-4. Majority realised this was about personality theories (not NaCh/NaF). Many got AO1 but application and evaluation were weak. Majority fell in Level 2 (3-4 marks) due to insufficient application and/or evaluation."},
+
+  {id:"Q16",sub:"Attitudes & Personality",marks:15,ao:"AO1=2 AO2=5 AO3=6",synoptic:true,
+  q:`'This Girl Can' is an example of a Sport England campaign that tries to increase female participation in sport by changing attitudes.\n\nAnalyse how campaigns such as 'This Girl Can' might overcome barriers to female participation in sport and change attitudes.`,
+  levels:L5,
+  ms:`AO1: Barriers to female participation: lack of clubs/competitions/coaches/role models/media coverage/funding/accessibility; stereotyping/discrimination/low self-esteem/sexism. Three attitude components: Cognitive (how they think); Affective (how they feel); Behavioural (how they act). Attitudes changed by: persuasive communication; cognitive dissonance.
+AO2: Traditional/old-fashioned perception that some sports are for men (cognitive). Perception women may not like feeling sweaty/muddy (affective). Women avoid sports because of how others may perceive them (behavioural). Female athletes channelled into 'feminine' sports at school. 'This Girl Can' provides positive role models; slogans challenge traditional female stereotypes.
+AO3: Campaigns change attitudes through persuasive communication and cognitive dissonance. Persuasive communication — making role models out of normal women who enjoy being active; widely publicised alongside elite athletes. Message: sport not just for men; can take part and still be feminine; nothing wrong with getting hot and sweaty. Cognitive dissonance — primarily impacts cognitive component (how women and society think about women in sport). By showing women in sport positively — breaks stereotypes/barriers leading to more women trying sport (behavioural) and enjoying it (affective). Campaign raises profile of women's sport — more women's only sessions/clubs; increases access/advertising.`,
+  er:"The second topic — changing attitudes — was generally missed by students. This resulted in many failing to achieve any AO3 marks when discussing persuasive communication and cognitive dissonance in relation to the campaign. As students also failed to show knowledge of attitude as a topic area, only around 17% achieved 8 marks or higher for this 15-mark question. Students must be explicitly aware of the synoptic demands."},
+
+  {id:"Q19",sub:"Attitudes & Personality",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`Evaluate how well the interactionist perspective explains the behaviour of a team member in varying competitive situations.`,
+  levels:L4,
+  ms:`AO1: Aspects of personality are stable, innate, enduring traits; other aspects developed through social learning theory. Interactionist perspective combines both. Team members have core values, typical responses and role-related behaviour (Hollander's model).
+AO2: Core values may cause stable behaviour in certain competitive situations. In certain situations a player exerts a typical response (e.g. strong work ethic = typical response to always track back and defend). Significant others and other team members may influence behaviour. B = f(P × E) — behaviour is dependent on personality AND competitive situations.
+AO3 Evaluation: Core values could be very hard to alter — behaviour during competition may remain stable (positive or negative effect on performance). Reinforcement from significant others could continue behaviour (positive or negative effects). Personality is stable but competitive situation can be unstable — may require varying behavioural responses which may be difficult depending on traits. Better understanding of own personality profile may assist in adapting to any given competitive situation.`,
+  er:"Least accessible of the extended answer questions. Many students struggled to demonstrate understanding of the topic, which affected ability to apply and evaluate. Small minority with good grasp of theory accessed Level 3-4. Most commonly: students failed to apply knowledge and evaluation was not apparent at all. For Level 3-4, application AND evaluation of knowledge needs to be made often and coherently."},
+
+  // STRESS MANAGEMENT & ANXIETY
+  {id:"Q5",sub:"Stress Management & Anxiety",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`An elite golfer is struggling with their putting because of cognitive and somatic anxiety.\n\nEvaluate the use of thought stopping AND beta blockers to reduce the effects of anxiety and improve the golfer's performance in their next competition.`,
+  levels:L4,
+  ms:`AO1: Thought stopping = saying a particular word or carrying out a particular action to divert attention away from negative thoughts. Beta blockers = block effects of adrenalin/slow sympathetic nervous system/slow heart rate/lower blood pressure. Somatic anxiety = physiological reactions (increased heart rate, sweaty palms). Cognitive anxiety = psychological reactions (unpleasant thoughts).
+AO2: Thought stopping applied — when golfer suffers cognitive anxiety ('I'm going to miss'), use cue word 'stop'/tap putter on ground. Stopping negative thoughts may increase confidence/decrease cognitive anxiety. Beta blockers — decrease somatic/physiological effects of anxiety.
+AO3: THOUGHT STOPPING positives — decreases cognitive anxiety which also decreases somatic anxiety → more likely to be successful with putting; quick and simple technique includable in routine. NEGATIVES — must be learnt (takes time); effectiveness linked to golfer's ability to use under highest anxiety. BETA BLOCKERS positives — reduces tremors → improves accuracy; reliable effect even under high anxiety. NEGATIVES — only addresses somatic anxiety, cognitive anxiety may still negatively affect putting; BANNED SUBSTANCE — risk of being banned/loss of income/damaged reputation; increased risk of dizziness/circulatory problems/trouble sleeping.`,
+  er:"Mean over 4.3. Relatively well answered. Most students knew about different types of anxiety and could apply thought stopping and beta blockers (AO2). AO3 was less well accessed — points about beta blockers being illegal and causing health issues were the predominantly awarded AO3 marks."},
+
+  {id:"Q7",sub:"Stress Management & Anxiety",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:`A golfer may use cognitive stress management techniques during an important competition.\n\nAnalyse how the golfer could use these techniques to improve their performance in the competition.`,
+  levels:L5,
+  ms:`AO1: Positive self-talk — voice inside performer's mind telling them they are capable of success. Thought stopping — preventing negative thoughts from entering performer's mind. Attentional control — altering perceptual field/preventing stress by changing focus to select relevant stimuli. Mental rehearsal — going over movements in mind. Imagery/visualisation — imagining a previous successful performance.
+AO2: Positive self-talk — 'I am capable of making this putt'. Thought stopping — stopping 'I am useless at bunker shots' by clicking fingers/cue word 'focus'. Attentional control — external-narrow style when putting (blocking crowd, focusing on hole). Mental rehearsal — golfer visualises various stages of the golf swing. Imagery/visualisation — golfer remembers successful drive/putt from previous competition.
+AO3: Positive self-talk — convinces golfer they are capable of success → higher confidence. Thought stopping — prevents negative thoughts raising self-doubt/anxieties → full concentration on the shot. Attentional control — ensures focus only on relevant stimuli → avoids information overload → effective decisions. Mental rehearsal — ensures golfer rehearses movements to remember technique. Imagery/visualisation — golfer visualises successful performances and believes they can be successful. All techniques allow golfer to manage stress → execute effective drives/maintain accurate chipping and putting.`,
+  er:"Mean approximately 5.7. Most students could access Level 2 or above. Most were able to name 2-3 cognitive stress management techniques (a few incorrectly focused on somatic ones). What failed to get students into top bands: not applying enough to golf (AO2) and/or not giving enough analysis — general points like 'this will help lower stress' rather than specifically focusing on HOW each technique would help the golfer."},
+
+  {id:"Q10",sub:"Stress Management & Anxiety",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`The diver may use cognitive techniques such as mental rehearsal, visualisation and imagery to manage stress immediately before performance.\n\nAnalyse how the diver could use OTHER cognitive stress management techniques to improve their performance in a competition. Refer to catastrophe theory in your answer.`,
+  levels:L4,
+  ms:`AO1: Attentional control and cue utilisation = choosing correct style of attention for right circumstances. Thought-stopping = saying word or carrying out action to divert attention from negative thoughts. Positive self-talk = using uplifting phrase to replace negative thoughts. Catastrophe theory = arousal beyond optimal results in sudden/dramatic decline in performance.
+AO2: Attentional control — diver may focus on entry position using narrow internal style/end of diving platform using narrow external style/selecting routine in response to competitors' scores using broad internal style. Thought-stopping — diver clicks fingers/claps hands when negative thought ('I cannot complete this dive'). Positive self-talk — 'you have nailed this dive in training hundreds of times'. Catastrophe theory — if diver fails to control negative thoughts/self-doubt they may experience sudden drop in performance (mistiming the dive).
+AO3: Positive self-talk/thought-stopping diverts attention from negative thoughts → moderates cognitive anxiety. Correct attentional style → avoids information overload → lowers cognitive anxiety. If cognitive anxiety is moderated effectively → arousal will be optimal → good performance/catastrophe avoided. If stress management used effectively → timing/entry/aesthetics of dive likely to improve. If cognitive anxiety NOT controlled and somatic anxiety high → over-arousal → dramatic/sudden decline/catastrophe.`,
+  er:"No specific examiner report for this question. Key requirement: mental rehearsal, visualisation and imagery must NOT be discussed (they are excluded by the question). Focus must be on other cognitive techniques AND must explicitly link to catastrophe theory."},
+
+  {id:"Q11",sub:"Stress Management & Anxiety",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:`A coach can use observations, questionnaires or physiological measures to obtain data on anxiety levels.\n\nEvaluate the use of each measure to provide valid and reliable data to assess anxiety in sport.`,
+  levels:L5,
+  ms:`AO1: Questionnaires = series of questions to assess anxiety levels. Observations = watching performer during competition to assess signs of anxiety. Physiological measures = monitor symptoms of somatic anxiety (heart rate, perspiration, respiration, hormones/adrenaline). Validity = whether data actually measures what it sets out to measure. Reliability = degree to which data collection is consistent and stable over time.
+AO2 Advantages: Questionnaires — quick/cheap/efficient/large amounts of data. Observations — carried out whilst performer is training/competing → assess anxiety in most relevant environment. Physiological measures — objective numerical data; can be carried out in real-life environment. DISADVANTAGES: Questionnaires — questions may not be understood/biased/not a true reflection; performer's responses affected by mood/when/how asked/may not respond honestly. Observations — highly subjective/require prior knowledge of performer/very time consuming. Physiological measures — must be interpreted as all changes will not be due to anxiety. All methods — performer aware of being assessed may alter behaviour/responses.
+AO3 VALID/RELIABLE: Questionnaire responses can provide reliable information — allow performer time to consider answers. Observations/physiological measures can provide valid information — real-life setting. Physiological data is objective/not affected by mood → more reliable. NOT VALID/RELIABLE: Inappropriate/biased/misunderstood questionnaire questions → results not valid. Reliability of observations questionable — observer may draw different conclusions from same information. Any method where performer knows they're being assessed may alter behaviour → decreases validity.`,
+  er:"No specific examiner report. All three measures must be evaluated with explicit reference to validity AND reliability. The AO3 must go beyond listing advantages/disadvantages — it must assess the quality of the data produced."},
+
+  {id:"Q18",sub:"Stress Management & Anxiety",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:true,
+  q:`A golf coach believes the most important aim of a warm-up is stress management.\n\nA rugby coach believes the most important aim of a warm-up is injury prevention.\n\nEvaluate these two statements.`,
+  levels:L5,
+  ms:`AO1: Warm-up for injury prevention: pulse raiser, stretches, skills drill; increases heart rate/blood flow; increases muscle elasticity/synovial fluid/body temperature; prevents sprains and strains. Warm-up for stress management: mental preparation to control stress; cognitive stress = negative thoughts (self-talk, imagery, visualisation used); somatic stress = physical response (centering/breathing control, PMR).
+AO2: Golf — cognitive stress: positive self-talk to replace negative thoughts about the round; imagery to focus on successful performances; thought stopping to prevent distractions (crowd). Rugby — highly explosive activity, muscles must be warmed via pulse raiser (jogging) before tackling; shoulder joints need flexibility for passing; wingers need muscle elasticity for sprinting to prevent muscle tears.
+AO3: Golf coach justified — high impact of stress on golfer performance; high levels of focus and accuracy required. HOWEVER physical preparation also important — flexibility exercises (wide shoulder range of movement). Furthermore cognitive/somatic techniques can also be used during play (breaks between shots) — don't always need to be performed during warm-up. Rugby coach justified — pulse raiser increases blood flow to muscles → less likelihood of muscle pulls. HOWEVER not all injuries can be prevented in a contact sport. Stress management is also vital for rugby — conversion kicks; visualisation prior to kick crucial; imagery before kick-off helps control stress ahead of important match.`,
+  er:"AO3 marks generally well accessed. Many students justified statements well in relation to each sport. Best answers provided alternative argument too — why injury prevention AND stress management aspects are important for BOTH sports. Students who failed to relate to rugby or golf specifically and just discussed warm-up generally lost out on AO2 and AO3 marks."},
+
+  {id:"Q20",sub:"Stress Management & Anxiety",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`A rugby player preparing to kick a conversion during an important game is having negative thoughts about the kick. He is also experiencing increased heart rate and muscular tension.\n\nEvaluate the use of visualisation AND centering by the rugby player to ensure the kick is successful.`,
+  levels:L4,
+  ms:`AO1: Visualisation = performer works through images in mind on how performance should be completed successfully; can reduce anxiety before/during/after performance. Centering = form of breathing control to relax upper body whilst concentrating on slow movement of abdominals; diverts attention away from stressful situations. Cognitive symptoms = negative thoughts. Somatic symptoms = increased heart rate, muscular tension.
+AO2: Visualisation — control negative thoughts by visualising the kick (cognitive symptoms); work through each stage of the kick imagining completing it successfully. Centering — relax shoulders/chest whilst concentrating on slow movement of abdominals; aim to reduce heart rate (somatic symptoms); also diverts thoughts away from negative thoughts.
+AO3: Visualisation — develops kinaesthetic feel of the kick → increases likelihood of success. Centering — appropriate specifically because it can be performed on the pitch due to timing; PMR would be too time consuming in this context. Muscular tension in the legs would be problematic — could negatively impact kicking technique; therefore PMR to reduce tension in quadriceps/hamstrings may also be appropriate to ensure correct kicking technique. Visualisation is cognitive — addresses negative thoughts. Centering is somatic — addresses heart rate and muscular tension. Together they address both types of anxiety.`,
+  er:"Visualisation better understood than centering. Pleasing to see students directly relating responses to the context in the question (AO2). Best answers discussed advantages of using a cognitive strategy (visualisation) for negative thoughts AND a somatic strategy (centering) for heart rate/muscular tension, then evaluated disadvantages and alternatives. Most showed sound AO1 and AO2 for visualisation but few evaluated it (AO3). Many students didn't know what centering was and incorrectly referred to cue utilisation theory."},
+
+  // MOTIVATION & CONFIDENCE
+  {id:"Q4",sub:"Motivation & Confidence",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:true,
+  q:`One coach believes improving a runner's MOTIVATION is the easiest way to improve their 10 km time.\n\nAnother coach believes improving a runner's VO2 MAX is the easiest way to improve their 10 km time.\n\nEvaluate these statements. Refer to how the coaches could improve a 10 km runner's motivation and VO2 max in your answer.`,
+  levels:L5,
+  ms:`AO1: Motivation = performer's desire to succeed; intrinsic (from within) or extrinsic (from external factors); extrinsic = tangible (can touch) or intangible (cannot touch). VO2 max = maximum volume of oxygen taken in and used by the body per minute; measured in ml/kg/min; affected by genetics/physiology/training.
+AO2: Improve motivation: extrinsic — tangible rewards (money/trophy); intrinsic — setting SMARTER goals with runner. Increased motivation → willing to run faster/train harder. Improve VO2 max: appropriate training programme (continuous/interval training); physiological changes (increased capillarisation) → improved oxygen delivery to working muscles.
+AO3 MOTIVATION coach: Increasing motivation → willing to run at higher percentage of VO2 max and tolerate discomfort. Could have IMMEDIATE impact on 10 km time. Extrinsic rewards may be short-lived as effects wear off. Intrinsic motivation more powerful — if intrinsically motivated, runner also willing to train/improve VO2 max. VO2 MAX coach: Improved VO2 max → runner can run faster while using aerobic system/delay fatigue/limit lactate build-up. If VO2 max increased, athlete needs less motivation to improve time — finding it easier. HOWEVER — not necessarily the easiest way: requires commitment to regular training; may take time to see real improvements; large percentage of VO2 max is genetically dictated so improvement is limited. A combination of both would be best/depends on the individual performer.`,
+  er:"Least well answered of the 15-mark questions. Mean approximately 6.4. Only a very small minority correctly defined VO2 max. Most had good knowledge of motivation. AO3 was particularly weak — many did not even attempt it. Students must address BOTH statements, evaluate each, and link motivation and VO2 max improvement to the 10km running context."},
+
+  {id:"Q6",sub:"Motivation & Confidence",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`A football match ends in a draw. A penalty shoot-out is used to decide the winner of the match. One player refuses to take a penalty.\n\nAnalyse why the player refuses to take a penalty AND the strategies that could be used to encourage the player to take the penalty next time. Refer to Atkinson's Model of achievement motivation in your answer.`,
+  levels:L4,
+  ms:`AO1: Achievement motivation = tendency to approach or avoid competitive situations/drive to succeed minus fear of failure. NaF (need to avoid failure) = avoidance behaviour/avoid risk/avoid challenges/avoid feedback. Incentive value/probability of success will influence achievement motivation. Strategies: reinforcement/success/attributions/goal setting.
+AO2: Player refusing penalty = displaying NaF/avoidance behaviour; worried about risk of missing/being evaluated; feels refusing is the easy option. Strategies applied: praise or reward/practice without a goalkeeper/attribute scoring penalties to effort and ability/set performance or process goals.
+AO3 Analysis of strategies: Praise and rewards for taking a risk — shows player that approach behaviour is desired. Allowing success in training — develops confidence/self-esteem → increases perception of chances of success. Encouraging attribution of success to internal factors (effort/ability) → encourages approach behaviour. Setting achievable performance/process goals → enhances confidence → more likely to agree to take a penalty.`,
+  er:"Mean approximately 3.2. Less than 23% accessed Level 3-4. Number of students didn't know Atkinson's Model — just referred to motivation/intrinsic/extrinsic generally. Those who knew the model had weakest section in strategies — named one or two but didn't apply them to the penalty situation and didn't analyse them. Definite AO3 weakness."},
+
+  {id:"Q8",sub:"Motivation & Confidence",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`A badminton player is suffering from learned helplessness.\n\nAnalyse the strategies a coach could use to help the player overcome learned helplessness and improve their performance.`,
+  levels:L4,
+  ms:`AO1: Learned helplessness = belief that failure is inevitable. Strategies: allowing success/reminding performer of previous successful performances; positive feedback (highlighting good points); setting performance/process goals (focused on improving personal standards/techniques); attribution retraining (changing perception of failure — success to internal-stable, failure to external factors).
+AO2 Application to badminton: compete against weaker player/lower league to experience success; reminded of excellent drop shots from last season; coach tells player they have excellent low serve; set target of improving technique for overhead clear/number of successful serves over net; attribute success to ability ('I won because I played effective smash shots'); attribute failure to luck ('I lost because I picked up an injury') or task difficulty ('I played an opponent from a higher league').
+AO3 Analysis of impact: Allowing success → positive experience → reassures success is possible → increases belief they can succeed in more challenging situations. Positive feedback → coach persuades performer they have ability → performer believes for themselves. Performance/process goals → sense of confidence when achieved → more persistent in future; better than outcome goals (focus on self, not comparing to others). Attribution retraining → performer believes success is due to ability → self-serving bias → no longer believes failure is inevitable → improvement in serve/confidence to attempt difficult shots (smashes).`,
+  er:"Mean approximately 3.1 — lowest scoring of the 8-mark questions. Surprising given advance information identified this topic. Lower scoring answers spent too much time describing Weiner's attribution model (not the question focus). Most successful responses focused on attribution retraining alongside other strategies (developing self-efficacy) with sports-specific badminton examples of how the athlete should attribute success and failure to promote self-serving bias."},
+
+  {id:"Q15",sub:"Motivation & Confidence",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:true,
+  q:`Analyse how athletes could use goal setting to increase the effectiveness of periodisation when training for an Olympic Games.`,
+  levels:L4,
+  ms:`AO1: Periodisation = dividing training into blocks; macrocycle/mesocycle/microcycle; preparation/competition/transition/tapering/recovery. Goal setting = outcome, task orientated, performance or process goals; SMARTER principles.
+AO2: Macrocycle = 4-year plan building to Olympics. Transition period = recover mentally and physically before next competition. Mesocycles = focusing on developing particular aspects (speed, power). Microcycles = weekly plans (Monday S&C, Tuesday speed, Wednesday rest, Thursday practice). Tapering = reduce training quantity days before competition. Outcome goals for competition success. Task-orientated goals for specific aspects (start, average speed). Process goals for technique improvements. Performance goals relating to improving previous performances.
+AO3 Analysis of impact: Effective goal-setting allows athlete to get most out of training blocks. Continues to motivate athlete → trains effectively/puts in effort during each microcycle. Outcome goals (gold medal) for macrocycle → provides motivation/aspirations → train harder. Task-orientated goals during minor competitions → focuses on technique development/momentum. Performance goals during preparation → ensures meeting fitness/technique levels. Seeing improvements through goal-setting → confidence increases → maintains motivation. Goal-setting may sustain effort as athlete strives for targets. Coach and athlete may need to monitor targets to avoid over training/fatigue/injury. SMARTER principle ensures goals are achievable and maintain motivation.`,
+  er:"Mean 2.52, with 26% achieving 4 marks or more. Some pleasing responses recognised the synoptic nature and blended periodisation with goal setting. Excellent AO2 applications of periodisation and goal setting to an Olympian seen. Students often missed the opportunity to analyse (AO3) the IMPACT of periodisation and goal setting on the performance of the athlete."},
+
+  {id:"Q21",sub:"Motivation & Confidence",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:`Mo Farah is a four-time Olympic gold medallist. Before the 10 000m race at the 2017 World Championships, he said:\n\n"I know I am the man to beat but that gives me confidence. I can't wait to get on that track – bring it on!"\n\nAnalyse Mo Farah's statement using Bandura's model of self-efficacy AND Vealey's model of self-confidence.`,
+  levels:L5,
+  ms:`AO1: BANDURA — self-efficacy = situation-specific self-confidence. Four factors: performance accomplishments (most dependable for improving self-efficacy); vicarious experiences (watching similar ability person succeed); verbal persuasion; emotional arousal (how performer interprets their arousal). VEALEY — looks at trait confidence, state confidence, situation and competitive orientation. Competitive orientation = how much performer is drawn to challenging situations. Trait confidence = how performer rates chances across range of sports. State confidence = how performer rates chances in one specific situation. Objective sporting situation = combination of skill and situation.
+AO2: Bandura applied — performance accomplishments: Mo Farah is highly successful (four Olympic gold medals) explains why he feels confident. Vicarious experiences may also contribute — watching other top athletes train and succeed. Vealey applied — state confidence: belief his ability will bring success in 10,000m; specific to the situation. Trait confidence: personality trait stable across sports. 'I am the man to beat' reflects performance accomplishments. 'Bring it on' reflects competitive orientation.
+AO3: Performance accomplishments evident in 'I am the man to beat'. Vealey's competitive orientation reflected in 'Bring it on'. Difficult to fully analyse from statement alone — we don't know Mo Farah's full personality; trait confidence and competitive orientation can only be implied. Bandura's verbal persuasion and arousal interpretation could also contribute to his high self-efficacy but we cannot confirm from statement. High self-efficacy is likely to lead to approach behaviour and optimal arousal. Distinction between Bandura (task-specific) and Vealey (broader competitive confidence) is important — both can coexist.`,
+  er:"Clear spread across all levels; lowest mean mark of the 15-mark items (5.3). Vealey's model is a newer specification topic and was less known compared to Bandura's. Most students started with Bandura and answered in depth with four principles applied to Mo Farah. Many referenced the stem statement — provided greater supporting evidence. Weaker responses were not linked directly to the statement. Vealey's model was either absent or superficial in weaker responses."},
+
+  // GROUP DYNAMICS & LEADERSHIP
+  {id:"Q9",sub:"Group Dynamics & Leadership",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:`An experienced women's rugby team is bottom of the league with only a few games left before the end of the season.\n\nA new head coach is recruited and chooses to adopt an autocratic leadership style during training sessions and games.\n\nAnalyse the impact an autocratic leadership style may have on the team. Refer to Chelladurai's multi-dimensional model in your answer.`,
+  levels:L5,
+  ms:`AO1: Autocratic leader makes all decisions. Requirements of situation determine required leadership behaviour. Characteristics of team members determine preferred behaviour. Requirements of situation + characteristics of team members + characteristics of leader determine actual behaviour. (Accept labelled diagrams of model.)
+AO2: Autocratic = coach doesn't consult over key decisions (captain/tactics). Situation: facing relegation with few fixtures left — limited time to turn around; rugby involves large squad (20-30 players) and complex skills requiring co-ordination. NOT a danger factor — context states players are experienced. Group members' characteristics: experienced players — may want involvement in decision-making; female team — may prefer to be consulted. Leader's characteristics: coach may have succeeded with autocratic approach before/prefers telling players what to do.
+AO3: Experienced female team may prefer democratic approach; if situation requirements and leader preference lead to autocratic behaviour, performance AND satisfaction unlikely to improve. Team needs to win quickly to avoid relegation — autocratic likely to improve performance/results quickly. Large squad: autocratic most efficient way of ensuring everyone understands their role and tactics quickly. Coach's preference for autocratic may mean they are most effective leading this way → improved performances. HOWEVER team member satisfaction matters — members may leave/team may disband/cliques may form/productivity may be reduced if satisfaction suffers.`,
+  er:"Lowest scoring 15-mark question. Mean nearly 5. Students generally had very good knowledge of autocratic leadership style but lowest scoring answers focused solely on advantages/disadvantages without reference to Chelladurai's model. Students who could recall the model (often drawn in planning box) but couldn't fully work through it with examples from the question were limited to Level 3. Top answers understood: autocratic style at odds with group's preferred style, but matched required behaviour of the situation — maximising performance at cost of group satisfaction."},
+
+  {id:"Q12",sub:"Group Dynamics & Leadership",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`Evaluate the impact of strategies a coach may use to avoid social loafing in their team.\n\nUse examples from a team game of your choice to support your answer.`,
+  levels:L4,
+  ms:`AO1: Strategies: reward and recognise effort; give specific roles/responsibilities; use goal setting; use video analysis; avoid situations where social loafing may occur; allow success; develop fitness.
+AO2 Applied to team game: Reward via tangible rewards (man of match award/bonuses for achieving target). Specific targets — individual goals for players (distance covered/passes/tackles/interceptions). Video/match analysis — highlight poor positioning/lack of tracking back/failure to mark. Avoid social loafing in training — think about group sizes/activities. Manipulate training situations — increase success for tactics in future games. Fitness sessions — increase stamina/endurance/minimise fatigue.
+AO3: (Rewards) → likely to continue working hard/work even harder. (Achieving targets) → more motivated to continue working hard. (Video analysis) → players understand how to contribute more effectively. (Improving fitness) → last longer/cover more ground/maintain effort in final stages. (Improving success) → believe they can apply tactics effectively/work hard to maintain approach. If social loafing NOT addressed → lack of motivation may spread to more players. Addressing social loafing → more unity/togetherness. Improving communication → players understand role better → contribute with more drive. Coach may struggle to address social loafing. Players may be injured/unfit rather than social loafing. Social loafers may need punishing and removing.`,
+  er:"No specific examiner report. Must use examples from a named team game throughout. Evaluation (AO3) must assess the IMPACT of each strategy on social loafing and team performance — not just describe the strategy."},
+
+  {id:"Q14",sub:"Group Dynamics & Leadership",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:`England, ranked 11th in the world, were knocked out of the 2016 European Championships by Iceland, a team ranked 34th in the world. Losing the match 2–1 represented a significant under-achievement for the England football team.\n\nAnalyse the faulty group processes which could have caused this defeat AND the strategies which can be used to address specific faulty processes.`,
+  levels:L5,
+  ms:`AO1: Steiner's model: Actual Productivity = Potential Productivity − Losses due to faulty group processes. Faulty processes: co-ordination losses and motivational losses. Social loafing = motivational losses due to lack of confidence or feeling under-valued. Ringelmann effect = larger groups → less effort exerted by each individual. Strategies: social activities, video analysis, performance goals, establishing clear roles, praising/rewarding cohesive behaviour.
+AO2: CO-ORDINATION LOSSES — England: tactics not working/positional roles unclear/lack of communication/not employing coach's tactics. MOTIVATIONAL LOSSES — social loafing: players not tracking back/working hard when losing. Large squad — Ringelmann effect: players lost in the squad. STRATEGIES applied: social activities before tournament (team building). Team goals (tournament progression) or individual performance goals (passing completion rate). Clear roles in set plays. Praise players demonstrating good team play (tracking back). GPS tracking to capture distances covered/tackles made.
+AO3: Co-ordination losses → set plays breaking down/players out of position → loss of productivity/poor team performance. Motivational losses → players not trying as hard as others → resentment → breakdown in cohesion. Large group → players felt lost/undervalued → low confidence/not trying hard → cohesion and productivity reduced. Social activities → increased social cohesion → support/trust/playing for each other. Praise for effort regardless of receiving the ball → all contributions valued → maintained motivation. GPS tracking → Ringelmann effect reduced (players know efforts monitored at all times) → motivation increases/social loafing reduced. Performance goals → individual challenges reviewed after each match → target motivates → reduces social loafing.`,
+  er:"No specific examiner report. Both faulty group processes (co-ordination AND motivation) must be discussed. Strategies must be linked to specific faulty processes — not just listed. The AO3 must analyse the impact of both the faulty processes AND the strategies."},
+
+  // AROUSAL & ATTRIBUTION
+  {id:"Q13",sub:"Arousal & Attribution",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`In the 2011 Masters, Rory McIlroy was four shots ahead going into the final round. However, due to a sudden decline in performance, he finished 10 shots behind the eventual winner.\n\nAnalyse the factors linked to arousal which led to such a dramatic and sudden decline in performance.`,
+  levels:L4,
+  ms:`AO1: Arousal = state of energised alertness/readiness to perform/drive to achieve. Arousal increases until optimal arousal reached/zone of optimal functioning. CATASTROPHE THEORY (must be named) = arousal beyond optimal results in sudden/dramatic decline in performance. Dramatic decline caused by combination of high cognitive anxiety AND high somatic anxiety. NO credit for Drive Theory or Inverted-U.
+AO2: McIlroy had optimal arousal in earlier rounds — in zone of optimal functioning. McIlroy then experienced catastrophe. Golf is a fine and complex skill requiring LOW levels of arousal. McIlroy experienced over-arousal and cognitive anxiety due to negative thoughts/self-doubt ('what if I miss this putt?'/'what if I mess this up from such a commanding position?'). Importance of occasion/competitors playing well/poor stroke → increased cognitive anxiety/negative thoughts/self-doubt.
+AO3: Over-arousal → putting less accurate/driving misdirected → leads to further anxiety. Over-arousal causes attention to be too narrow → misses vital cues (focusing on putting action rather than run of the green). Once McIlroy started performing badly → cognitive anxiety increases further → dramatic decline almost impossible to recover from → even most basic errors occur. McIlroy's stress management techniques became ineffective as performance continued to decline.`,
+  er:"No specific examiner report. CRITICAL: Catastrophe theory must be named and correctly applied. Drive theory and Inverted-U receive NO credit. The analysis must explain the CHAIN REACTION: over-arousal → specific performance errors → more anxiety → further decline → catastrophe."},
+
+  {id:"Q17",sub:"Arousal & Attribution",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:`Crystal Palace are a professional football club. The team lost their first seven games of the 2017-2018 English Premier League season.\n\nAnalyse how the players may have attributed those defeats and the effect this may have had on their performance at that point in the season.\n\nRefer to Weiner's model of attribution theory.`,
+  levels:L4,
+  ms:`AO1: Attribution = perceived reason for success or failure. Weiner's model: locus of causality (internal/external) + locus of stability (stable/unstable) = four attributions: ability (internal-stable), effort (internal-unstable), task difficulty (external-stable), luck (external-unstable). Controllability dimension.
+AO2: External-stable (task difficulty) — opposition has been too tough. External-unstable (luck) — bad referee decisions/bad luck. Internal-unstable (effort) — team didn't try hard in first few games. Internal-stable (ability) — don't have good enough players for the Premier League. Controllable factors — tactics not being right (something that can be changed).
+AO3: External attributions → players remain motivated/confident (easier opposition coming up/more likely to win). Self-serving bias. Attributing defeat to effort → can be rectified (work harder in training/games). Problems arise if attributed to internal-stable (ability) → players don't believe they're good enough → demotivated team → negative effect on effort → further defeats. This is learned helplessness. Coach may need attribution retraining — change reasons for failure to external factors. Encourage external-unstable attribution for losses and internal-stable for any future wins/good performances (self-serving bias).`,
+  er:"Generally well answered (mean 3.64). Most had knowledge of Weiner's model and could apply to Crystal Palace's 7 defeats. More students accessed top band than for any other 8-mark question. Main reason for not achieving top band: lack of analysis of the EFFECT of the attributions on performance. Many could identify psychological effects (learned helplessness) but fewer added analysis of how it could have affected the players' performance themselves. Always check back to ensure ALL aspects of the question have been addressed."},
+];
+
+const SUBTOPICS = [...new Set(QS.map(q=>q.sub))];
+let selSub=null,curQ=null,phase='select',ans='',conv=[],loading=false,currentTab='practice';
+
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='practice')||(i===1&&t==='browse')));
+  document.getElementById('practice-panel').style.display=t==='practice'?'':'none';
+  document.getElementById('browse-panel').style.display=t==='browse'?'':'none';
+  if(t==='browse') renderBrowse();
+  if(t==='practice') renderPractice();
+}
+
+function toggleLevelGuide(){
+  const body=document.getElementById('level-guide-body');
+  const arrow=document.getElementById('level-arrow');
+  if(body){body.style.display=body.style.display==='none'?'block':'none';}
+  if(arrow){arrow.textContent=body.style.display==='none'?'▼':'▲';}
+}
+
+function renderPractice(){
+  const p=document.getElementById('practice-panel');
+  if(phase==='select'){
+    const counts={};
+    QS.forEach(q=>{counts[q.sub]=(counts[q.sub]||0)+1;});
+    p.innerHTML=`
+      <div class="tip-box"><div class="tip-label">💡 Extended Response Marking</div>These questions are marked holistically using level descriptors — not individual points. The AI reads your whole answer and places it in a level based on the quality of your knowledge, application and evaluation. Aim to <strong>blend</strong> AO1+AO2+AO3 within sentences.</div>
+      <div class="section-title">Select a topic area</div>
+      <div class="topic-grid">${SUBTOPICS.map(s=>{const qs=QS.filter(q=>q.sub===s);const has8=qs.some(q=>q.marks===8);const has15=qs.some(q=>q.marks===15);const hasSyn=qs.some(q=>q.synoptic);return`
+        <div class="topic-card${selSub===s?' sel':''}" onclick="selSub='${s}';renderPractice()">
+          <div class="tc-name">${s}</div>
+          <div class="tc-sub">${qs.length} question${qs.length>1?'s':''}${has8&&has15?' · 8 & 15 mark':has15?' · 15 mark':' · 8 mark'}${hasSyn?' · ⚡':''}</div>
+        </div>`;}).join('')}
+      </div>
+      <div style="font-size:12px;color:#888;margin-top:.25rem;">⚡ = synoptic question</div>
+      ${selSub?`<div class="btn-row" style="margin-top:.75rem;">
+        <button class="btn primary" onclick="startQ()">Get a question &rarr;</button>
+        <button class="btn" onclick="selSub=null;renderPractice()">Clear</button>
+      </div>`:''}`;
+  } else if(phase==='answer'){
+    const levelRows=curQ.levels.map(l=>`<div class="level-row"><div class="level-num">Level ${l.l}</div><div class="level-marks">${l.r} marks</div><div>${l.d}</div></div>`).join('');
+    p.innerHTML=`
+      <div class="meta">
+        <button class="btn" onclick="phase='select';renderPractice()">&#8592; Back</button>
+        <span class="badge ${curQ.marks===8?'b-8':'b-15'}">${curQ.marks} marks</span>
+        <span class="badge b-ao">${curQ.ao}</span>
+        ${curQ.synoptic?'<span class="badge b-syn">⚡ Synoptic</span>':''}
+        <span style="font-size:12px;color:#888;">${curQ.id} &middot; ${curQ.sub}</span>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="level-guide">
+        <div class="level-guide-header" onclick="toggleLevelGuide()"><span>Level Descriptors</span><span id="level-arrow">▼</span></div>
+        <div class="level-guide-body" id="level-guide-body">${levelRows}</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label class="label">Your answer — write in continuous prose (aim for ${curQ.marks===8?'~200-250':'~350-450'} words)</label>
+        <textarea id="ansbox" rows="${curQ.marks===8?10:15}" placeholder="Write your answer here in continuous prose. Aim to blend knowledge (AO1), application to the specific context (AO2) and evaluation (AO3) throughout your paragraphs...">${ans}</textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" onclick="submitAns()">Submit for marking &rarr;</button>
+        <button class="btn" onclick="newQ()">Different question</button>
+      </div>`;
+    const box=document.getElementById('ansbox');
+    if(box) box.addEventListener('input',e=>ans=e.target.value);
+  } else if(phase==='feedback'){
+    p.innerHTML=`
+      <div class="meta" style="margin-bottom:1rem;">
+        <button class="btn" onclick="phase='answer';renderPractice()">&#8592; Edit answer</button>
+        <button class="btn" onclick="phase='select';conv=[];ans='';renderPractice()">New topic</button>
+        <button class="btn" onclick="newQ()">Next question</button>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="card">
+        <div class="msg-role">Your answer</div>
+        <div class="msg-text">${ans}</div>
+      </div>
+      <div class="card" id="fb-card">
+        <div class="msg-role">Examiner feedback</div>
+        <div id="fb-content" style="font-size:14px;line-height:1.75;white-space:pre-wrap;">${loading?'<span class="spinner"></span>Applying level descriptors and marking your response...':''}</div>
+        ${curQ.er?`<div class="er-box" id="er-box" style="display:none;"><div class="er-label">📄 Examiner Report — what the chief examiner said about this question</div><div class="er-text">${curQ.er}</div></div>`:''}
+      </div>
+      ${!loading&&conv.length>0?`
+        <div class="card" id="fu-card" style="display:none;"><div id="fu-msgs"></div></div>
+        <div class="fu-row">
+          <input type="text" id="fu-input" placeholder="Ask a follow-up question about this feedback..." />
+          <button class="btn primary" onclick="sendFU()">Ask &rarr;</button>
+        </div>`:''}`;
+  }
+}
+
+function startQ(){
+  const pool=QS.filter(q=>q.sub===selSub);
+  curQ=pool[Math.floor(Math.random()*pool.length)];
+  ans='';conv=[];phase='answer';renderPractice();
+}
+
+function newQ(){
+  const pool=QS.filter(q=>q.sub===selSub);
+  curQ=pool[Math.floor(Math.random()*pool.length)];
+  ans='';conv=[];phase='answer';renderPractice();
+}
+
+async function submitAns(){
+  if(!ans.trim()) return;
+  phase='feedback';loading=true;renderPractice();
+
+  const levelDescriptors=curQ.levels.map(l=>`Level ${l.l} (${l.r} marks): ${l.d}`).join('\n');
+  const sys=`You are an experienced AQA A-Level Physical Education senior examiner, expert in extended response marking for Sport Psychology.
+
+CRITICAL: This is a LEVEL-MARKED question. You must mark HOLISTICALLY using level descriptors. Do NOT count individual points. Read the entire response, assess the overall quality, and place it in a level.
+
+QUESTION: ${curQ.q}
+TOTAL MARKS: ${curQ.marks}
+AO BREAKDOWN: ${curQ.ao}
+${curQ.marks===8?'This is a 4-level question.':'This is a 5-level question.'}
+${curQ.synoptic?'SYNOPTIC QUESTION: This question draws on content from more than one area of the specification. Strong answers must integrate knowledge from both areas.':''}
+
+LEVEL DESCRIPTORS:
+${levelDescriptors}
+
+KEY PRINCIPLES FOR LEVEL PLACEMENT:
+- AO1 (Knowledge): Accuracy, detail, comprehensiveness
+- AO2 (Application): Is knowledge applied specifically to the context in the question? Breadth AND depth?
+- AO3 (Evaluation/Analysis): Is evaluation coherent, consistent, and linked? Are impacts identified? Are factors compared?
+- Terminology: Is specialist vocabulary used correctly and consistently?
+- Structure: Is the answer focused, substantiated, and clearly reasoned?
+- BLENDING: The highest marks go to responses that blend AO1+AO2+AO3 within sentences — stating knowledge, applying to context, AND evaluating impact in the same argument. Lists of points without development cannot reach the top levels.
+
+MARK SCHEME CONTENT FOR REFERENCE (do not share verbatim — use to inform your judgment):
+${curQ.ms}
+
+EXAMINER REPORT CONTEXT:
+${curQ.er||'No specific examiner report available.'}
+
+FEEDBACK FORMAT — use exactly this structure:
+
+LEVEL AWARDED: Level [X] — [X] / ${curQ.marks} marks
+
+WHY THIS LEVEL:
+[Holistic explanation of what the response does well and where it falls short relative to the level descriptors. Reference SPECIFIC things the student wrote. Explain which AO each section demonstrates. Be direct — if the AO2 is missing or the evaluation is listed rather than developed, say so clearly.]
+
+WHAT KEPT THIS FROM A HIGHER LEVEL:
+[Be precise. Name the exact gap — e.g., "Your AO1 is secure but the evaluation lacks coherence — points are stated without explaining the impact on the performer." Or: "AO2 is missing — you state theory but don't apply it to the specific sport context." If already at the top level, identify what made it exceptional.]
+
+AO BALANCE:
+AO1 Knowledge: [Weak / Developing / Secure / Strong]
+AO2 Application: [Weak / Developing / Secure / Strong]
+AO3 Evaluation: [Weak / Developing / Secure / Strong]
+
+EXAMINER REPORT COMMENTARY:
+[Reference what the chief examiner said about common performance on this question. Tell the student whether their response matches the typical high or low performer profile.]
+
+TO REACH THE NEXT LEVEL:
+[Concrete, specific advice. Don't just say "evaluate more" — give an example of how to turn one of their existing points into a higher-level response. E.g., "Take your point about 'X' and add: '...which means that Y, resulting in Z for the performer.' That development is what AO3 requires."]`;
+
+  const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:1200,system:sys,messages})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||JSON.stringify(data);
+    conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
+    loading=false;renderPractice();
+    const el=document.getElementById('fb-content');
+    if(el) el.textContent=text;
+    const er=document.getElementById('er-box');
+    if(er) er.style.display='';
+    const fu=document.getElementById('fu-card');
+    if(fu) fu.style.display='';
+  } catch(e){
+    loading=false;
+    const el=document.getElementById('fb-content');
+    if(el) el.textContent='Error: '+e.message;
+  }
+}
+
+async function sendFU(){
+  const input=document.getElementById('fu-input');
+  if(!input||!input.value.trim()) return;
+  const q=input.value.trim();
+  input.value='';
+  const fuMsgs=document.getElementById('fu-msgs');
+  const fuCard=document.getElementById('fu-card');
+  if(fuCard) fuCard.style.display='';
+  if(fuMsgs){
+    fuMsgs.innerHTML+=`<div class="msg"><div class="msg-role">You</div><div class="msg-text">${q}</div></div>`;
+    fuMsgs.innerHTML+=`<div class="msg" id="fu-loading"><div class="msg-role">Tutor</div><div class="msg-text"><span class="spinner"></span>Thinking...</div></div>`;
+  }
+  const sys=`You are an AQA A-Level PE senior examiner providing follow-up tutoring on Sport Psychology extended response marking. The question was: "${curQ.q}" (${curQ.marks} marks). Help the student understand how to improve their level placement. Focus on AO1/AO2/AO3 balance and the importance of blending knowledge, application and evaluation.`;
+  const msgs=conv.map(m=>({role:m.role,content:m.content}));
+  msgs.push({role:'user',content:q});
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:600,system:sys,messages:msgs})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'';
+    conv.push({role:'user',content:q},{role:'assistant',content:text});
+    const l=document.getElementById('fu-loading');
+    if(l) l.querySelector('.msg-text').textContent=text;
+  } catch(e){
+    const l=document.getElementById('fu-loading');
+    if(l) l.querySelector('.msg-text').textContent='Error. Please try again.';
+  }
+}
+
+function renderBrowse(){
+  const p=document.getElementById('browse-panel');
+  const byTopic={};
+  QS.forEach(q=>{if(!byTopic[q.sub]) byTopic[q.sub]=[];byTopic[q.sub].push(q);});
+  p.innerHTML=Object.keys(byTopic).map(sub=>`
+    <div class="section-title">${sub}</div>
+    <div class="card" style="margin-bottom:1.25rem;">
+      ${byTopic[sub].map(q=>`
+        <div class="q-item">
+          <div class="q-num">${q.id}</div>
+          <div class="q-txt">${q.q.split('\n')[0].substring(0,80)}${q.q.split('\n')[0].length>80?'...':''}</div>
+          <div class="q-actions">
+            <span class="badge ${q.marks===8?'b-8':'b-15'}">${q.marks}m</span>
+            ${q.synoptic?'<span class="badge b-syn">⚡</span>':''}
+            <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="practiseQ('${q.id}')">Practise</button>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function practiseQ(id){
+  curQ=QS.find(q=>q.id===id);
+  selSub=curQ.sub;
+  ans='';conv=[];phase='answer';
+  switchTab('practice');
+}
+
+renderPractice();
+</script>
+</body>
+</html>

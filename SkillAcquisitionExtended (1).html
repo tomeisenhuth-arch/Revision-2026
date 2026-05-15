@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQA A-Level PE — Skill Acquisition Extended Responses</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;}
+.header{background:#1a2744;color:#fff;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header-title{font-size:17px;font-weight:600;}
+.header-sub{font-size:12px;opacity:.65;margin-top:2px;}
+.header-badge{background:#c9a84c;color:#1a2744;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.container{max-width:820px;margin:0 auto;padding:2rem 1.5rem;}
+.tab-bar{display:flex;gap:2px;margin-bottom:1.5rem;background:#e8e7e3;border-radius:10px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;cursor:pointer;border:none;background:transparent;border-radius:8px;color:#555;font-weight:500;}
+.tab.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:1rem;}
+.topic-card{background:#fff;border:1.5px solid #e0dfd8;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s;}
+.topic-card:hover{border-color:#1a2744;background:#f8f7f4;}
+.topic-card.sel{border-color:#1a2744;background:#eef1f7;}
+.tc-name{font-size:13px;font-weight:600;margin-bottom:3px;}
+.tc-sub{font-size:11px;color:#888;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#1a1a1a;transition:all .15s;}
+.btn:hover{background:#f5f4f0;}
+.btn.primary{background:#1a2744;color:#fff;border-color:#1a2744;}
+.btn.primary:hover{background:#243561;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.qbox{background:#f5f4f0;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.65;margin-bottom:1rem;white-space:pre-wrap;}
+.level-guide{background:#fff;border:1px solid #e0dfd8;border-radius:8px;margin-bottom:1rem;overflow:hidden;}
+.level-guide-header{background:#1a2744;color:#fff;padding:.625rem 1rem;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.level-guide-body{padding:.75rem;display:none;}
+.level-row{display:grid;grid-template-columns:60px 60px 1fr;gap:.5rem;padding:.5rem 0;border-bottom:1px solid #f0f0ec;font-size:12px;line-height:1.5;}
+.level-row:last-child{border-bottom:none;}
+.level-num{font-weight:700;color:#1a2744;}
+.level-marks{color:#888;}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-bottom:6px;display:block;}
+textarea{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;background:#fafaf8;resize:vertical;}
+textarea:focus{outline:none;border-color:#1a2744;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.03em;}
+.b-8{background:#dbeafe;color:#1e40af;}
+.b-15{background:#fef3c7;color:#92400e;}
+.b-ao{background:#f0f0ec;color:#555;}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+.fb-text{font-size:14px;line-height:1.75;white-space:pre-wrap;}
+.er-box{background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;padding:.875rem 1rem;margin-top:1rem;}
+.er-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c3aed;margin-bottom:5px;}
+.er-text{font-size:13px;color:#4c1d95;line-height:1.65;}
+.ao-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.75rem;}
+.ao-box{background:#f5f4f0;border-radius:6px;padding:.5rem;text-align:center;}
+.ao-label{font-size:10px;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:2px;}
+.ao-val{font-size:13px;font-weight:600;color:#1a2744;}
+.msg{padding:10px 0;border-bottom:1px solid #f0f0ec;}
+.msg:last-child{border-bottom:none;}
+.msg-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#999;margin-bottom:3px;}
+.msg-text{font-size:14px;line-height:1.65;white-space:pre-wrap;}
+.fu-row{display:flex;gap:8px;margin-top:1rem;}
+.fu-row input{flex:1;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;background:#fafaf8;}
+.fu-row input:focus{outline:none;border-color:#1a2744;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:#1a2744;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:-1px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.q-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0ec;}
+.q-item:last-child{border-bottom:none;}
+.q-num{font-size:11px;color:#aaa;min-width:28px;padding-top:1px;font-weight:600;}
+.q-txt{font-size:13px;flex:1;line-height:1.4;}
+.q-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.section-title{font-size:14px;font-weight:600;margin-bottom:.75rem;color:#1a2744;}
+.tip-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:.875rem 1rem;margin-bottom:1rem;font-size:13px;line-height:1.6;color:#1e3a8a;}
+.tip-label{font-size:11px;font-weight:700;text-transform:uppercase;color:#1d4ed8;margin-bottom:4px;}
+table.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:.75rem 0;}
+table.data-table th,table.data-table td{border:1px solid #ddd;padding:6px 10px;text-align:center;}
+table.data-table th{background:#1a2744;color:#fff;font-weight:600;}
+table.data-table td:first-child{font-weight:600;text-align:left;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="header-title">AQA A-Level PE — Skill Acquisition Extended Responses</div>
+    <div class="header-sub">Level-descriptor marking · AO1/AO2/AO3 balance · Examiner report feedback</div>
+  </div>
+  <div class="header-badge">16 QUESTIONS</div>
+</div>
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('practice')">Practice</button>
+    <button class="tab" onclick="switchTab('browse')">All Questions</button>
+  </div>
+  <div id="practice-panel"></div>
+  <div id="browse-panel" style="display:none;"></div>
+</div>
+
+<script>
+const PROXY = 'https://keen-sawine-d41a7a.netlify.app/.netlify/functions/proxy';
+const MODEL = 'claude-sonnet-4-5';
+
+const WHITING_SVG = `<svg viewBox="0 0 680 120" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;width:100%;display:block;margin:.75rem auto;font-family:inherit;font-size:10px;">
+<defs><marker id="ar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a2744"/></marker></defs>
+<rect x="2" y="35" width="70" height="50" rx="4" fill="#eef1f7" stroke="#1a2744" stroke-width="1.2"/>
+<text x="37" y="56" text-anchor="middle" font-weight="600" fill="#1a2744">Input /</text>
+<text x="37" y="68" text-anchor="middle" font-weight="600" fill="#1a2744">Display</text>
+<text x="37" y="80" text-anchor="middle" fill="#555">stimuli</text>
+<line x1="72" y1="60" x2="92" y2="60" stroke="#1a2744" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="94" y="35" width="70" height="50" rx="4" fill="#eef1f7" stroke="#1a2744" stroke-width="1.2"/>
+<text x="129" y="56" text-anchor="middle" font-weight="600" fill="#1a2744">Receptor</text>
+<text x="129" y="68" text-anchor="middle" font-weight="600" fill="#1a2744">Systems</text>
+<text x="129" y="80" text-anchor="middle" fill="#555">senses</text>
+<line x1="164" y1="60" x2="184" y2="60" stroke="#1a2744" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="186" y="20" width="300" height="80" rx="4" fill="#fff3cd" stroke="#c9a84c" stroke-width="1.5"/>
+<text x="336" y="35" text-anchor="middle" font-weight="700" fill="#92400e" font-size="9">CENTRAL MECHANISMS</text>
+<rect x="196" y="40" width="84" height="50" rx="3" fill="#fef9c3" stroke="#c9a84c" stroke-width="1"/>
+<text x="238" y="58" text-anchor="middle" font-weight="600" fill="#92400e">Perceptual</text>
+<text x="238" y="70" text-anchor="middle" font-weight="600" fill="#92400e">Mechanisms</text>
+<text x="238" y="82" text-anchor="middle" fill="#555">DCR/attention</text>
+<line x1="280" y1="65" x2="296" y2="65" stroke="#c9a84c" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="298" y="40" width="84" height="50" rx="3" fill="#fef9c3" stroke="#c9a84c" stroke-width="1"/>
+<text x="340" y="58" text-anchor="middle" font-weight="600" fill="#92400e">Translatory</text>
+<text x="340" y="70" text-anchor="middle" font-weight="600" fill="#92400e">Mechanisms</text>
+<text x="340" y="82" text-anchor="middle" fill="#555">decision/LTM</text>
+<line x1="382" y1="65" x2="398" y2="65" stroke="#c9a84c" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="400" y="40" width="78" height="50" rx="3" fill="#fef9c3" stroke="#c9a84c" stroke-width="1"/>
+<text x="439" y="58" text-anchor="middle" font-weight="600" fill="#92400e">Effector</text>
+<text x="439" y="70" text-anchor="middle" font-weight="600" fill="#92400e">Mechanisms</text>
+<text x="439" y="82" text-anchor="middle" fill="#555">programme</text>
+<line x1="486" y1="60" x2="506" y2="60" stroke="#1a2744" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="508" y="35" width="70" height="50" rx="4" fill="#eef1f7" stroke="#1a2744" stroke-width="1.2"/>
+<text x="543" y="56" text-anchor="middle" font-weight="600" fill="#1a2744">Muscular</text>
+<text x="543" y="68" text-anchor="middle" font-weight="600" fill="#1a2744">System</text>
+<text x="543" y="80" text-anchor="middle" fill="#555">output</text>
+<line x1="578" y1="60" x2="598" y2="60" stroke="#1a2744" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="600" y="35" width="74" height="50" rx="4" fill="#eef1f7" stroke="#1a2744" stroke-width="1.2"/>
+<text x="637" y="58" text-anchor="middle" font-weight="600" fill="#1a2744">Output /</text>
+<text x="637" y="70" text-anchor="middle" font-weight="600" fill="#1a2744">Feedback</text>
+<text x="637" y="82" text-anchor="middle" fill="#555">data</text>
+<path d="M637,85 L637,110 L337,110 L337,100" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ar)"/>
+<text x="487" y="108" text-anchor="middle" fill="#888" font-size="9">Feedback loop</text>
+</svg>`;
+
+const TRAMPOLINIST_TABLE = `<table class="data-table"><thead><tr><th>Attempt</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead><tbody><tr><td>Trampolinist A</td><td>9.7</td><td>9.8</td><td>9.8</td><td>9.7</td><td>9.6</td><td>9.8</td></tr><tr><td>Trampolinist B</td><td>3.7</td><td>3.4</td><td>4.2</td><td>4.7</td><td>5.9</td><td>5.1</td></tr></tbody></table>`;
+
+const QS = [
+  // 8-MARK QUESTIONS
+  {id:"Q1",sub:"Learning Theories",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Evaluate whether operant conditioning or insight learning would be most effective when coaching passing in a team sport.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made between different relevant factors and their impact. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used. Answer usually demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence. Terminology sometimes used. Answer occasionally demonstrates substantiated reasoning but may lack clarity, structure and focus."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation. Terminology occasionally used. Answer may lack substantiated reasoning, clarity, structure and focus."}],
+  ms:`AO1: Operant conditioning (Skinner): trial and error; shaping behaviour; SR bond strengthened via positive/negative reinforcement; broken via punishment. Insight learning (Gestalt): whole skill learning through problem solving/discovery; coach uses questioning; skills adapted and transferred.
+AO2: Operant conditioning applied to passing: placed in situations where desired pass occurs; positive reinforcement (praise when pass correct); negative reinforcement (stop criticising when pass successful); punishment for repeated errors (extra laps).
+Insight learning applied to passing: performer placed in situations where pass type varies; encouraged to evaluate and decide; coach asks questions (why step into the pass?).
+AO3 Evaluation: Insight learning more effective for associative/autonomous players; develops understanding and ability to modify passing in new situations; encourages creativity/decision making; but time consuming — players may become demotivated. Operant conditioning more appropriate for cognitive/young players; trial and error sufficient; positive reinforcement maintains motivation; punishment may demotivate cognitive stage performers.`,
+  er:"This question highlighted a difference in depth of understanding. Students could often describe operant conditioning accurately but insight learning was frequently mislabelled as trial-and-error (which it isn't). Application of insight learning to passing lacked clarity and depth in most responses."},
+
+  {id:"Q3",sub:"Feedback",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Knowledge of performance and knowledge of results are two types of feedback available to a long jumper.\n\nEvaluate the effectiveness of OTHER types of feedback for a long jumper in the cognitive stage of learning.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used. Answer usually demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence. Terminology sometimes used."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation. Terminology occasionally used."}],
+  ms:`AO1: Positive feedback = information on correct aspects/praise. Negative feedback = information on incorrect actions. Extrinsic feedback = from external source. Intrinsic feedback = from within the performer. Cognitive phase = first phase with lots of mistakes.
+AO2 Application to long jump: Positive — 'excellent take off drive'. Negative — 'use arms more during flight'. Intrinsic — feeling landing position is off balance. Extrinsic — coach tells jumper run-up was too slow.
+AO3 Evaluation: Positive feedback highlights correct technique — ensures repeated/develops correct motor programme; increases motivation and confidence. Negative feedback could damage motivation/confidence and cause self-doubt. Some negative feedback still required but alongside positives. Extrinsic helps correct errors cognitive performer cannot identify independently; but over-reliance may prevent progression. Intrinsic not useful at cognitive stage — performer lacks experience to know what correct jump should feel like.`,
+  er:"Highest mean mark of the three 8-mark questions (just over 4). Types of feedback generally well known. Most common miss was failing to give AO2 examples of different feedback types. Students also repeated types mentioned in the question (KOP and KOR) which were not creditworthy."},
+
+  {id:"Q5",sub:"Practice Methods",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Tom Daley won an Olympic gold medal in diving.\n\nEvaluate the effectiveness of mental practice when developing a diver's performance.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation."}],
+  ms:`AO1: Mental practice = rehearsing skill in mind without movement. Internal = from within (how it feels). External = from outside (how it looks like a TV camera).
+AO2 Application to diving: Grooves/develops motor programme for specific dive. Controls emotions/confidence/lowers arousal. Used away from pool (access issues or injury). Used in warm-up or immediately before dive in competition.
+AO3 Evaluation: Used immediately before dive — controls arousal (diving is complex/requires precision — best at lower arousal). NOT appropriate for cognitive performers as they lack correct mental image stored in LTM; may practise incorrectly (jumping out too far/not pointing toes). Performer must be trained in mental practice to use under pressure; incorrect imagery decreases confidence/increases arousal. Not a substitute for physical practice — should be used alongside massed/distributed/varied practice. Note: other practice types only credit-worthy if explicitly linked to overcoming a limitation of mental practice.`,
+  er:"Mean mark just over 3. Fewer than 1% reached the top band. Good responses differentiated between internal and external viewpoints. Application was often limited regarding how, when, and where a diver could use mental practice. Best answers linked mental practice to arousal control and understood it is ineffective for cognitive performers who lack the stored motor programme."},
+
+  {id:"Q7",sub:"Goal Setting",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"A high jumper is experiencing a learning plateau.\n\nEvaluate the effectiveness of setting a SMARTER process goal to overcome this learning plateau. Refer to an appropriate goal in your answer.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation."}],
+  ms:`AO1: Learning plateau = period of no improvement/performance levels off. Causes: lack of motivation/boredom/poor coaching/achieved potential/fatigue/insufficient fitness. Process goal = one which focuses on improving technique. SMARTER = Specific, Measurable, Achievable, Realistic, Time-bound, Evaluated, Re-done.
+AO2 Application: Setting goals beneficial if plateau caused by motivational/technical factors. Goals increase motivation and force focus on specific weaknesses. Example process goal: 'push hips up to arch the back on at least 9/10 attempts in the next session'. The goal must reference high jump technique specifically.
+AO3 Evaluation: Goal setting NOT effective if cause is fatigue/poor coaching/lack of ability — alternatives (rest, new coach) more effective. Process goal most effective as focuses on technique/avoids comparison with others. Can experience success without new PB — increases motivation. Specific (focuses on technical element). Measurable (number of times performed correctly). Achievable/realistic (small technical improvement, not new height). Time-bound (next session).`,
+  er:"Lowest scoring 8-mark question. Mean only just over 2.5. Despite being on pre-release material, very few students reached beyond Level 2. The limiting factor was inability to apply process goals to high jump. Many correctly stated process goals focus on technique, then gave 'jumping a higher height' as their example — which is an outcome goal, not a process goal."},
+
+  {id:"Q9",sub:"Guidance",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Evaluate the effectiveness of the different methods of guidance that could be used when teaching a swimmer who is in the cognitive stage of learning.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation."}],
+  ms:`AO1: Visual = demonstrations. Verbal = instructions. Mechanical = aids to support performance. Manual = coach using body to support/guide. Cognitive learner = first stage, no clear mental image, makes many mistakes.
+AO2 Application to swimming: Visual — demonstration of correct stroke. Verbal — explanation of when to breathe. Mechanical — float to focus on kick action. Manual — holding learner flat in water to feel correct position.
+AO3 Evaluation: All types play some role. Mechanical and manual are vital early on for safety. Mechanical/manual decrease cognitive load — allow focus on parts (float = focus on kick). Over-reliance on mechanical/manual limits development of kinaesthetic feel for whole skill; loss of confidence when aid removed. Visual guidance provides correct mental image — conditional on demonstration being accurate. Swimmer needs to see demonstration both in and out of water. Verbal guidance least important at cognitive stage — swimmer has limited knowledge/may not understand technical terms. Where verbal guidance is given, must be clear and accessible.`,
+  er:"No specific examiner report for this question — apply general principles from similar guidance questions. All four methods must be discussed for full marks. Evaluation must clearly link each method's appropriateness to the cognitive stage."},
+
+  {id:"Q11",sub:"Feedback",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Developments in video and analysis programmes have changed how coaches provide feedback to performers.\n\nEvaluate the impact of these developments on a coach's ability to provide effective feedback to an athlete in the cognitive stage of learning.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation."}],
+  ms:`AO1: Video/analysis packages including Dartfish/Prozone; high-speed camera; frame-by-frame playback; motion analysis; match analysis. Cognitive stage: inconsistent performance; trial and error; large/regular mistakes; all attention required. Feedback types: positive (correct aspects/praise); extrinsic (external source); KOR (outcome); KOP (technique quality).
+AO2 Best feedback for cognitive performers: positive to maintain motivation; extrinsic as unable to provide accurate intrinsic feedback; KOR to focus on specific goal; KOP to take positives in technique even when outcome not achieved. Technology link: video analysis allows detailed extrinsic feedback; video highlights positives.
+AO3 Evaluation POSITIVE: Extrinsic video feedback enables performer to build mental image of correct model/begin using intrinsic feedback. Video can be edited to focus on strengths — maintains motivation; weaknesses drip-fed one at a time. NEGATIVE: May cause information overload. Hard not to show negatives which will decrease motivation. Focuses on KOP — may be more suitable for autonomous performers.`,
+  er:"No specific examiner report available. Key distinction: AO2 is applying the types of feedback most appropriate for cognitive performers — extrinsic, positive, KOR. AO3 is evaluating the impact of VIDEO specifically on this, not just general feedback evaluation."},
+
+  {id:"Q13",sub:"Learning Theories",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Analyse how Schmidt's schema theory can be applied to a single golf shot AND the implications of this theory for the golfer's coach when trying to maximise performance.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation."}],
+  ms:`AO1: Too many motor programmes to store all. Generalised motor programmes adapted. Recall schema (initial conditions + response specification). Recognition schema (sensory consequences + response outcome).
+AO2 Application to golf shot: Initial conditions = position relative to fairway/green/flag/hazards/wind direction. Response specification = where golfer wants to hit, accounting for wind. Sensory consequence = rhythm of swing (too fast/slow), force, contact quality. Response outcome = where ball finished vs intended target.
+AO3 Implications for coach: Basics of golf swing developed first. Coach allows varied practice — many different initial conditions (different length/shaped holes, various hazards). Performer develops ability to modify motor programme to meet new conditions. Regular feedback about most effective ways of tackling range of situations. Encourage mental rehearsal/visualisation of suitable adaptations. When competing, performer is prepared/able to adapt to all challenges. Note: difficult to correct errors in the original generalised programme.`,
+  er:"Over half of students accessed the top two mark bands. Success depended on being able to apply schema theory to a golf shot AND state how this impacts the coach. Top-band answers demonstrated both breadth and depth — a range of coaching strategies with explanation of how AND why they would be used."},
+
+  {id:"Q16",sub:"Practice Methods",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Coaches need to consider the nature of the skills and the experience of the performers when structuring a practice session.\n\nEvaluate the use of massed AND distributed practice when coaching a group of beginners, in a game such as basketball.",
+  levels:[{l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation."}],
+  ms:`AO1: Massed = continuous/little/no rest between attempts; limited feedback during. Good for closed skills/fitness development. Distributed = breaks between practice blocks; used with beginners/unfit/dangerous skills/open skills; allows for rest and feedback.
+AO2 Application to basketball: Massed example = continuous lay-up shots without breaks. Used with highly motivated/skilled players (e.g., first team). Good for simple/discrete skills in basketball (dribbling, shooting, catching) once basics taught. Distributed = practice with rest/feedback intervals. More appropriate for beginners.
+AO3 Evaluation: Beginners should use distributed — allows time for coach feedback; player can develop understanding and improve. Rest allows focus on instruction rather than managing fatigue. Coach can vary activities — reduces boredom/dropout risk. As fitness/skill improves, massed practice becomes appropriate. Basketball not a dangerous sport — as players fatigue, safety not impacted. Massed also appropriate if limited time available/to reflect fast pace of basketball game.`,
+  er:"No specific examiner report. Both massed AND distributed must be discussed and evaluated specifically in context of basketball beginners. The key AO3 move is justifying WHY distributed is better for beginners, not just listing its advantages in isolation."},
+
+  // 15-MARK QUESTIONS
+  {id:"Q2",sub:"Information Processing",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Goalkeepers in several sports need a fast response time to make a save.\n\nEvaluate how effective the following are for improving the response time of a goalkeeper:\n• development of selective attention\n• speed agility quickness (SAQ) training\n• caffeine supplementation.",
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made between different relevant factors and their impact. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used. Answer usually demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence. Terminology used but may sometimes be missing. Answer sometimes demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Some evaluation attempted but likely to lack coherence. Terminology occasionally used."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation. Terminology very occasionally used. Answer often lacks substantiated reasoning, clarity, structure and/or focus."}],
+  ms:`AO1: Response time = reaction time + movement time. Selective attention = ability to focus on relevant stimuli and ignore irrelevant. SAQ = dynamic movements/changing direction at speed/ladder drills. Caffeine = stimulant that increases mental alertness.
+AO2: Selective attention improved by bright ball/highlighting relevant stimuli/training with distractions — improves reaction time. SAQ training: multiple saves in different positions/ladder footwork before saves — improves movement time. Caffeine before performance: improves alertness/helps maintain focus on ball — improves reaction time.
+AO3 Evaluation:
+SELECTIVE ATTENTION: Beneficial — allows goalkeeper to ignore distractions (crowd) and focus on ball — decreases reaction time through anticipation. However — only develops reaction time, still need ability to move quickly.
+SAQ TRAINING: Develops motor abilities/movement speed — increases likelihood of save. However — only improves motor abilities, still need accurate decisions first about where/when to move.
+CAFFEINE: Increases focus — react more quickly. However — effects wear off, need additional caffeine during game. Overconsumption: stomach problems/headaches/dehydration/irritability — negative performance effects.`,
+  er:"Breadth of the question (three distinct topics) made it more accessible. Selective attention knowledge was strongest; SAQ and caffeine lacked real depth. Students could often give ways each method would improve response time, but limitations were harder to identify — especially those with clear links to the goalkeeper context specifically."},
+
+  {id:"Q4",sub:"Practice Methods",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"'Whole practice is the most suitable type of practice for a basketball team's training'.\n\nEvaluate this statement using your knowledge of the following skill continua:\n• Complex – Simple\n• High organisation – Low organisation.",
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence. Terminology used but may sometimes be missing."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation."}],
+  ms:`AO1: Complex skill = requires large amounts of decision making. Simple skill = limited decision making. High organisation = difficult to break down/lacks meaning in part. Low organisation = easy to break down. Whole practice = skill not broken down/practised in entirety.
+AO2 Application to basketball: Whole practice = teaching dribbling without breaking into subroutines. Complex example = passing in a game. Simple example = free throw. High organisation example = dribbling. Low organisation example = layup.
+AO3 Evaluation:
+SIMPLE skills (e.g., free throw): whole practice most appropriate — won't be overloaded; can cope with cognitive demands.
+COMPLEX skills (e.g., passing in game): progressive part/whole-part-whole may be better — reduces cognitive demand/easier to understand in stages.
+HIGH ORGANISATION skills (e.g., dribbling): whole practice is the only option — skill lacks meaning if broken down; performer develops fluency.
+LOW ORGANISATION skills (e.g., layup): progressive part may be better — skill can be broken down; each subroutine mastered before moving on.
+SKILL LEVEL: Autonomous players cope better with high cognitive load — may not need skills broken down. Whole practice also allows transfer into games — perform under pressure more successfully.`,
+  er:"Students failed when they classified the sport rather than individual skills within basketball. Whole practice was commonly confused with massed practice — leading to irrelevant points about fatigue. High and low organisation were frequently used the wrong way around. Knowledge of complex-simple was the most secure."},
+
+  {id:"Q6",sub:"Information Processing",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"The figure below shows Whiting's information processing model. Over arousal can impact a performer's ability to process information effectively.\n\nAnalyse how over arousal would impact on the information processing of a basketball player when attempting a pass. Refer to Whiting's information processing model throughout your answer.",
+  diagram: WHITING_SVG,
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence. Terminology used but may sometimes be missing."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation."}],
+  ms:`AO1: Arousal = energised state of readiness/level of excitement/degree of activation. Over arousal = beyond optimal level. Whiting's model stages: Input (stimulus arrives); Receptors (senses detecting stimuli); Perceptual mechanisms (stimuli interpreted/DCR/selective attention); Translatory mechanisms (decision made/response selection/comparison to LTM); Effector mechanisms (response programmed/sent via neuromuscular system); Output (response performed); Feedback (information about performance).
+AO2 Application to basketball pass: Input = ball, players, crowd noise. Receptors = vision (player positions)/audition (teammate call). Perceptual mechanisms = judging position of teammates/opponents. Translatory = choosing who to pass to/type of pass. Effector = muscles programmed to perform pass. Output = pass performed. Feedback = whether pass received successfully. Over arousal effects: wrong type of pass used; passing to wrong/poorly positioned player; pass executed poorly.
+AO3 Analysis: At PERCEPTUAL stage — selective attention poor; focuses on irrelevant stimuli (crowd not teammates); attention too narrow — misses relevant cues (better positioned teammate). Information overload — unable to make effective decision about who to pass. Ineffective DCR — misjudges stimuli/passes to wrong player. Rushed/poor decisions at TRANSLATORY stage — chooses wrong option/passes to closely marked player. Poor EFFECTOR output — pass with too much power/inaccurate. Ineffective use of FEEDBACK — continues same mistakes/ignores relevant feedback. Autonomous players may pass more successfully at higher arousal; cognitive performer's accuracy decreases as arousal increases.`,
+  er:"The only synoptic question on this paper blending information processing with arousal. Mean approximately 5.4. The best answers demonstrated detailed knowledge of Whiting's model (especially central mechanisms) with specific basketball examples, AND blended this with the impact of over arousal at each stage — e.g., 'during the perceptual mechanism, over arousal causes attention narrowing, meaning the player misses a better-positioned teammate, resulting in the pass being intercepted.' This blending — Whiting's stage + over arousal effect + specific basketball impact — is what separated Level 4-5 from lower responses."},
+
+  {id:"Q8",sub:"Practice Methods",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Trampolinists A and B have both performed the same set routine on a number of occasions in training. For each attempt they have been awarded an execution score out of 10 by their coach, with 10 being the best possible score.\n\nEvaluate whether massed practice or distributed practice would be most effective for their coach to use with:\n• Trampolinist A\n• Trampolinist B.\n\nRefer to each trampolinist's stage of learning in your answer.",
+  diagram: TRAMPOLINIST_TABLE,
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation."}],
+  ms:`AO1: Massed = no rest; good for closed skills/repetition; promotes fitness/automaticity/time efficient; but tiring/risk of negative transfer. Distributed = rest intervals; good for open/complex/externally paced skills; provides feedback/mental practice time; but time consuming.
+AO2 Massed in trampolining: performing routine repeatedly without breaks; as a closed skill, massed could be used; but high fitness demands cause rapid fatigue/injury risk. Distributed in trampolining: routine performed with rest between attempts; could use time for extrinsic feedback/mental practice.
+AO3 TRAMPOLINIST A (autonomous — consistently high scores ~9.7-9.8): Massed more appropriate — helps overlearn routine for competition; further improves fitness (strength/power for height; CV endurance for harder training). However, if learning new routine/correcting specific weakness, distributed more effective for feedback. Even autonomous struggle with prolonged massed practice in a demanding sport — rest periods beneficial.
+TRAMPOLINIST B (cognitive/associative — low/inconsistent scores 3.4-5.9): Distributed more appropriate — focus on routine without fatigue concern; rest intervals allow extrinsic feedback from coach targeting weaknesses; prevents negative transfer from massed practice if fundamental errors present. However, for simple isolated skills (e.g., tuck jump in isolation), massed could apply — overlearning simple element. Massed useful if performing below potential in competition — overlearning limits impact of over arousal/social inhibition.`,
+  er:"Mean approximately 7. Most students identified A as autonomous and B as cognitive from the table data. Most then linked massed to A and distributed to B. The difference was what came after: basic responses simply listed advantages/disadvantages with no links to the sport or stage of learning. Best answers presented balanced arguments linking practice type to the activity (classification of skills) AND the qualities of each stage of learning."},
+
+  {id:"Q10",sub:"Transfer & Skill Classification",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Great Britain's Rebecca Romero won a silver medal in rowing at the Athens Olympics in 2004. She then changed to track cycling, winning individual pursuit gold at the Beijing Olympics in 2008.\n\nAnalyse why an elite performer would find the switch from rower to cyclist easier than if they were to move from tennis to badminton.\n\nUse your knowledge of TRANSFER OF LEARNING and the following SKILL CONTINUA:\n• Open–Closed\n• Discrete–Continuous\n• Simple–Complex.",
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation."}],
+  ms:`AO1: Open = unstable/changing environment. Closed = stable/unchanging environment. Discrete = clear beginning and end. Continuous = no clear beginning or end. Simple = few decisions/little concentration. Complex = many decisions/high concentration. Negative transfer = one skill hinders learning of another. Zero transfer = one skill has no effect on learning of another.
+AO2 Application:
+ROWING TO CYCLING: Both closed (stable environment). Both continuous (no clear beginning/end). Both simple (few decisions/maximum effort). Zero transfer — skill actions different.
+TENNIS TO BADMINTON: Both open (unstable environment). Each shot discrete (clear beginning/end). Both complex (many decisions/concentration required). Negative transfer — different wrist mechanics (flexible wrist in badminton; firm wrist in tennis).
+AO3 Analysis:
+ROWING TO CYCLING: Switch possible — one main continuous skill in each event; simple nature makes skills easy to learn; closed nature means performed in same way each time/little modification required. Success primarily determined by fitness — both require same fitness components (aerobic power/muscular endurance/anaerobic power/speed).
+TENNIS TO BADMINTON: Negative transfer — skills with similarities must be relearned. Every shot is a discrete skill with different technique requiring individual learning. Complex nature makes this time consuming and difficult. Once skills learnt, must then apply in open game situation. Skill execution and decision-making are the primary success factors.`,
+  er:"No specific examiner report. Success requires applying ALL THREE continua to both sport switches, and explicitly linking them to transfer of learning. The analysis should explain WHY the continua make the switch easier or harder — not just classify the skills."},
+
+  {id:"Q12",sub:"Information Processing",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Baddeley and Hitch's memory model operates within the general information processing model.\n\nAnalyse how Baddeley and Hitch's model allows a performer to make effective decisions when passing in a game of basketball.",
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation."}],
+  ms:`AO1: Central executive = selects which information to send to each of the 3 subsystems. Phonological loop = deals with sounds. Visuospatial sketchpad = stores visual and spatial information. Episodic buffer = sends sequences from phonological loop and visuospatial sketchpad to long-term memory.
+AO2 Application to basketball passing: Central executive = ignores crowd noise; sends coach instructions to phonological loop. Phonological loop = teammate's call. Visuospatial sketchpad = position of players on court. Episodic buffer = initiates motor programme to perform the pass.
+AO3 Analysis: During input, selective attention filters irrelevant stimuli. Only relevant stimuli distributed by central executive — prevents information overload. Must selectively attend to most relevant stimuli for a successful pass. Phonological loop, visuospatial sketchpad and episodic buffer work together to decide on the most appropriate action (type of pass, to whom, when). More experienced performers make more effective decisions. Episodic buffer sends sequences to LTM to initiate motor programme for the chosen pass. Performer must have a well-learnt motor programme for the pass to be performed consistently well.`,
+  er:"No specific examiner report. This question requires showing how the components INTERACT (not just describe each separately) and linking this specifically to effective decision-making in basketball. Top marks require showing the flow of information between components and explaining WHY this enables a successful pass."},
+
+  {id:"Q14",sub:"Information Processing",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"A batsman in cricket may face a bowler who can deliver the ball at over 90mph. The batsman therefore needs to take in information and process it very quickly.\n\nAnalyse how the input stage of information processing will differ between an international and a local club batsman AND explain how a coach can adapt the strategies to improve selective attention to each player's level of ability.",
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation."}],
+  ms:`AO1: Input stage = taking in all information from display/environment using the senses (external: sight/hearing; internal: proprioception/touch/balance/kinesthesis). Relevant stimuli filtered from irrelevant using selective attention. DCR process: stimulus Detected, Compared to LTM, Recognised as relevant or irrelevant. Methods to improve selective attention: key stimulus made more intense; optimal arousal; pointing relevant/irrelevant stimuli; varied relevant experiences; training with distractions.
+AO2: International batsman has more LTM experience — more effectively identifies relevant vs irrelevant stimuli. Club batsman may lack experience — may focus on irrelevant stimuli or too many stimuli. Applied examples: bright coloured ball in training; reducing distractions for club batsman; more complex stimuli for international batsman (seam position/spin on ball).
+AO3: International's additional experience allows faster completion of input/selective attention/DCR process — more likely to select appropriate response in time available — more successful. Club batsman focusing on wrong stimuli leads to wrong shot selection; insufficient time to respond; information overload. Coach adapts: lower ability player focuses on big cues (ball); higher level performer focuses on finer details (spin on ball/seam position to predict delivery type). May require stress management to lower arousal of club batsman; elite performer performs better with higher arousal.`,
+  er:"Often answered poorly. Students lacked detailed knowledge of the input stage — few could demonstrate DCR and selective attention in depth. Knowledge was generally applied to both batsmen but with little acknowledgement of how differences would impact performance. Lack of AO3 on adapting strategies — some explained why different strategies work with different batsmen, but very few talked about using one strategy in different ways. Mean approximately 5.43; less than 5% in top two bands."},
+
+  {id:"Q15",sub:"Transfer & Skill Classification",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Skill classification can be used to place skills onto a range of continua including:\n• Simple – Complex\n• Discrete – Serial – Continuous\n• Self-paced – Externally paced\n• High Organisation – Low Organisation.\n\n'Progressive part practice is suitable for developing a tumbling routine in gymnastics.'\n\nEvaluate this statement, using your knowledge of the continua listed above.",
+  levels:[{l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application of breadth or depth often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation."}],
+  ms:`AO1: Simple = few decisions/limited information processing. Complex = greater decision making/more information processing/numerous sub-routines. Discrete = clear beginning and end. Continuous = no clear beginning or end. Serial = series of discrete skills. Self-paced = performer decides when movement takes place. Externally paced = other factors determine when movement begins. Low organisation = relatively easy to break into sub-routines. High organisation = harder to break down. Progressive part practice = practising first part then adding parts gradually (chaining: A; then B; then A+B; then add C).
+AO2 Application to gymnastics tumbling routine: Simple (pre-set routine/few decisions) or complex (high number of sub-routines to link). Discrete (clear beginning/end) or serial (series of discrete skills). Self-paced (gymnast decides when to begin/speed) or externally paced (must start in time with music). Low organisation (relatively easy to break into sub-routines). Progressive part example: learn somersault first; then forward roll; then combine; then add cartwheel.
+AO3 Evaluation: SUITABLE — low organisation allows breaking down; performer masters each individual move before moving on; increases motivation; reduces risks in learning complex routines. HOWEVER — gymnast may get stuck on one move slowing progress; whole-part-whole may be more suitable — develops kinaesthetic feel while still improving specific weakness. Progressive part practice can be time consuming; if performer already knows routine and preparing for competition, whole practice more effective (overlearning/competition preparation).`,
+  er:"Generally well answered — mean mark 5.8. Students demonstrated good knowledge of progressive part practice and applied continua to tumbling. Better responses justified the position on each continuum AND used this to evaluate progressive part practice suitability. Further successful evaluation considered skill level of the performer and suggested alternatives where relevant."},
+];
+
+const SUBTOPICS = [...new Set(QS.map(q=>q.sub))];
+let selSub=null,curQ=null,phase='select',ans='',conv=[],loading=false,currentTab='practice';
+
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='practice')||(i===1&&t==='browse')));
+  document.getElementById('practice-panel').style.display=t==='practice'?'':'none';
+  document.getElementById('browse-panel').style.display=t==='browse'?'':'none';
+  if(t==='browse') renderBrowse();
+  if(t==='practice') renderPractice();
+}
+
+function toggleLevelGuide(){
+  const body=document.getElementById('level-guide-body');
+  const arrow=document.getElementById('level-arrow');
+  if(body){body.style.display=body.style.display==='none'?'block':'none';}
+  if(arrow){arrow.textContent=body.style.display==='none'?'▼':'▲';}
+}
+
+function renderPractice(){
+  const p=document.getElementById('practice-panel');
+  if(phase==='select'){
+    const counts={};
+    QS.forEach(q=>{counts[q.sub]=(counts[q.sub]||0)+1;});
+    p.innerHTML=`
+      <div class="tip-box"><div class="tip-label">💡 Extended Response Marking</div>These questions are marked holistically using level descriptors — not individual points. The AI reads your whole answer and places it in a level based on the quality of your knowledge, application and evaluation. Aim to <strong>blend</strong> AO1+AO2+AO3 within sentences.</div>
+      <div class="section-title">Select a topic area</div>
+      <div class="topic-grid">${SUBTOPICS.map(s=>{const qs=QS.filter(q=>q.sub===s);const has8=qs.some(q=>q.marks===8);const has15=qs.some(q=>q.marks===15);return`
+        <div class="topic-card${selSub===s?' sel':''}" onclick="selSub='${s}';renderPractice()">
+          <div class="tc-name">${s}</div>
+          <div class="tc-sub">${qs.length} question${qs.length>1?'s':''}${has8&&has15?' · 8 & 15 mark':has15?' · 15 mark':' · 8 mark'}</div>
+        </div>`;}).join('')}
+      </div>
+      ${selSub?`<div class="btn-row">
+        <button class="btn primary" onclick="startQ()">Get a question &rarr;</button>
+        <button class="btn" onclick="selSub=null;renderPractice()">Clear</button>
+      </div>`:''}`;
+  } else if(phase==='answer'){
+    const levelRows=curQ.levels.map(l=>`<div class="level-row"><div class="level-num">Level ${l.l}</div><div class="level-marks">${l.r} marks</div><div>${l.d}</div></div>`).join('');
+    p.innerHTML=`
+      <div class="meta">
+        <button class="btn" onclick="phase='select';renderPractice()">&#8592; Back</button>
+        <span class="badge ${curQ.marks===8?'b-8':'b-15'}">${curQ.marks} marks</span>
+        <span class="badge b-ao">${curQ.ao}</span>
+        <span style="font-size:12px;color:#888;">${curQ.id} &middot; ${curQ.sub}</span>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="level-guide">
+        <div class="level-guide-header" onclick="toggleLevelGuide()"><span>Level Descriptors</span><span id="level-arrow">▼</span></div>
+        <div class="level-guide-body" id="level-guide-body">${levelRows}</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label class="label">Your answer — write in continuous prose (aim for ${curQ.marks===8?'~200-250':'~350-450'} words)</label>
+        <textarea id="ansbox" rows="${curQ.marks===8?10:15}" placeholder="Write your answer here in continuous prose. Aim to blend knowledge (AO1), application to the specific context (AO2) and evaluation (AO3) throughout your paragraphs...">${ans}</textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" onclick="submitAns()">Submit for marking &rarr;</button>
+        <button class="btn" onclick="newQ()">Different question</button>
+      </div>`;
+    const box=document.getElementById('ansbox');
+    if(box) box.addEventListener('input',e=>ans=e.target.value);
+  } else if(phase==='feedback'){
+    p.innerHTML=`
+      <div class="meta" style="margin-bottom:1rem;">
+        <button class="btn" onclick="phase='answer';renderPractice()">&#8592; Edit answer</button>
+        <button class="btn" onclick="phase='select';conv=[];ans='';renderPractice()">New topic</button>
+        <button class="btn" onclick="newQ()">Next question</button>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="card">
+        <div class="msg-role">Your answer</div>
+        <div class="msg-text">${ans}</div>
+      </div>
+      <div class="card" id="fb-card">
+        <div class="msg-role">Examiner feedback</div>
+        <div id="fb-content" style="font-size:14px;line-height:1.75;white-space:pre-wrap;">${loading?'<span class="spinner"></span>Applying level descriptors and marking your response...':''}</div>
+        ${curQ.er?`<div class="er-box" id="er-box" style="display:none;"><div class="er-label">📄 Examiner Report — what the chief examiner said about this question</div><div class="er-text">${curQ.er}</div></div>`:''}
+      </div>
+      ${!loading&&conv.length>0?`
+        <div class="card" id="fu-card" style="display:none;"><div id="fu-msgs"></div></div>
+        <div class="fu-row">
+          <input type="text" id="fu-input" placeholder="Ask a follow-up question about this feedback..." />
+          <button class="btn primary" onclick="sendFU()">Ask &rarr;</button>
+        </div>`:''}`;
+  }
+}
+
+function startQ(){
+  const pool=QS.filter(q=>q.sub===selSub);
+  curQ=pool[Math.floor(Math.random()*pool.length)];
+  ans='';conv=[];phase='answer';renderPractice();
+}
+
+function newQ(){
+  const pool=QS.filter(q=>q.sub===selSub);
+  curQ=pool[Math.floor(Math.random()*pool.length)];
+  ans='';conv=[];phase='answer';renderPractice();
+}
+
+async function submitAns(){
+  if(!ans.trim()) return;
+  phase='feedback';loading=true;renderPractice();
+
+  const levelDescriptors=curQ.levels.map(l=>`Level ${l.l} (${l.r} marks): ${l.d}`).join('\n');
+  const sys=`You are an experienced AQA A-Level Physical Education senior examiner, expert in extended response marking.
+
+CRITICAL: This is a LEVEL-MARKED question. You must mark HOLISTICALLY using level descriptors. Do NOT count individual points. Read the entire response, assess the overall quality, and place it in a level.
+
+QUESTION: ${curQ.q}
+TOTAL MARKS: ${curQ.marks}
+AO BREAKDOWN: ${curQ.ao}
+${curQ.marks===8?'This is a 4-level question.':'This is a 5-level question.'}
+
+LEVEL DESCRIPTORS:
+${levelDescriptors}
+
+KEY PRINCIPLES FOR LEVEL PLACEMENT:
+- AO1 (Knowledge): Accuracy, detail, comprehensiveness
+- AO2 (Application): Is knowledge applied specifically to the context in the question? Breadth AND depth?
+- AO3 (Evaluation/Analysis): Is evaluation coherent, consistent, and linked? Are impacts identified? Are factors compared?
+- Terminology: Is specialist vocabulary used correctly and consistently?
+- Structure: Is the answer focused, substantiated, and clearly reasoned?
+- BLENDING: The highest marks go to responses that blend AO1+AO2+AO3 within sentences — stating knowledge, applying to context, AND evaluating impact in the same argument. Lists of points without development cannot reach the top levels.
+
+MARK SCHEME CONTENT FOR REFERENCE (do not share verbatim — use to inform your judgment):
+${curQ.ms}
+
+EXAMINER REPORT CONTEXT:
+${curQ.er||'No specific examiner report available.'}
+
+FEEDBACK FORMAT — use exactly this structure:
+
+LEVEL AWARDED: Level [X] — [X] / ${curQ.marks} marks
+
+WHY THIS LEVEL:
+[Holistic explanation of what the response does well and where it falls short relative to the level descriptors. Reference SPECIFIC things the student wrote. Explain which AO each section demonstrates. Be direct — if the AO2 is missing or the evaluation is listed rather than developed, say so clearly.]
+
+WHAT KEPT THIS FROM A HIGHER LEVEL:
+[Be precise. Name the exact gap — e.g., "Your AO1 is secure but the evaluation lacks coherence — points are stated without explaining the impact on the performer." Or: "AO2 is missing — you state theory but don't apply it to the specific sport context." If already at the top level, identify what made it exceptional.]
+
+AO BALANCE:
+AO1 Knowledge: [Weak / Developing / Secure / Strong]
+AO2 Application: [Weak / Developing / Secure / Strong]
+AO3 Evaluation: [Weak / Developing / Secure / Strong]
+
+EXAMINER REPORT COMMENTARY:
+[Reference what the chief examiner said about common performance on this question. Tell the student whether their response matches the typical high or low performer profile.]
+
+TO REACH THE NEXT LEVEL:
+[Concrete, specific advice. Don't just say "evaluate more" — give an example of how to turn one of their existing points into a higher-level response. E.g., "Take your point about 'X' and add: '...which means that Y, resulting in Z for the performer.' That development is what AO3 requires."]`;
+
+  const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:1200,system:sys,messages})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||JSON.stringify(data);
+    conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
+    loading=false;renderPractice();
+    const el=document.getElementById('fb-content');
+    if(el) el.textContent=text;
+    const er=document.getElementById('er-box');
+    if(er) er.style.display='';
+    const fu=document.getElementById('fu-card');
+    if(fu) fu.style.display='';
+  } catch(e){
+    loading=false;
+    const el=document.getElementById('fb-content');
+    if(el) el.textContent='Error: '+e.message;
+  }
+}
+
+async function sendFU(){
+  const input=document.getElementById('fu-input');
+  if(!input||!input.value.trim()) return;
+  const q=input.value.trim();
+  input.value='';
+  const fuMsgs=document.getElementById('fu-msgs');
+  const fuCard=document.getElementById('fu-card');
+  if(fuCard) fuCard.style.display='';
+  if(fuMsgs){
+    fuMsgs.innerHTML+=`<div class="msg"><div class="msg-role">You</div><div class="msg-text">${q}</div></div>`;
+    fuMsgs.innerHTML+=`<div class="msg" id="fu-loading"><div class="msg-role">Tutor</div><div class="msg-text"><span class="spinner"></span>Thinking...</div></div>`;
+  }
+  const sys=`You are an AQA A-Level PE senior examiner providing follow-up tutoring on extended response marking. The question was: "${curQ.q}" (${curQ.marks} marks). Help the student understand how to improve their level placement. Use Socratic questioning to develop understanding of what distinguishes levels. Focus on AO1/AO2/AO3 balance and the importance of blending.`;
+  const msgs=conv.map(m=>({role:m.role,content:m.content}));
+  msgs.push({role:'user',content:q});
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:600,system:sys,messages:msgs})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'';
+    conv.push({role:'user',content:q},{role:'assistant',content:text});
+    const l=document.getElementById('fu-loading');
+    if(l) l.querySelector('.msg-text').textContent=text;
+  } catch(e){
+    const l=document.getElementById('fu-loading');
+    if(l) l.querySelector('.msg-text').textContent='Error. Please try again.';
+  }
+}
+
+function renderBrowse(){
+  const p=document.getElementById('browse-panel');
+  const byTopic={};
+  QS.forEach(q=>{if(!byTopic[q.sub]) byTopic[q.sub]=[];byTopic[q.sub].push(q);});
+  p.innerHTML=Object.keys(byTopic).map(sub=>`
+    <div class="section-title">${sub}</div>
+    <div class="card" style="margin-bottom:1.25rem;">
+      ${byTopic[sub].map(q=>`
+        <div class="q-item">
+          <div class="q-num">${q.id}</div>
+          <div class="q-txt">${q.q.split('\n')[0].substring(0,85)}${q.q.split('\n')[0].length>85?'...':''}</div>
+          <div class="q-actions">
+            <span class="badge ${q.marks===8?'b-8':'b-15'}">${q.marks}m</span>
+            <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="practiseQ('${q.id}')">Practise</button>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function practiseQ(id){
+  curQ=QS.find(q=>q.id===id);
+  selSub=curQ.sub;
+  ans='';conv=[];phase='answer';
+  switchTab('practice');
+}
+
+renderPractice();
+</script>
+</body>
+</html>
