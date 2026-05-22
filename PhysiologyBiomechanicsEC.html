@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQA A-Level PE — Exercise Physiology, Biomechanics & Health</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;}
+.header{background:#1a4435;color:#fff;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header-title{font-size:17px;font-weight:600;}
+.header-sub{font-size:12px;opacity:.65;margin-top:2px;}
+.header-badge{background:#c9a84c;color:#1a4435;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.container{max-width:820px;margin:0 auto;padding:2rem 1.5rem;}
+.tab-bar{display:flex;gap:2px;margin-bottom:1.5rem;background:#e8e7e3;border-radius:10px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;cursor:pointer;border:none;background:transparent;border-radius:8px;color:#555;font-weight:500;}
+.tab.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:1rem;}
+.topic-card{background:#fff;border:1.5px solid #e0dfd8;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s;}
+.topic-card:hover{border-color:#1a4435;background:#f0f7f4;}
+.topic-card.sel{border-color:#1a4435;background:#ecf4f0;}
+.tc-name{font-size:13px;font-weight:600;margin-bottom:3px;}
+.tc-count{font-size:11px;color:#888;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#1a1a1a;transition:all .15s;}
+.btn:hover{background:#f5f4f0;}
+.btn.primary{background:#1a4435;color:#fff;border-color:#1a4435;}
+.btn.primary:hover{background:#245e49;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.qbox{background:#f5f4f0;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.65;margin-bottom:1rem;white-space:pre-wrap;}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-bottom:6px;display:block;}
+textarea,input[type="text"]{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;background:#fafaf8;}
+textarea:focus,input:focus{outline:none;border-color:#1a4435;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.03em;}
+.b-ao1{background:#dbeafe;color:#1e40af;}
+.b-ao2{background:#fef3c7;color:#92400e;}
+.b-ao3{background:#dcfce7;color:#15803d;}
+.b-m{background:#f0f0ec;color:#555;}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+.er-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:.875rem 1rem;margin-top:1rem;}
+.er-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#15803d;margin-bottom:5px;}
+.er-text{font-size:13px;color:#14532d;line-height:1.65;}
+.msg{padding:10px 0;border-bottom:1px solid #f0f0ec;}
+.msg:last-child{border-bottom:none;}
+.msg-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#999;margin-bottom:3px;}
+.msg-text{font-size:14px;line-height:1.65;white-space:pre-wrap;}
+.fu-row{display:flex;gap:8px;margin-top:1rem;}
+.fu-row input{flex:1;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:#1a4435;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:-1px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.q-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0ec;}
+.q-item:last-child{border-bottom:none;}
+.q-id{font-size:11px;color:#aaa;min-width:28px;padding-top:1px;font-weight:600;}
+.q-txt{font-size:13px;flex:1;line-height:1.4;}
+.q-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.section-title{font-size:14px;font-weight:600;margin-bottom:.75rem;color:#1a4435;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="header-title">AQA A-Level PE — Exercise Physiology, Biomechanics &amp; Health</div>
+    <div class="header-sub">AI tutor · mark-scheme accurate · examiner report feedback</div>
+  </div>
+  <div class="header-badge">60 QUESTIONS</div>
+</div>
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('practice')">Practice</button>
+    <button class="tab" onclick="switchTab('browse')">All Questions</button>
+  </div>
+  <div id="practice-panel"></div>
+  <div id="browse-panel" style="display:none;"></div>
+</div>
+<script>
+const PROXY='https://keen-sawine-d41a7a.netlify.app/.netlify/functions/proxy';
+const MODEL='claude-sonnet-4-5';
+
+const QS=[
+  // BIOMECHANICS
+  {id:"Q1",sub:"Biomechanics",q:"Different types of data are collected from laboratory or field tests.\n\nWhich one of the following terms is used to describe data which is based on judgement on how well a test was performed?\nA) Objective\nB) Reliable\nC) Subjective\nD) Valid",marks:1,ao:"AO1",ms:"C – Subjective",er:"A straightforward recall MCQ. Subjective data is based on opinion or interpretation. Objective data is factual and measurable. Students most commonly confused subjective with unreliable.",type:"mcq",answer:"C"},
+  {id:"Q2",sub:"Biomechanics",q:"A discus will generate lift when thrown with the optimal angle of attack.\n\nWhich one of the following correctly describes the air flow and resulting pressure change when this occurs?\nA) Air passing over the discus travels further than the air passing under it, decreasing the pressure above the discus.\nB) Air passing over the discus travels further than the air passing under it, increasing the pressure above the discus.\nC) Air passing under the discus travels further than the air passing over it, decreasing the pressure below the discus.\nD) Air passing under the discus travels further than the air passing over it, increasing the pressure below the discus.",marks:1,ao:"AO2",ms:"A – Air passing over travels further, decreasing pressure above (Bernoulli principle — fast airflow = low pressure).",er:"The Bernoulli principle: where air travels further (over the discus at optimal angle of attack) it moves faster, creating LOW pressure. The higher pressure below creates lift. Students commonly confused which side has fast/slow air flow.",type:"mcq",answer:"A"},
+  {id:"Q3",sub:"Biomechanics",q:"Linear motion involves both vector and scalar quantities.\n\nGive three examples of scalar quantities.",marks:3,ao:"AO1",ms:"Any 3 of: speed / distance / mass / time / temperature / energy (1 each)\nDo NOT accept: velocity / displacement / acceleration / force (these are vectors)\nMax 3 marks",er:"A well answered AO1 recall question with a mean of just over 2. Around 50% of students achieved all 3 marks. The most common error was giving vector quantities such as velocity or displacement instead of their scalar equivalents (speed and distance).",type:"written"},
+  {id:"Q4",sub:"Injury & Rehabilitation",q:"One example of a common sports injury is a sprain.\n\nDescribe a sprain.",marks:1,ao:"AO1",ms:"Stretching or tearing of a ligament (1)\nMust reference ligament for the mark.\nMax 1 mark",er:"Around 64% of students answered correctly. The most common incorrect answer was describing damage to a muscle (which is a strain, not a sprain). Students must link sprain specifically to LIGAMENT damage.",type:"written"},
+  {id:"Q5",sub:"Injury & Rehabilitation",q:"Explain how three different methods of injury prevention could decrease the likelihood of a sprain.",marks:3,ao:"AO2",ms:"Award 1 mark per explained method (must have connective showing WHY):\n• Warm up properly (so muscles/connective tissue are more pliable and less likely to tear under sudden stress). (1)\n• Taping/bracing of vulnerable joints (so the joint is stabilised reducing excessive movement that could tear a ligament). (1)\n• Strengthening exercises for muscles around vulnerable joints (so muscles support the joint more effectively, reducing strain on ligaments). (1)\n• Wearing appropriate footwear (so the ankle/foot is supported reducing risk of sudden inversion). (1)\n• Screening/pre-participation assessment (so existing weaknesses are identified and addressed before injury occurs). (1)\nMax 3 marks — must explain (use 'so' or 'because' connecting method to reason)",er:"Just over 20% of students achieved full marks. The command word 'explain' requires a connective identifying why the strategy reduces injury risk. Many students simply stated strategies without explaining the mechanism — e.g. 'do a warm up' without explaining why this reduces sprain risk.",type:"written"},
+  {id:"Q6",sub:"Injury & Rehabilitation",q:"Evaluate the effectiveness of the diver using PNF (Proprioceptive Neuromuscular Facilitation) as a training method.",marks:3,ao:"AO3",ms:"Positives (sub max 2):\n• PNF produces greater gains in flexibility than static stretching — important for dive entry position and body shape. (1)\n• Engages the proprioceptors/Golgi tendon organ — prevents protective stretch reflex allowing greater range of motion. (1)\nNegatives (sub max 2):\n• Requires a partner which may not always be available. (1)\n• Risk of injury if partner applies too much pressure/technique applied incorrectly. (1)\n• More time consuming than other methods. (1)\n• Needs to be learned correctly before being used safely. (1)\nMax 3 marks — must include both positives and negatives with IMPACT stated.",er:"Mean mark approximately 1.2. Most common mark was 1. Students attempted to give both positives and negatives. However they were often unsuccessful due to a lack of depth — unable to provide the impact on the diver. E.g. stating 'PNF requires a partner' without saying what impact this has on the diver's ability to use this method.",type:"written"},
+  {id:"Q7",sub:"Health & Exercise",q:"Analyse how regular participation in exercise can decrease the likelihood of a stroke.",marks:3,ao:"AO3",ms:"Award 1 mark each for analysed points:\n• Regular exercise maintains the elasticity of blood vessels (so blockages are less likely to occur reducing ischaemic stroke risk). (1)\n• Regular exercise reduces blood pressure (so there is less strain on blood vessel walls, reducing the likelihood of rupture/haemorrhagic stroke). (1)\n• Regular exercise reduces cholesterol/atherosclerosis (so fatty deposits are less likely to block arteries supplying the brain). (1)\n• Regular exercise reduces likelihood of obesity (so associated risk factors for stroke such as hypertension and type 2 diabetes are reduced). (1)\nMax 3 marks",er:"Mean mark fell just under 1 out of 3. Where students did achieve marks they linked the impact of regular exercise to the cause of a stroke. The first marking point regarding exercise maintaining the elasticity of blood vessels was very seldom awarded — this was the most discriminating point. Only a very small number achieved all 3 marks.",type:"written"},
+  {id:"Q8",sub:"Injury & Rehabilitation",q:"Which one of the following is an acute injury?\nA) Achilles tendonitis\nB) Dislocated shoulder\nC) Tibial stress fracture",marks:1,ao:"AO1",ms:"B – Dislocated shoulder\nAcute injuries have sudden onset. Achilles tendonitis and tibial stress fractures are chronic/overuse injuries.",er:"Around 84% of students correctly identified dislocated shoulder as an acute injury. An acute injury has a sudden onset — dislocations, fractures, sprains from a single incident.",type:"mcq",answer:"B"},
+  {id:"Q9",sub:"Biomechanics",q:"Which one of the following is a correct unit of measurement for acceleration?\nA) Metres (m)\nB) Metres per second (m/s)\nC) Metres per second squared (m/s²)\nD) Seconds (s)",marks:1,ao:"AO1",ms:"C – Metres per second squared (m/s²)\nAcceleration = change in velocity ÷ time = (m/s) ÷ s = m/s²",er:"Around 73% correctly answered. m/s is velocity; m/s² is acceleration (change in velocity per unit time).",type:"mcq",answer:"C"},
+  {id:"Q10",sub:"Biomechanics",q:"State three factors which affect stability.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Height of centre of mass (1)\n• Width/size of base of support (1)\n• Mass of performer (1)\n• Line of gravity (whether it falls within base of support) (1)\n• Friction between performer and surface (1)\nMax 3 marks",er:"Mean approximately 1.7. Majority achieved 1 or 2 marks. Common errors: referring to 'centre of mass' without specifying 'height' of centre of mass; referring to 'base of support' without specifying 'width/area' of base. Very few students failed to score at least 1 mark.",type:"written"},
+  {id:"Q11",sub:"Biomechanics",q:"Height of release and speed of release are two factors affecting the horizontal displacement of a projectile.\n\nName one other factor which affects the horizontal displacement of a projectile.",marks:1,ao:"AO1",ms:"Angle of release (1)\n(Also accept air resistance / weight of the object as valid alternatives)\nMax 1 mark",er:"A very well answered question. Angle of release was the most common response. A few students put air resistance or weight but very few failed to get the mark.",type:"written"},
+  {id:"Q13",sub:"Biomechanics",q:"Analyse how the gymnast makes use of the principle of conservation of angular momentum when performing a front tuck somersault.",marks:3,ao:"AO2",ms:"Award 1 mark each for any 3 analysed points:\n• Angular momentum = moment of inertia × angular velocity, and remains constant throughout the somersault. (1)\n• At take-off the gymnast is in an open/extended position — high moment of inertia, low angular velocity. (1)\n• In the tucked position, mass is drawn closer to the axis of rotation — moment of inertia decreases, angular velocity increases (faster rotation). (1)\n• On landing, the gymnast opens out — moment of inertia increases again, angular velocity decreases (slows rotation for controlled landing). (1)\nMax 3 marks — answers without key terminology (moment of inertia, angular velocity) will be limited to 2 marks.",er:"A significant number scored zero because they did not apply key terminology. Mentioning 'tuck position' and 'increased speed of rotation' was insufficient without linking to MOMENT OF INERTIA. Around 22% of students scored 3 marks.",type:"written"},
+  {id:"Q17",sub:"Biomechanics",q:"Explain how the swimming costume, swim cap, and body hair removal all reduce drag on a swimmer.",marks:3,ao:"AO2",ms:"Award 1 mark each for any 3 explained points:\n• Tight swimsuit/tech suit (reduces skin friction/form drag by creating a smoother surface). (1)\n• Swim cap (reduces profile drag from hair/streamlines the head shape). (1)\n• Body hair removal/shaving (reduces surface friction drag allowing water to flow over skin more smoothly). (1)\n• (Accept other valid streamlining adaptations with explanation)\nMax 3 marks — each point must include the mechanism (HOW it reduces drag).",er:"Mean mark approximately 2.3. Well answered. Students who lost marks either used examples not related to swimming (tight clothing generally) or did not specifically relate the example to the mechanism of drag reduction. Most could get marks for swim cap/costume/shave hair.",type:"written"},
+  {id:"Q18",sub:"Biomechanics",q:"State Newton's first law of angular motion.",marks:1,ao:"AO1",ms:"A rotating body will continue to rotate at a constant angular velocity unless acted upon by an external torque/force. (1)\nMax 1 mark",er:"Roughly 37% could correctly state Newton's first law of angular motion. Many students stated the LINEAR version (body remains at rest/uniform motion). The angular version requires reference to 'constant angular velocity' not just 'constant motion'.",type:"written"},
+  {id:"Q19",sub:"Biomechanics",q:"Analyse how Newton's laws of angular motion account for changes in a figure skater's speed of rotation during a spin.",marks:3,ao:"AO3",ms:"Award 1 mark each for analysed points:\n• Newton's 1st law: once the skater begins spinning, angular momentum is conserved — they will continue to spin at the same rate unless acted upon by external torque. (1)\n• Newton's 2nd law: when the skater brings arms in close to body, moment of inertia decreases, causing angular acceleration (increased angular velocity). (1)\n• Newton's 3rd law: the force applied to the ice by the skater to initiate the spin results in an equal and opposite reaction force from the ice that initiates the rotation. (1)\nMax 3 marks",er:"Approximately 4% achieved full marks — mean 0.6. The two common mistakes: (1) simply describing the law without applying it to the figure skater; (2) describing conservation of angular momentum rather than Newton's Laws. Newton's 3rd law applied to the INITIATION of the spin was rarely attempted.",type:"written"},
+  {id:"Q20",sub:"Biomechanics",q:"Which one of the following describes a second-class lever?\nA) The effort is between the fulcrum and the resistance\nB) The fulcrum is between the effort and the resistance\nC) The resistance is between the fulcrum and the effort",marks:1,ao:"AO1",ms:"C – The resistance is between the fulcrum and the effort\n(1st class: fulcrum in middle; 2nd class: resistance in middle; 3rd class: effort in middle)",er:"Students performed well, with a mean of nearly 0.9.",type:"mcq",answer:"C"},
+  {id:"Q21",sub:"Biomechanics",q:"Which of the following describes a third-class lever?\nA) Effort between fulcrum and resistance\nB) Fulcrum between effort and resistance\nC) Resistance between fulcrum and effort",marks:1,ao:"AO1",ms:"A – Effort between fulcrum and resistance\nMost levers in the body are 3rd class. High speed/range of motion but mechanical disadvantage.",er:"Around 60% of students answered correctly. Approximately 40% confused with other lever classes.",type:"mcq",answer:"A"},
+  {id:"Q22",sub:"Data & Testing",q:"Define qualitative data and state one method used to collect it.",marks:2,ao:"AO1",ms:"Qualitative data: Data based on opinion/description/interpretation/not numerical. (1)\nMethod: Observation/interview/questionnaire/video analysis. (1)\nMax 2 marks\nNote: students should not state quantitative data is always factual and objective — PRE scores are quantitative but subjective.",er:"Mean approximately 1.7. Generally successful though there was a common misconception that quantitative data is always factual and objective. A coach asking an athlete for a Perceived Rate of Exertion (PRE) score gives quantitative but subjective data.",type:"written"},
+  {id:"Q23",sub:"Data & Testing",q:"Define reliability in the context of sports testing.",marks:2,ao:"AO1",ms:"Reliability: The extent to which a test or method produces consistent and repeatable results. (1)\nA test can be reliable even if not accurate — it consistently measures the same (even if wrong) value. (1)\nMax 2 marks",er:"Mean approximately 0.8 — considerably lower than the corresponding validity question. Students confused reliability with accuracy. A test is reliable if it gives the same result each time — even if that result is not the correct one. Accuracy is a separate concept.",type:"written"},
+  {id:"Q24",sub:"Biomechanics",q:"Define vector quantity.",marks:1,ao:"AO1",ms:"A quantity that has both magnitude (size) AND direction. (1)\nMust include BOTH magnitude and direction.\nMax 1 mark",er:"Mean approximately 0.4 — fewer than half of students answered correctly. Many knew there were two key parts but couldn't identify the correct terms, often citing 'speed' instead of 'magnitude'. Both MAGNITUDE and DIRECTION must be referenced.",type:"written"},
+  {id:"Q25",sub:"Biomechanics",q:"A sprinter accelerates from 4 m/s to 10 m/s over 3 seconds.\n\nCalculate the sprinter's acceleration. Show your working and include the correct units.",marks:2,ao:"AO2",ms:"Acceleration = change in velocity ÷ time = (10 - 4) ÷ 3 = 2 m/s² (1 mark for method, 1 for correct answer with units)\nMax 2 marks",er:"Mean around 0.7. Only around 14.5% achieved both marks. The most commonly awarded mark was for correct units. Students could identify the formula but made arithmetic errors or omitted units.",type:"written"},
+  {id:"Q26",sub:"Training & Fitness",q:"Evaluate the use of High Intensity Interval Training (HIIT) for improving the performance of a netball or basketball player.",marks:3,ao:"AO3",ms:"Positives (sub max 2):\n• HIIT improves aerobic and anaerobic capacity needed for high-intensity bursts in netball/basketball. (1)\n• Time efficient method — players can achieve significant adaptations in shorter sessions. (1)\n• Replicates the stop-start nature of netball/basketball better than steady-state training. (1)\nNegatives (sub max 2):\n• High injury risk from intense effort — missed training/games leading to reversibility. (1)\n• Not suitable for all players — those with low base fitness may not be able to sustain HIIT safely. (1)\n• Fatiguing — can impact subsequent training/match performance if not managed correctly. (1)\nMax 3 marks — must give impact after each point.",er:"Mean around 1. Students clearly had the knowledge but failed to provide sufficient depth. Stating 'HIIT improves anaerobic power' without identifying HOW this helps a netballer/basketballer specifically. Points such as injury risk were not developed to give the impact on performance. Always explain the consequences.",type:"written"},
+  {id:"Q46",sub:"Training & Fitness",q:"Describe how the principles of progressive overload and specificity could be used in a weight training programme for a tennis player.",marks:3,ao:"AO1",ms:"Progressive overload (sub max 2):\n• Gradually increase the load/weight lifted over time. (1)\n• Increase number of repetitions/sets/reduce rest periods. (1)\nSpecificity (sub max 2):\n• Target muscles used in tennis — rotator cuff/core/forearm muscles. (1)\n• Use similar movement patterns to tennis shots. (1)\nMax 3 marks — sub max 2 per principle. The command word is DESCRIBE — do not penalise for elaboration but description is what's required.",er:"77% gained 2 or 3 marks. Students described progressive overload more successfully than specificity. For specificity, simply mentioning 'making training most relevant to the tennis player' was the most common approach — more specific muscle/movement references gained higher marks. Sub-max marking meant max 2 marks from either principle alone.",type:"written"},
+  {id:"Q47",sub:"Training & Fitness",q:"Discuss the advantages and disadvantages of weight training for improving the performance of a tennis player.",marks:3,ao:"AO3",ms:"Advantages (sub max 2 with impact):\n• Increased strength → greater shot force making it harder for opponent to return. (1)\n• Increased strength → faster serve/more aces. (1)\n• Injury prevention through strengthening muscles around vulnerable joints. (1)\nDisadvantages (sub max 2 with impact):\n• Risk of injury during weight training → missed training/matches leading to reversibility. (1)\n• Hypertrophy may impair flexibility needed for overhead/wide shots. (1)\n• Time consuming — takes time away from skill/technical training. (1)\nMax 3 marks — must identify IMPACT not just state advantage/disadvantage.",er:"Only 4% achieved full marks; 40% achieved 2 marks. The command word 'discuss' requires advantages AND disadvantages with their impact on performance. Identifying strength gains was not enough — students needed to say HOW increased strength improves tennis performance specifically.",type:"written"},
+  {id:"Q48",sub:"Data & Testing",q:"A runner completes 400m in 1 minute and 20 seconds.\n\nCalculate the runner's average speed in m/s. Show your working.",marks:1,ao:"AO2",ms:"Speed = distance ÷ time = 400 ÷ 80 = 5 m/s (1)\n(1 minute 20 seconds = 80 seconds)\nMax 1 mark",er:"95% of students correctly answered this question — the most successfully answered calculation question on the paper. The key step was converting 1 minute 20 seconds to 80 seconds before dividing.",type:"written"},
+  {id:"Q49",sub:"Nutrition",q:"Which one of the following is a function of sodium in exercise?\nA) Helps regulate body fluid levels\nB) Helps transport oxygen in the blood\nC) Needed for formation of haemoglobin\nD) Provides structural support for bones",marks:1,ao:"AO1",ms:"A – Helps regulate body fluid levels\nSodium is an electrolyte that regulates fluid balance. Haemoglobin requires iron, not sodium.",er:"85% of students correctly identified sodium's exercise function as regulating body fluid levels. The most common incorrect answer was 'needed for formation of haemoglobin' — this requires IRON.",type:"mcq",answer:"A"},
+  {id:"Q50",sub:"Data & Testing",q:"Define subjective data. State one method used to collect subjective data in sport.",marks:2,ao:"AO1",ms:"Subjective data: Based on personal interpretation, opinion or judgement — not purely numerical/factual. (1)\nMethod: RPE (Rate of Perceived Exertion) scale / observational assessment / questionnaire / coach observation. (1)\nMax 2 marks",er:"Around 68% achieved maximum marks. Most students identified subjective data as opinion or interpretation, with questionnaires as the most popular collection method.",type:"written"},
+  {id:"Q51",sub:"Injury & Rehabilitation",q:"State three purposes of screening in sport.",marks:3,ao:"AO1",ms:"Award 1 mark for any 3 of:\n• Identify current/past/previous injuries. (1)\n• Identify conditions such as cardiac abnormalities (e.g. CRY screening). (1)\n• Assess muscle imbalances. (1)\n• Assess joint mobility/range of movement. (1)\n• Identify postural alignment issues. (1)\n• Assess core strength. (1)\nMax 3 marks",er:"Most students scored some marks — mean 1.54 out of 3. Students identified screening correctly as being under injury prevention and rehabilitation. Identifying CRY (Cardiac Risk in the Young) was a well-known purpose. Testing for muscle imbalances and assessing joint mobility were less commonly cited.",type:"written"},
+  {id:"Q52",sub:"Nutrition",q:"A 200m sprinter is considering using creatine monohydrate supplementation.\n\nDiscuss the potential advantages and disadvantages of creatine monohydrate for a 200m sprinter.",marks:5,ao:"AO2/AO3",ms:"Advantages (sub max 3):\n• Creatine increases PC stores → faster ATP resynthesis → sprinter can maintain maximum sprint effort for longer. (1)\n• Reduces recovery time between reps in training → more effective sprint training sessions. (1)\n• Increases lean muscle mass → greater force production → faster sprint start. (1)\nDisadvantages (sub max 3):\n• Water retention → increased body mass → may slow the sprinter (important at 200m). (1)\n• Potential for stomach cramps/muscle cramps/dehydration. (1)\n• Evidence for benefit at 200m is mixed — most research supports benefits for efforts under 30 seconds. (1)\n• Question the benefits — research is inconclusive for longer sprints. (1)\n• Expense/availability issues. (1)\nMax 5 marks",er:"Well answered — pleasing to see application to the 200m sprinter being made. Students should consider the context — the advantages and disadvantages need to be specifically impacted upon the sprinter. Expense and side effects were common additional considerations that gained credit.",type:"written"},
+  {id:"Q53",sub:"Biomechanics",q:"Which one of the following is a scalar quantity?\nA) Acceleration\nB) Displacement\nC) Mass\nD) Velocity",marks:1,ao:"AO1",ms:"C – Mass\nMass has magnitude only (no direction). Acceleration, displacement and velocity are all vectors (have direction).",er:"61% correctly identified mass as a scalar quantity. The least accessible MCQ on the paper. Students most commonly incorrectly identified displacement (a vector).",type:"mcq",answer:"C"},
+  {id:"Q54",sub:"Injury & Rehabilitation",q:"Which one of the following is an acute injury?\nA) Achilles tendinopathy\nB) Shin splints\nC) Sprained ankle",marks:1,ao:"AO1",ms:"C – Sprained ankle (acute — sudden onset from a specific incident)\nAchilles tendinopathy and shin splints are both chronic/overuse injuries.",er:"71% correctly identified sprained ankle. Strain was the most common incorrect answer — students confused sprain (ligament) with strain (muscle).",type:"mcq",answer:"C"},
+  {id:"Q55",sub:"Biomechanics",q:"A long jumper is in flight during their jump.\n\nExplain two external forces acting on the athlete during flight.",marks:4,ao:"AO2",ms:"Award up to 2 marks per force:\nAir resistance:\n• Acting in the opposite direction to the jumper's travel. (1)\n• Depends on the velocity of the jumper/cross-sectional area/streamlining. (1)\nWeight/Gravity:\n• Pulling the jumper downwards towards the sand pit. (1)\n• The greater the mass of the jumper the greater the weight force. (1)\nMax 4 marks",er:"85% achieved at least 3 marks — the majority identified two forces. Students who lost marks failed to explain WHY air resistance acts in the opposite direction of travel, or gave vague descriptions of gravity without mentioning downward direction.",type:"written"},
+  {id:"Q56",sub:"Biomechanics",q:"The long jump take-off uses a third-class lever system at the hip.\n\n(a) State the mechanical advantage of a third-class lever.\n(b) Explain how this advantage helps the long jumper to jump further.",marks:2,ao:"AO1/AO3",ms:"(a) AO1: Large range of movement / resistance/load can be moved quickly (mechanical disadvantage in terms of force but advantage in speed/range). (1)\n(b) AO3: By moving the legs forwards quickly (flexing at the hip) the jumper throws their legs ahead of them generating forward momentum and jumping further. (1)\nMax 2 marks",er:"Only 7% achieved both marks. Many students could not recognise the mechanical advantage (speed/range) of a third-class lever. Even fewer applied it specifically to how this allows the long jumper to jump further.",type:"written"},
+  {id:"Q57",sub:"Flexibility & Stretching",q:"Define ballistic stretching.",marks:1,ao:"AO1",ms:"Ballistic stretching involves fast bouncing or swinging movements, using the momentum of a moving body to force it beyond its normal range of motion. (1)\nMax 1 mark",er:"68% of students secured the mark. Terms such as 'bouncing' or 'swinging' were key. Disappointing that many achieved zero for incorrectly using the term 'bounding' — this describes a plyometric action, not a stretch.",type:"written"},
+  {id:"Q58",sub:"Flexibility & Stretching",q:"Discuss the suitability of ballistic stretching for a long jumper.",marks:3,ao:"AO3",ms:"Suitable (sub max 2):\n• Improves dynamic flexibility at the hip — vital for effective take-off drive in the long jump. (1)\n• Fast dynamic contractions in ballistic stretching mirror the explosive nature of the long jump action. (1)\nNot suitable (sub max 2):\n• Risk of injury if done incorrectly/without adequate warm-up or if athlete lacks base flexibility. (1)\n• Static or PNF stretching may be safer alternatives for building flexibility without injury risk. (1)\nMax 3 marks",er:"A good discriminator. Positives and negatives both required. Students who stated 'improved flexibility' without linking to hip/take-off action in the long jump were considered too vague. Both sides must be present AND each must have an explained impact.",type:"written"},
+  {id:"Q59",sub:"Training & Fitness",q:"Define and give an example of each of the following training phases:\nA) Microcycle\nB) Mesocycle\nC) Macrocycle",marks:3,ao:"AO1",ms:"A: Microcycle – periods of a week/day/individual training sessions. (1)\nB: Mesocycle – periods of two to eight weeks/months. (1)\nC: Macrocycle – yearly/two-yearly cycle/Olympic cycle (e.g. 4 years). (1)\nMust state the term AND a correct time-based description for each mark.\nMax 3 marks",er:"The question stated the specific phases to be explained rather than an open-ended question. Over 70% achieved maximum marks. Students who failed typically gave descriptions without the correct time periods.",type:"written"},
+  {id:"Q60",sub:"Biomechanics",q:"During a 100m race a sprinter produces different impulse-momentum graphs at different stages:\n• Start of race (accelerating hard)\n• Middle of race (at maximum velocity)\n• End of race (beginning to fatigue)\n\nDescribe the impulse-momentum relationship at each stage.",marks:3,ao:"AO2",ms:"Start (accelerating): Net positive impulse — positive force > negative force — acceleration occurring. (1)\nMiddle (max velocity): Net zero impulse — positive force = negative force — velocity constant. (1)\nEnd (fatiguing): Net negative impulse — negative force > positive force — deceleration occurring. (1)\nMax 3 marks",er:"Well answered — popular question. The majority correctly identified the correct impulse graph for each phase. Those who failed to achieve marks often failed to use appropriate biomechanical terms or gave vague descriptions of the graphs without referencing net force relationships.",type:"written"},
+
+  // NUTRITION
+  {id:"Q14",sub:"Nutrition",q:"Which dietary supplement would improve the mobilisation of fatty acids in the body?\nA) Caffeine\nB) Creatine\nC) Sodium bicarbonate\nD) Whey protein",marks:1,ao:"AO1",ms:"A – Caffeine\nCaffeine stimulates the mobilisation of free fatty acids from adipose tissue, sparing glycogen.",er:"Only 40% of students correctly identified caffeine as improving fatty acid mobilisation. Creatine was the most common incorrect answer — creatine replenishes PC stores, not fatty acid mobilisation.",type:"mcq",answer:"A"},
+
+  // TRAINING
+  {id:"Q16",sub:"Training & Fitness",q:"Describe the training focus for each phase of a periodised programme:\nA) Preparation phase\nB) Competition phase\nC) Transition phase",marks:3,ao:"AO1",ms:"A: Preparation — building general fitness/aerobic base/strength/sport-specific fitness. (1)\nB: Competition — maintaining fitness/peaking for competition/working on tactics and skills. (1)\nC: Transition — active recovery/rest/low intensity activity/cross training (must be active recovery or equivalent). (1)\nMax 3 marks",er:"Mean approximately 1.45. Some students failed to refer to the transition phase as active recovery, instead stating 'rest' which was not accepted without the active component. Preparation and competition phases were generally well described.",type:"written"},
+];
+
+const SUBTOPICS=[...new Set(QS.map(q=>q.sub))];
+let selSub=null,curQ=null,phase='select',ans='',conv=[],loading=false,currentTab='practice';
+
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='practice')||(i===1&&t==='browse')));
+  document.getElementById('practice-panel').style.display=t==='practice'?'':'none';
+  document.getElementById('browse-panel').style.display=t==='browse'?'':'none';
+  if(t==='browse')renderBrowse();
+  if(t==='practice')renderPractice();
+}
+
+function renderPractice(){
+  const p=document.getElementById('practice-panel');
+  if(phase==='select'){
+    const counts={};QS.forEach(q=>{counts[q.sub]=(counts[q.sub]||0)+1;});
+    p.innerHTML=`<div class="section-title">Select a topic area</div>
+      <div class="topic-grid">${SUBTOPICS.map(s=>`
+        <div class="topic-card${selSub===s?' sel':''}" onclick="selSub='${s}';renderPractice()">
+          <div class="tc-name">${s}</div><div class="tc-count">${counts[s]} question${counts[s]>1?'s':''}</div>
+        </div>`).join('')}
+      </div>
+      ${selSub?`<div class="btn-row"><button class="btn primary" onclick="startQ()">Get a question &rarr;</button><button class="btn" onclick="selSub=null;renderPractice()">Clear</button></div>`:''}`;
+  } else if(phase==='answer'){
+    p.innerHTML=`
+      <div class="meta">
+        <button class="btn" onclick="phase='select';renderPractice()">&#8592; Back</button>
+        <span class="badge b-m">${curQ.marks} mark${curQ.marks>1?'s':''}</span>
+        ${curQ.ao.split('/').map(a=>`<span class="badge b-${a.trim().toLowerCase()}">${a.trim()}</span>`).join('')}
+        <span style="font-size:12px;color:#888;">${curQ.id} &middot; ${curQ.sub}</span>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.type==='mcq'?`
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="label">Select your answer</div>
+          ${['A','B','C','D'].filter(o=>curQ.q.includes(o+')')).map(o=>`
+            <label style="display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:14px;">
+              <input type="radio" name="mcq" value="${o}" style="width:auto;"> ${o})
+            </label>`).join('')}
+        </div>
+        <div class="btn-row"><button class="btn primary" onclick="submitMCQ()">Check answer &rarr;</button><button class="btn" onclick="newQ()">Different question</button></div>`:`
+        <div style="margin-bottom:12px;">
+          <label class="label">Your answer</label>
+          <textarea id="ansbox" rows="${curQ.marks>=4?8:5}" placeholder="Write your answer here...">${ans}</textarea>
+        </div>
+        <div class="btn-row"><button class="btn primary" onclick="submitAns()">Submit for marking &rarr;</button><button class="btn" onclick="newQ()">Different question</button></div>`}`;
+    const box=document.getElementById('ansbox');
+    if(box)box.addEventListener('input',e=>ans=e.target.value);
+  } else if(phase==='feedback'){
+    p.innerHTML=`
+      <div class="meta" style="margin-bottom:1rem;">
+        <button class="btn" onclick="phase='answer';renderPractice()">&#8592; Edit answer</button>
+        <button class="btn" onclick="phase='select';conv=[];ans='';renderPractice()">New topic</button>
+        <button class="btn" onclick="newQ()">Next question</button>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      <div class="card"><div class="msg-role">Your answer</div><div class="msg-text">${ans||'[MCQ selected]'}</div></div>
+      <div class="card" id="fb-card">
+        <div class="msg-role">Examiner feedback</div>
+        <div id="fb-content" style="font-size:14px;line-height:1.75;white-space:pre-wrap;">${loading?'<span class="spinner"></span>Marking your answer...':''}</div>
+        ${curQ.er?`<div class="er-box" id="er-box" style="display:none;"><div class="er-label">📄 Examiner Report</div><div class="er-text">${curQ.er}</div></div>`:''}
+      </div>
+      ${!loading&&conv.length>0?`
+        <div class="card" id="fu-card" style="display:none;"><div id="fu-msgs"></div></div>
+        <div class="fu-row"><input type="text" id="fu-input" placeholder="Ask a follow-up question..." /><button class="btn primary" onclick="sendFU()">Ask &rarr;</button></div>`:''}`;
+  }
+}
+
+function startQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+function newQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+
+function submitMCQ(){
+  const sel=document.querySelector('input[name="mcq"]:checked');
+  if(!sel)return;
+  ans='Selected: '+sel.value;phase='feedback';loading=true;renderPractice();
+  const isRight=sel.value===curQ.answer;
+  const text=isRight?`CORRECT — ${sel.value} is the right answer.\n\nWHY THIS IS CORRECT:\n${curQ.ms}\n\nEXAMINER REPORT:\n${curQ.er||'No specific examiner report.'}`:
+    `INCORRECT — You selected ${sel.value}, but the correct answer is ${curQ.answer}.\n\nCORRECT ANSWER:\n${curQ.ms}\n\nEXAMINER REPORT:\n${curQ.er||'No specific examiner report.'}`;
+  conv=[{role:'user',content:`Q${curQ.id} — Student selected: ${sel.value}`},{role:'assistant',content:text}];
+  loading=false;renderPractice();
+  const el=document.getElementById('fb-content');if(el)el.textContent=text;
+  const er=document.getElementById('er-box');if(er)er.style.display='';
+  const fu=document.getElementById('fu-card');if(fu)fu.style.display='';
+}
+
+async function submitAns(){
+  if(!ans.trim())return;
+  phase='feedback';loading=true;renderPractice();
+  const sys=`You are an AQA A-Level Physical Education examiner marking Exercise Physiology, Biomechanics and Health questions with precision.
+Mark strictly to the mark scheme. Do not award marks for vague or inaccurate statements. If a student makes the correct point differently, award the mark.
+EXAMINER REPORT FOR THIS QUESTION: ${curQ.er||'No specific examiner report.'}
+Reference the examiner report in your feedback.
+MARK SCHEME: ${curQ.ms}
+FEEDBACK FORMAT:
+MARKS AWARDED: [X] / [${curQ.marks}]
+WHAT YOU GOT RIGHT:
+[Each awarded mark — what the student said and why it earns the mark]
+WHAT WAS MISSING:
+[Each unawarded mark — precisely what was needed]
+EXAMINER REPORT COMMENTARY:
+[How the student's response compares to typical candidates]
+HOW TO IMPROVE (B-U-C):
+Basic | Use knowledge | Connect/contextualise`;
+  const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:800,system:sys,messages})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||JSON.stringify(data);
+    conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
+    loading=false;renderPractice();
+    const el=document.getElementById('fb-content');if(el)el.textContent=text;
+    const er=document.getElementById('er-box');if(er)er.style.display='';
+    const fu=document.getElementById('fu-card');if(fu)fu.style.display='';
+  }catch(e){loading=false;const el=document.getElementById('fb-content');if(el)el.textContent='Error: '+e.message;}
+}
+
+async function sendFU(){
+  const input=document.getElementById('fu-input');
+  if(!input||!input.value.trim())return;
+  const q=input.value.trim();input.value='';
+  const fuMsgs=document.getElementById('fu-msgs');
+  const fuCard=document.getElementById('fu-card');
+  if(fuCard)fuCard.style.display='';
+  if(fuMsgs){fuMsgs.innerHTML+=`<div class="msg"><div class="msg-role">You</div><div class="msg-text">${q}</div></div><div class="msg" id="fu-loading"><div class="msg-role">Tutor</div><div class="msg-text"><span class="spinner"></span>Thinking...</div></div>`;}
+  const sys=`You are an AQA A-Level PE examiner providing follow-up tutoring on Exercise Physiology/Biomechanics. The question was: "${curQ.q}". Help the student understand the mark scheme reasoning.`;
+  const msgs=conv.map(m=>({role:m.role,content:m.content}));msgs.push({role:'user',content:q});
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:400,system:sys,messages:msgs})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'';
+    conv.push({role:'user',content:q},{role:'assistant',content:text});
+    const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent=text;
+  }catch(e){const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent='Error.';}
+}
+
+function renderBrowse(){
+  const p=document.getElementById('browse-panel');
+  const byTopic={};QS.forEach(q=>{if(!byTopic[q.sub])byTopic[q.sub]=[];byTopic[q.sub].push(q);});
+  p.innerHTML=Object.keys(byTopic).map(sub=>`
+    <div class="section-title">${sub}</div>
+    <div class="card" style="margin-bottom:1.25rem;">${byTopic[sub].map(q=>`
+      <div class="q-item">
+        <div class="q-id">${q.id}</div>
+        <div class="q-txt">${q.q.split('\n')[0].substring(0,85)}${q.q.split('\n')[0].length>85?'...':''}</div>
+        <div class="q-actions">
+          <span class="badge b-m">${q.marks}m</span>
+          ${q.type==='mcq'?'<span class="badge" style="background:#f3e8ff;color:#7c3aed;">MCQ</span>':''}
+          <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="practiseQ('${q.id}')">Practise</button>
+        </div>
+      </div>`).join('')}
+    </div>`).join('');
+}
+
+function practiseQ(id){curQ=QS.find(q=>q.id===id);selSub=curQ.sub;ans='';conv=[];phase='answer';switchTab('practice');}
+renderPractice();
+</script>
+</body>
+</html>

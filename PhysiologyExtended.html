@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQA A-Level PE — Physiology &amp; Biomechanics Extended Responses</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;}
+.header{background:#1a4435;color:#fff;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header-title{font-size:17px;font-weight:600;}
+.header-sub{font-size:12px;opacity:.65;margin-top:2px;}
+.header-badge{background:#c9a84c;color:#1a4435;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.container{max-width:820px;margin:0 auto;padding:2rem 1.5rem;}
+.tab-bar{display:flex;gap:2px;margin-bottom:1.5rem;background:#e8e7e3;border-radius:10px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;cursor:pointer;border:none;background:transparent;border-radius:8px;color:#555;font-weight:500;}
+.tab.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:1rem;}
+.topic-card{background:#fff;border:1.5px solid #e0dfd8;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s;}
+.topic-card:hover{border-color:#1a4435;background:#f0f7f4;}
+.topic-card.sel{border-color:#1a4435;background:#ecf4f0;}
+.tc-name{font-size:13px;font-weight:600;margin-bottom:3px;}
+.tc-sub{font-size:11px;color:#888;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#1a1a1a;transition:all .15s;}
+.btn:hover{background:#f5f4f0;}
+.btn.primary{background:#1a4435;color:#fff;border-color:#1a4435;}
+.btn.primary:hover{background:#245e49;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.qbox{background:#f5f4f0;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.65;margin-bottom:1rem;white-space:pre-wrap;}
+.level-guide{background:#fff;border:1px solid #e0dfd8;border-radius:8px;margin-bottom:1rem;overflow:hidden;}
+.level-guide-header{background:#1a4435;color:#fff;padding:.625rem 1rem;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.level-guide-body{padding:.75rem;display:none;}
+.level-row{display:grid;grid-template-columns:60px 60px 1fr;gap:.5rem;padding:.5rem 0;border-bottom:1px solid #f0f0ec;font-size:12px;line-height:1.5;}
+.level-row:last-child{border-bottom:none;}
+.level-num{font-weight:700;color:#1a4435;}
+.level-marks{color:#888;}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-bottom:6px;display:block;}
+textarea{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;background:#fafaf8;resize:vertical;}
+textarea:focus{outline:none;border-color:#1a4435;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.b-8{background:#dbeafe;color:#1e40af;}
+.b-15{background:#fef3c7;color:#92400e;}
+.b-ao{background:#f0f0ec;color:#555;}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+.er-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:.875rem 1rem;margin-top:1rem;}
+.er-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#15803d;margin-bottom:5px;}
+.er-text{font-size:13px;color:#14532d;line-height:1.65;}
+.msg{padding:10px 0;border-bottom:1px solid #f0f0ec;}
+.msg:last-child{border-bottom:none;}
+.msg-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#999;margin-bottom:3px;}
+.msg-text{font-size:14px;line-height:1.65;white-space:pre-wrap;}
+.fu-row{display:flex;gap:8px;margin-top:1rem;}
+.fu-row input{flex:1;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;background:#fafaf8;}
+.fu-row input:focus{outline:none;border-color:#1a4435;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:#1a4435;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:-1px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.q-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0ec;}
+.q-item:last-child{border-bottom:none;}
+.q-num{font-size:11px;color:#aaa;min-width:28px;padding-top:1px;font-weight:600;}
+.q-txt{font-size:13px;flex:1;line-height:1.4;}
+.q-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.section-title{font-size:14px;font-weight:600;margin-bottom:.75rem;color:#1a4435;}
+.tip-box{background:#ecf4f0;border:1px solid #a7d7c5;border-radius:8px;padding:.875rem 1rem;margin-bottom:1rem;font-size:13px;line-height:1.6;color:#14532d;}
+.tip-label{font-size:11px;font-weight:700;text-transform:uppercase;color:#1a4435;margin-bottom:4px;}
+table.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:.75rem 0;}
+table.data-table th,table.data-table td{border:1px solid #ddd;padding:6px 10px;text-align:center;}
+table.data-table th{background:#1a4435;color:#fff;font-weight:600;}
+table.data-table td:first-child{font-weight:600;text-align:left;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="header-title">AQA A-Level PE — Physiology &amp; Biomechanics Extended Responses</div>
+    <div class="header-sub">Level-descriptor marking · AO1/AO2/AO3 balance · Examiner report feedback</div>
+  </div>
+  <div class="header-badge">18 QUESTIONS</div>
+</div>
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('practice')">Practice</button>
+    <button class="tab" onclick="switchTab('browse')">All Questions</button>
+  </div>
+  <div id="practice-panel"></div>
+  <div id="browse-panel" style="display:none;"></div>
+</div>
+<script>
+const PROXY='https://keen-sawine-d41a7a.netlify.app/.netlify/functions/proxy';
+const MODEL='claude-sonnet-4-5';
+
+const L4=[
+  {l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used. Answer usually demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence. Terminology sometimes used."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation. Terminology occasionally used."}
+];
+const L5=[
+  {l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence. Terminology used but may sometimes be missing."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence. Terminology occasionally used."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation. Terminology very occasionally used."}
+];
+
+const VO2_TABLE=`<table class="data-table"><thead><tr><th>Footballer</th><th>Test 1 (ml/kg/min)</th><th>Test 2 (ml/kg/min)</th></tr></thead><tbody><tr><td>Footballer A</td><td>52</td><td>54</td></tr><tr><td>Footballer B</td><td>46</td><td>61</td></tr><tr><td>Footballer C</td><td>45</td><td>45</td></tr><tr><td>Footballer D</td><td>41</td><td>39</td></tr></tbody></table>`;
+
+const HAYLEY_TABLE=`<table class="data-table"><thead><tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody><tr><td>Week 1</td><td>Rest</td><td>Rest</td><td>30-min continuous</td><td>Rest</td><td>Rest</td><td>5km</td><td>Rest</td></tr><tr><td>Week 2</td><td>Rest</td><td>Rest</td><td>35-min continuous</td><td>Rest</td><td>Rest</td><td>6km</td><td>Rest</td></tr><tr><td>Week 3</td><td>Rest</td><td>Rest</td><td>40-min continuous</td><td>Rest</td><td>Rest</td><td>7km</td><td>Rest</td></tr><tr><td>Week 4</td><td>Rest</td><td>Rest</td><td>45-min continuous</td><td>Rest</td><td>Rest</td><td>8km</td><td>Rest</td></tr><tr><td>Week 5</td><td>Rest</td><td>Rest</td><td>50-min continuous</td><td>Rest</td><td>Rest</td><td>9km</td><td>Rest</td></tr><tr><td>Week 6</td><td>Rest</td><td>Rest</td><td>55-min continuous</td><td>Rest</td><td>Rest</td><td><strong>Race</strong></td><td></td></tr></tbody></table>`;
+
+const QS=[
+  {id:"Q1",sub:"Data & Testing",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"The table below shows data collected from gas analysis VO₂ max tests performed by football players on a treadmill. Each footballer performed the same test twice, one week apart.\n\nEvaluate the suitability of this VO₂ max test for football players. Refer to the validity and reliability of the test protocol and the results in the table above.",
+  diagram:VO2_TABLE,levels:L4,
+  ms:`AO1: Validity = extent to which a test measures what it sets out to measure. Reliability = extent to which a test produces consistent/repeatable results. VO2 max = maximum volume of oxygen taken in and used per minute (ml/kg/min).
+AO2 Strengths: Aerobic power is important in football. Running on treadmill replicates football running. Gas analysis provides accurate/objective data.
+AO2 Weaknesses: Continuous running unlike stop-start football. Requires maximal effort — not replicated in football. No skill/decision-making involved.
+AO3 Validity: Valid because running on treadmill replicates football. Valid as direct measure of VO2 max important for some positions. Not valid — continuous unlike stop-start football. Not valid — doesn't involve skills/decision-making important in football.
+AO3 Reliability: Reliable because standardised protocol followed each time. Not reliable — depends on player's preparation/condition on test day. Tests one week apart — minimal expected change. Footballer A, C, D show consistent results supporting reliability. Footballer B shows large change (46→61) calling reliability into question — may have been unwell/injured in Test 1, or human error occurred.`,
+  er:"No specific examiner report. Both validity AND reliability must be evaluated, with explicit reference to the TABLE DATA throughout the AO3. Footballer B's anomalous data is the key evaluative opportunity — strong responses explain possible reasons."},
+
+  {id:"Q2",sub:"Selective Attention & SAQ",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Goalkeepers in several sports need a fast response time to make a save.\n\nEvaluate how effective the following are for improving the response time of a goalkeeper:\n• development of selective attention\n• speed agility quickness (SAQ) training\n• caffeine supplementation.",
+  levels:L5,
+  ms:`AO1: Response time = reaction time + movement time. Selective attention = ability to focus on relevant stimuli and ignore irrelevant. SAQ training = dynamic movements/changing direction at speed/ladder drills. Caffeine = stimulant that increases mental alertness.
+AO2: Selective attention — make ball brighter/highlight relevant stimuli/train with distractions. SAQ — multiple saves in different positions/ladder drills before saves. Caffeine — taken before performance to improve alertness/focus on ball.
+AO3 SELECTIVE ATTENTION: Allows goalkeeper to ignore distractions (crowd) and focus on ball → decreases reaction time through anticipation. Only develops reaction time — still needs physical speed.
+SAQ: Develops motor abilities → move more quickly → more saves. Only improves movement time — still needs accurate decision-making.
+CAFFEINE: Increases focus → react more quickly. Effects wear off — needs more during game. Over-consumption: stomach problems/headaches/dehydration/irritability → negative performance effects.`,
+  er:"No specific examiner report. All three methods must be evaluated, each with a positive AND limitation linked specifically to goalkeeper performance."},
+
+  {id:"Q3",sub:"Nutrition",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"A triathlete will need vitamins, minerals, fibre and water to maintain the healthy functioning of their body.\n\nAnalyse how the OTHER food classes allow the triathlete to maximise their performance.",
+  levels:L4,
+  ms:`AO1: Carbohydrates = primary energy source especially at higher intensities (found in fruit/pasta). Fats = energy source at low intensities; saturated/unsaturated/trans. Protein = amino acids for growth and repair (meat/fish/eggs).
+AO2: Carbohydrates — energy for high training volume/long race. Fats — energy for low-intensity long training sessions. Protein — repair muscle damage from long swim/bike/run training.
+AO3: Carbohydrates allow completion of training sessions to maximum ability/races at full effort. Fats conserve glycogen stores for intense sections — prevent 'hitting the wall'. Fats transport fat-soluble vitamins. Unsaturated fats preferred — saturated may cause weight gain slowing the triathlete. Protein allows muscle growth/repair/recovery → stronger/more injury resistant.`,
+  er:"No specific examiner report. Must analyse each food class (carbohydrate, fat, protein) in context of a triathlete's specific demands — both training and competition."},
+
+  {id:"Q4",sub:"Musculo-Skeletal & Biomechanics",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Analyse how the musculo-skeletal AND lever systems operating at the knees AND ankles contribute to gaining maximum height in a volleyball jump.",
+  levels:L5,
+  ms:`AO1 Knee: Hinge joint. Femur and tibia articulate. Quadriceps/hamstrings antagonistic pair.
+AO1 Ankle: Hinge joint. Tibia, fibula and talus articulate. Gastrocnemius/tibialis anterior antagonistic pair.
+AO1 Levers: Fulcrum/pivot, resistance/load, effort.
+AO2 Knee: Extension caused by quadriceps contracting isotonic concentrically. Third-class lever.
+AO2 Ankle: Plantar flexion caused by gastrocnemius contracting isotonic concentrically. Second-class lever.
+AO3 Knee (3rd class): Longer resistance arm — mechanical disadvantage. However: lever can move at high speed with greater range of movement → explosive jump into air. Larger/stronger quadriceps → greater force → jump higher.
+AO3 Ankle (2nd class): Longer effort arm — mechanical advantage → high force production. Important as ankle lifts weight of whole body. The two lever systems combine/complement each other — force and speed together → maximum height.`,
+  er:"No specific examiner report. Both knees AND ankles must be addressed. Both musculo-skeletal system AND lever system must be covered. The AO3 analysis must link the mechanical properties of each lever system to the impact on jump height."},
+
+  {id:"Q5",sub:"Muscle Fibre & Newton's Laws",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"A sprinter is driving out of the blocks in a 100m race.\n\nAnalyse how the following factors help the sprinter to make an explosive start:\n• recruitment of muscle fibres\n• Newton's Laws of linear motion.",
+  levels:L5,
+  ms:`AO1 Muscle fibre: Motor unit = motor neurone + muscle fibres it stimulates. All or None Law. Spatial summation = impulses from multiple areas → action potential. Wave summation = repeated impulses → tetanic contraction.
+AO1 Newton's Laws: 1st (Inertia) = body remains at rest until force acts. 2nd (Acceleration) = F=ma. 3rd (Action/Reaction) = equal and opposite reaction.
+AO2: Spatial summation → more/bigger/fast-twitch motor units recruited. Newton's 1st — large enough force to overcome inertia from blocks. Newton's 2nd — mass constant so acceleration proportional to force; direction of force governs direction of acceleration. Newton's 3rd — internal force applied to blocks → equal and opposite force propels sprinter forward.
+AO3: More motor units/FT fibres → maximum force → overcomes inertia faster. Acceleration directly proportional to force produced. Larger backward force on blocks → larger forward reaction force → faster exit. Force applied at correct angle → maximises start (too flat = fall; too high = limits horizontal acceleration). Tetanic contractions from wave summation → smooth efficient movement → speed production.`,
+  er:"No specific examiner report. Both muscle fibre recruitment AND all three Newton's Laws must be addressed. The AO3 analysis must link each law and muscle fibre principle to the specific outcome for the sprinter."},
+
+  {id:"Q6",sub:"Nutrition",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Following intense exercise elite athletes are required to maximise their recovery.\n\nAnalyse how nutrition can contribute to effective recovery from intense exercise, resulting in improved performance in the future.",
+  levels:L4,
+  ms:`AO1: Carbohydrates, protein, water, sodium, vitamins, creatine — all relevant post-exercise nutrients.
+AO2: Carbohydrate — replenish glycogen depleted during intense exercise. Protein/vitamins — repair muscle damage from intense work. Sodium/water — replace losses through sweat. Creatine — increase phosphocreatine stores/speed muscle recovery.
+AO3: Replenishing carbohydrate/creatine → work at high intensity again in next session/competition. Allows more frequent hard training → maximise training gains. Protein/creatine for growth/repair → faster recovery/increased muscular hypertrophy → greater strength/power gains. Water prevents dehydration → allows removal of waste products (lactic acid) → prevents normal functioning disruption → faster recovery. Sodium replenishment → normal muscle cell function → prevents cramps → maintained recovery/performance.`,
+  er:"No specific examiner report. Must analyse each nutrient's role specifically in POST-EXERCISE RECOVERY and link to improved future performance."},
+
+  {id:"Q7",sub:"Training & Principles",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Hayley is training for a half marathon (21km). Her target is to run the race in 1 hour 45 minutes.\n\nThe table shows her training programme for the 6 weeks leading up to the race.\n\nEvaluate how well the principles of training have been applied to Hayley's training programme. Refer to ways that Hayley could improve her programme.",
+  diagram:HAYLEY_TABLE,levels:L5,
+  ms:`AO1: Specificity — training relevant to your activity/energy systems/muscles. Progressive overload — gradually increasing difficulty (FITT: Frequency/Intensity/Time/Type). Reversibility — adaptations lost if training stops. Recovery — rest days needed for adaptation.
+AO2 Specificity: Running specific to aerobic system — relevant. But not specific to 21km race distance/time.
+AO2 Progressive overload: Time progressively increased each week. Intensity increase unclear (may run slower for longer).
+AO2 Reversibility: Consistent training limits reversibility.
+AO2 Recovery: 2-3 days between sessions — adequate.
+AO3 Specificity: Not specific to distance intended to run — could make programme more specific by increasing distance in week 1.
+AO3 Progressive overload: Could add sessions in weeks 3-5 (frequency). Must ensure intensity also increases (pace). Could add Fartlek/interval training for variety/additional overload.
+AO3 Reversibility: Only 2 sessions per week — some reversibility may occur between sessions.
+AO3 Recovery: At least 48 hours between sessions — allows glycogen replenishment/DOMS recovery. Adding one additional session with adequate recovery is feasible.`,
+  er:"No specific examiner report. Must evaluate ALL training principles (specificity, progressive overload, reversibility, recovery) with reference to the table. Suggestions for improvement must be specific and linked back to the programme shown."},
+
+  {id:"Q8",sub:"Musculo-Skeletal & Biomechanics",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"A sprinter is driving out of the blocks in a 100m race.\n\nAnalyse how the lever systems operating at the ankle AND knee give the sprinter an effective start.\n\nInclude fully labelled diagrams of the lever systems in your answer.",
+  levels:L4,
+  ms:`AO1: Lever components = effort, fulcrum, resistance. 2nd class = resistance in middle. 3rd class = effort in middle. Mechanical advantage = effort arm ÷ resistance arm.
+AO2: Ankle = second-class lever. Knee = third-class lever.
+AO3 Ankle (2nd class): High mechanical advantage — effort arm longer than resistance arm → more force relative to effort → greater force to drive out of blocks/overcome inertia/accelerate faster.
+AO3 Knee (3rd class): Low mechanical advantage/disadvantage — effort arm shorter than resistance arm → requires more effort but moves quickly over large range of motion → sprinter covers larger distance quickly as they drive out using powerful quadriceps.
+Two systems combine/complement each other → powerful start with high force and speed.`,
+  er:"No specific examiner report. Both ankle AND knee must be analysed. Diagrams should be fully labelled (E, F, R). The AO3 must link mechanical advantage/disadvantage to the specific impact on the sprint start."},
+
+  {id:"Q9",sub:"Gas Exchange & Physiology",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Analyse how using a hyperbaric chamber would help rehabilitation from a muscle strain.\n\nRefer to the following in your answer:\n• gas exchange at the alveoli and muscles\n• transportation of oxygen.",
+  levels:L5,
+  ms:`AO1: Hyperbaric chamber = delivers oxygen at ~2.5x normal pressure/100% pure oxygen. Muscle strain = muscle fibres stretched too far/tear. Gas exchange = movement of gases by diffusion (high→low partial pressure). Transport = red blood cells/haemoglobin carry oxygen.
+AO2: High partial pressure in chamber → larger diffusion gradient between alveolar air and blood. More oxygen diffuses into blood → haemoglobin fully saturated → more oxyhaemoglobin. Excess oxygen dissolves in plasma. More oxygen reaches injured muscle. Higher diffusion gradient between blood and muscle cells → more oxygen into injured muscle. Myoglobin in muscle cells pulls additional oxygen in.
+AO3: Increased oxygen supply → speeds up rehabilitation. Used by mitochondria → energy production → powers faster recovery. Anti-inflammatory effect → reduces pressure/swelling in muscle. Reduced pressure → less pain → more natural movement → limits additional complications. Stimulates white blood cell production. White blood cells encourage growth/regeneration of injured muscle fibres.`,
+  er:"No specific examiner report. Must address both gas exchange (alveoli AND muscles) AND transportation of oxygen. The AO3 must link the increased oxygen supply to specific mechanisms of faster rehabilitation."},
+
+  {id:"Q10",sub:"Injury & Screening",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Elite-level rugby players are at high risk of suffering from musculo-skeletal injuries due to the physical nature of the sport.\n\nEvaluate the use of screening to prevent musculo-skeletal injuries in elite rugby.",
+  levels:L4,
+  ms:`AO1: Screening = series of tests to assess current musculo-skeletal condition. Can assess muscle imbalances/core strength/joint mobility/postural alignment/stress fractures.
+AO2: Muscle imbalances (e.g. stronger quads/weaker hamstrings) → increased hamstring injury risk. Weak core → decreased stability during contact → injury. Limited ankle mobility → increased pressure on other joints in scrums/rucks. Hypermobile shoulders → dislocation risk in tackling. Postural defects → injury risk in scrummaging.
+AO3 Positives: Pre-hab work → injuries avoided → no missed training/playing time. Individualised conditioning programmes target specific weaknesses. Detection allows bracing/surgery.
+AO3 Negatives: Some tests not 100% accurate → false negatives → more serious injury later. Despite screening, injuries still occur in contact sport — unavoidable. Taping/bracing/protective equipment may be more effective than screening alone. False positives → unnecessary rest → reduced fitness. Psychological impact of identifying potential issues → anxiety → reduced commitment to tackle → increased injury risk.`,
+  er:"No specific examiner report. Both positives AND negatives of screening must be evaluated. Each point must include the IMPACT — not just the advantage/disadvantage of screening."},
+
+  {id:"Q11",sub:"Biomechanics",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Analyse how an athlete can maximise the distance a discus travels.\n\nUse your knowledge of the factors affecting horizontal displacement of projectiles and the Bernoulli principle in your answer.",
+  levels:L5,
+  ms:`AO1: Angle of release — dependent on height/landing height difference. Speed of release — greater speed → greater displacement. Height of release — greater height → greater displacement. Bernoulli principle — fast air flow = low pressure; slow air flow = high pressure.
+AO2: Release height of discus greater than landing height. Faster spin → greater speed of release. Height depends on athlete's height/technique. Optimal angle of attack for Bernoulli effect = ~25-40 degrees. Athlete tries to optimise speed, height, angle of release AND angle of attack.
+AO3: Release height > landing height → optimum angle of release is less than 45°. Angle above optimal → increased air resistance → slower speed → shorter distance. Speed of release increased through training (power development). Taller athletes with better technique → greater height of release. At optimal angle of attack: air over discus travels further → faster → low pressure. Air under discus travels less → slower → high pressure. Air moves from high to low pressure → lift → discus stays airborne longer → maximises distance.`,
+  er:"No specific examiner report. Both horizontal displacement factors AND Bernoulli principle must be integrated throughout. AO3 must explain the mechanism of lift generation and link optimisation of all factors to maximised distance."},
+
+  {id:"Q12",sub:"Training & Principles",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"A runner has followed a continuous training programme three times per week for six weeks to prepare for a 5km race. The race is in four weeks' time.\n\nAnalyse how applying the FITT principles to the runner's training could improve their performance during the race.",
+  levels:L4,
+  ms:`AO1: Frequency = how often training is carried out. Intensity = how hard you train. Time = duration of training. Type = method used during training.
+AO2: Frequency — increase to 4 sessions per week. Intensity — work at higher average heart rate/speed. Time — increase duration from e.g. 30 to 40 minutes. Type — use Fartlek/interval training instead of continuous.
+AO3: Applying FITT → progressive overload → continued adaptations (cardiac output/A-VO2 diff/myoglobin/lactate threshold). Allows runner to work at higher intensities for longer without fatiguing → consistently fast pace throughout race. Fartlek/interval training stresses both anaerobic and aerobic systems → develops sprint finish capability. Without FITT application, plateau in performance development → race performance not maximised.`,
+  er:"No specific examiner report. All four FITT principles must be addressed. The AO3 must link FITT application to specific physiological adaptations AND to improved 5km race performance."},
+
+  {id:"Q13",sub:"Biomechanics",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"Analyse how the gymnast makes use of the principle of conservation of angular momentum when performing a front tuck somersault.\n\nRefer to a graph showing the relationship between moment of inertia and angular velocity in your answer.",
+  levels:L5,
+  ms:`AO1: Angular momentum = moment of inertia × angular velocity. Moment of inertia = body's reluctance to rotation. Angular velocity = rate of rotation around axis. Conservation principle = angular momentum remains constant if moment of inertia changes, angular velocity changes inversely.
+AO2: High MI at start and end (open position). Low MI in middle (tucked position). Low angular velocity at start/end. High angular velocity in middle. Angular acceleration as somersault begins; angular deceleration as gymnast opens out. Angular momentum constant throughout.
+AO3: Open position initially → large MI → low angular velocity. Tucking → mass closer to centre of mass → MI decreases → angular velocity increases → angular acceleration → full rotation occurs quickly → time for safe landing. Opening out → MI increases → angular velocity decreases → angular deceleration → slows rotation for controlled landing. Angular momentum conserved throughout — gymnast manipulates body position to control rotation speed without external torque.`,
+  er:"No specific examiner report. Must reference the graph or describe how MI and angular velocity are inversely related at different points in the somersault. The AO3 must explain the chain: body position → MI change → angular velocity change → impact on performance."},
+
+  {id:"Q14",sub:"Training & Fitness",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"A sedentary adult wants to improve their fitness using circuit training.\n\nEvaluate the effectiveness of circuit training to improve the fitness of the sedentary adult and the potential impact on completing everyday tasks.",
+  levels:L4,
+  ms:`AO1: Circuit training = series of exercises at set stations; can target different muscles; work/rest ratios varied. Fitness benefits: muscular endurance, cardiovascular endurance, strength, flexibility, body composition.
+AO2: Suitable stations for sedentary adult: walking/step-ups/sit-ups/press-ups/dumbbell work/mobility activities. Work periods low/rest periods longer to reflect current fitness.
+AO3 Positives: CV fitness improvements → everyday tasks completed with less effort/stress on body. Increased strength → objects lifted more easily. Muscular endurance → tasks sustained longer without fatigue. Improved flexibility → reach objects more easily. Better body composition → less weight to carry → tasks easier. Social/motivating element → likely to continue exercising → sustained benefits.
+AO3 Negatives: May be too intense for highly inactive individual. Other methods may be more effective for specific components (e.g. continuous for stamina, weight training for strength).`,
+  er:"No specific examiner report. Must evaluate both positives AND negatives, each with specific impact on completing everyday tasks. Application to a sedentary adult's current fitness level is key for AO2."},
+
+  {id:"Q15",sub:"Training & Principles",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Adam Peaty is a world record holder in the 100m breaststroke.\n\nAnalyse how Adam Peaty could structure macro, meso and micro cycles to benefit his performance.",
+  levels:L4,
+  ms:`AO1: Macrocycle = 1-4 year cycle (e.g. Olympic cycle). Mesocycle = 2-8 week block focusing on specific aspect. Microcycle = 1 week/individual sessions.
+AO2: Macrocycle for Peaty: 4-year plan building to Olympics/World Championships. Mesocycle examples: aerobic base building phase/power development phase/race-specific phase/tapering. Microcycle: weekly plan e.g. Monday S&C/Tuesday race pace/Wednesday recovery.
+AO3: Macrocycle allows long-term planning ensuring peak fitness for most important competition. Mesocycles allow targeted development of specific attributes at the right time. Tapering mesocycle before competition → fresh/rested → optimal performance. Microcycles ensure each week optimises training load without overtraining. Well planned periodisation → peaks at the right time → performs optimally in major championships.`,
+  er:"No specific examiner report. Must address ALL THREE cycle lengths. The AO3 analysis must explain how each cycle level BENEFITS Peaty's performance at major championships specifically."},
+
+  {id:"Q16",sub:"Muscle Fibre & Newton's Laws",marks:15,ao:"AO1=4 AO2=5 AO3=6",
+  q:"A gymnast performs an explosive leap off the balance beam.\n\nAnalyse how Newton's Laws of linear motion AND the recruitment of muscle fibres allow the gymnast to perform this explosive movement successfully.",
+  levels:L5,
+  ms:`AO1: Newton's 1st (Inertia), 2nd (Acceleration: F=ma), 3rd (Action/Reaction). Motor unit = motor neurone + fibres. All or None Law. Spatial summation. Wave summation → tetanic contraction.
+AO2: Gymnast must produce sufficient muscle contraction/force to overcome inertia and jump. Mass constant → acceleration = muscular force. At take-off, force applied to beam → equal/opposite force back onto gymnast. Spatial summation → more/bigger/FT motor units recruited. All movements involve tetanic contractions.
+AO3: Recruitment of more motor units/FT fibres → maximise force → overcome inertia. Increases acceleration (directly proportional to force). Larger downward force on beam → larger upward reaction force from beam → jump higher. Higher jump → more time in air → aesthetically pleasing movement → more points. Correct angle of force on beam to maximise take-off angle (too flat = limited air time → deductions). Tetanic contractions from wave summation → smooth, aesthetically pleasing movements → more points.`,
+  er:"No specific examiner report. All THREE Newton's Laws must be applied to the gymnast. Muscle fibre recruitment (All or None, spatial summation, wave summation, tetanic contraction) must all be addressed with analysis of impact on the explosive movement."},
+
+  {id:"Q17",sub:"Biomechanics",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Analyse how factors affecting stability can influence a rugby player making a tackle.",
+  levels:L4,
+  ms:`AO1: Centre of mass (COM), height of COM, width of base of support, mass, line of gravity, friction.
+AO2: Tackler lowers COM by bending knees. Wide base of support (feet apart). Line of gravity through middle of base. Both feet in contact with ground. Large mass increases stability. Boots/studs improve friction. Wet ground/poor footwear may reduce friction.
+AO3: Lowering COM → more stable → less likely to be unbalanced by the ball carrier. Optimal base of support — too wide reduces dynamics/ability to change direction; too narrow compromises stability. Line of gravity can shift toward edge of base to initiate a change of direction for the tackle. Altering COM height → enables different tackling styles (low = take legs; high = contest ball). Good friction through studs → maintains position → effective tackle. Excessive mass → less stable when moving dynamically.`,
+  er:"No specific examiner report. Must cover multiple factors (COM height, base of support, line of gravity, mass, friction). The AO3 must analyse the OPTIMAL balance between stability and dynamic movement needed for effective tackling."},
+
+  {id:"Q18",sub:"Training & Principles",marks:8,ao:"AO1=2 AO2=3 AO3=3",
+  q:"Analyse how the use of periodisation can benefit the performance of an elite swimmer preparing for a major championship.",
+  levels:L4,
+  ms:`AO1: Periodisation = dividing training into blocks. Macrocycle/mesocycle/microcycle. Preparation/competition/transition/tapering/recovery.
+AO2: Macrocycle = 4-year Olympic plan for swimmer. Preparation mesocycle = aerobic base/strength development. Competition mesocycle = race-specific intensity/lactate threshold work. Tapering = reduce volume, maintain intensity before championship. Transition = active recovery/cross-training after championship.
+AO3: Periodisation ensures swimmer peaks at the right time for the championship. Progressive overload throughout mesocycles → continued physiological adaptations. Tapering allows recovery of muscle glycogen/neuromuscular function without detraining → fresh and fast for competition. Transition period prevents overtraining/injury from year-round high intensity. Without periodisation → risk of overtraining/injury/suboptimal performance at key competition.`,
+  er:"No specific examiner report. Must address multiple cycle levels and phases. The AO3 should specifically analyse how periodisation maximises performance at the championship, including the tapering effect."},
+];
+
+const SUBTOPICS=[...new Set(QS.map(q=>q.sub))];
+let selSub=null,curQ=null,phase='select',ans='',conv=[],loading=false,currentTab='practice';
+
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='practice')||(i===1&&t==='browse')));
+  document.getElementById('practice-panel').style.display=t==='practice'?'':'none';
+  document.getElementById('browse-panel').style.display=t==='browse'?'':'none';
+  if(t==='browse')renderBrowse();
+  if(t==='practice')renderPractice();
+}
+
+function toggleLevelGuide(){
+  const body=document.getElementById('level-guide-body');
+  const arrow=document.getElementById('level-arrow');
+  if(body){body.style.display=body.style.display==='none'?'block':'none';}
+  if(arrow){arrow.textContent=body.style.display==='none'?'▼':'▲';}
+}
+
+function renderPractice(){
+  const p=document.getElementById('practice-panel');
+  if(phase==='select'){
+    const counts={};QS.forEach(q=>{counts[q.sub]=(counts[q.sub]||0)+1;});
+    p.innerHTML=`
+      <div class="tip-box"><div class="tip-label">💡 Extended Response Marking</div>These questions are marked holistically using level descriptors. Aim to blend AO1+AO2+AO3 within sentences for top marks.</div>
+      <div class="section-title">Select a topic area</div>
+      <div class="topic-grid">${SUBTOPICS.map(s=>{const qs=QS.filter(q=>q.sub===s);const has8=qs.some(q=>q.marks===8);const has15=qs.some(q=>q.marks===15);return`
+        <div class="topic-card${selSub===s?' sel':''}" onclick="selSub='${s}';renderPractice()">
+          <div class="tc-name">${s}</div>
+          <div class="tc-sub">${qs.length} question${qs.length>1?'s':''}${has8&&has15?' · 8 & 15 mark':has15?' · 15 mark':' · 8 mark'}</div>
+        </div>`;}).join('')}
+      </div>
+      ${selSub?`<div class="btn-row"><button class="btn primary" onclick="startQ()">Get a question &rarr;</button><button class="btn" onclick="selSub=null;renderPractice()">Clear</button></div>`:''}`;
+  } else if(phase==='answer'){
+    const levelRows=curQ.levels.map(l=>`<div class="level-row"><div class="level-num">Level ${l.l}</div><div class="level-marks">${l.r} marks</div><div>${l.d}</div></div>`).join('');
+    p.innerHTML=`
+      <div class="meta">
+        <button class="btn" onclick="phase='select';renderPractice()">&#8592; Back</button>
+        <span class="badge ${curQ.marks===8?'b-8':'b-15'}">${curQ.marks} marks</span>
+        <span class="badge b-ao">${curQ.ao}</span>
+        <span style="font-size:12px;color:#888;">${curQ.id} &middot; ${curQ.sub}</span>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="level-guide">
+        <div class="level-guide-header" onclick="toggleLevelGuide()"><span>Level Descriptors</span><span id="level-arrow">▼</span></div>
+        <div class="level-guide-body" id="level-guide-body">${levelRows}</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label class="label">Your answer — write in continuous prose (aim for ${curQ.marks===8?'~200-250':'~350-450'} words)</label>
+        <textarea id="ansbox" rows="${curQ.marks===8?10:15}" placeholder="Write your answer here...">${ans}</textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" onclick="submitAns()">Submit for marking &rarr;</button>
+        <button class="btn" onclick="newQ()">Different question</button>
+      </div>`;
+    const box=document.getElementById('ansbox');
+    if(box)box.addEventListener('input',e=>ans=e.target.value);
+  } else if(phase==='feedback'){
+    p.innerHTML=`
+      <div class="meta" style="margin-bottom:1rem;">
+        <button class="btn" onclick="phase='answer';renderPractice()">&#8592; Edit answer</button>
+        <button class="btn" onclick="phase='select';conv=[];ans='';renderPractice()">New topic</button>
+        <button class="btn" onclick="newQ()">Next question</button>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="card"><div class="msg-role">Your answer</div><div class="msg-text">${ans}</div></div>
+      <div class="card" id="fb-card">
+        <div class="msg-role">Examiner feedback</div>
+        <div id="fb-content" style="font-size:14px;line-height:1.75;white-space:pre-wrap;">${loading?'<span class="spinner"></span>Applying level descriptors...':''}</div>
+        ${curQ.er?`<div class="er-box" id="er-box" style="display:none;"><div class="er-label">📄 Examiner Report</div><div class="er-text">${curQ.er}</div></div>`:''}
+      </div>
+      ${!loading&&conv.length>0?`
+        <div class="card" id="fu-card" style="display:none;"><div id="fu-msgs"></div></div>
+        <div class="fu-row"><input type="text" id="fu-input" placeholder="Ask a follow-up question..." /><button class="btn primary" onclick="sendFU()">Ask &rarr;</button></div>`:''}`;
+  }
+}
+
+function startQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+function newQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+
+async function submitAns(){
+  if(!ans.trim())return;
+  phase='feedback';loading=true;renderPractice();
+  const levelDescriptors=curQ.levels.map(l=>`Level ${l.l} (${l.r} marks): ${l.d}`).join('\n');
+  const sys=`You are an experienced AQA A-Level Physical Education senior examiner, expert in extended response marking for Exercise Physiology and Biomechanics.
+CRITICAL: This is a LEVEL-MARKED question. Mark HOLISTICALLY using level descriptors. Do NOT count individual points.
+QUESTION: ${curQ.q}
+TOTAL MARKS: ${curQ.marks}
+AO BREAKDOWN: ${curQ.ao}
+${curQ.marks===8?'This is a 4-level question.':'This is a 5-level question.'}
+LEVEL DESCRIPTORS:
+${levelDescriptors}
+KEY PRINCIPLES: AO1=knowledge accuracy/detail. AO2=application to specific context. AO3=coherent evaluation/analysis with impacts. BLENDING AO1+AO2+AO3 in same sentences = top levels.
+MARK SCHEME (reference only):
+${curQ.ms}
+EXAMINER REPORT:
+${curQ.er}
+FEEDBACK FORMAT:
+LEVEL AWARDED: Level [X] — [X] / ${curQ.marks} marks
+WHY THIS LEVEL: [Holistic explanation referencing specific things the student wrote and which AO they demonstrate]
+WHAT KEPT THIS FROM A HIGHER LEVEL: [Precise gap — name the exact missing element]
+AO BALANCE:
+AO1 Knowledge: [Weak/Developing/Secure/Strong]
+AO2 Application: [Weak/Developing/Secure/Strong]
+AO3 Evaluation: [Weak/Developing/Secure/Strong]
+EXAMINER REPORT COMMENTARY: [How student compares to typical candidates]
+TO REACH THE NEXT LEVEL: [Specific advice — show how to upgrade one of their existing points]`;
+  const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:1000,system:sys,messages})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||JSON.stringify(data);
+    conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
+    loading=false;renderPractice();
+    const el=document.getElementById('fb-content');if(el)el.textContent=text;
+    const er=document.getElementById('er-box');if(er)er.style.display='';
+    const fu=document.getElementById('fu-card');if(fu)fu.style.display='';
+  }catch(e){loading=false;const el=document.getElementById('fb-content');if(el)el.textContent='Error: '+e.message;}
+}
+
+async function sendFU(){
+  const input=document.getElementById('fu-input');
+  if(!input||!input.value.trim())return;
+  const q=input.value.trim();input.value='';
+  const fuMsgs=document.getElementById('fu-msgs');
+  const fuCard=document.getElementById('fu-card');
+  if(fuCard)fuCard.style.display='';
+  if(fuMsgs){fuMsgs.innerHTML+=`<div class="msg"><div class="msg-role">You</div><div class="msg-text">${q}</div></div><div class="msg" id="fu-loading"><div class="msg-role">Tutor</div><div class="msg-text"><span class="spinner"></span>Thinking...</div></div>`;}
+  const sys=`You are an AQA A-Level PE senior examiner providing follow-up tutoring on Physiology/Biomechanics extended responses. The question was: "${curQ.q}" (${curQ.marks} marks). Help the student understand how to improve their level placement.`;
+  const msgs=conv.map(m=>({role:m.role,content:m.content}));msgs.push({role:'user',content:q});
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:500,system:sys,messages:msgs})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'';
+    conv.push({role:'user',content:q},{role:'assistant',content:text});
+    const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent=text;
+  }catch(e){const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent='Error.';}
+}
+
+function renderBrowse(){
+  const p=document.getElementById('browse-panel');
+  const byTopic={};QS.forEach(q=>{if(!byTopic[q.sub])byTopic[q.sub]=[];byTopic[q.sub].push(q);});
+  p.innerHTML=Object.keys(byTopic).map(sub=>`
+    <div class="section-title">${sub}</div>
+    <div class="card" style="margin-bottom:1.25rem;">${byTopic[sub].map(q=>`
+      <div class="q-item">
+        <div class="q-num">${q.id}</div>
+        <div class="q-txt">${q.q.split('\n')[0].substring(0,80)}${q.q.split('\n')[0].length>80?'...':''}</div>
+        <div class="q-actions">
+          <span class="badge ${q.marks===8?'b-8':'b-15'}">${q.marks}m</span>
+          <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="practiseQ('${q.id}')">Practise</button>
+        </div>
+      </div>`).join('')}
+    </div>`).join('');
+}
+
+function practiseQ(id){curQ=QS.find(q=>q.id===id);selSub=curQ.sub;ans='';conv=[];phase='answer';switchTab('practice');}
+renderPractice();
+</script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQA A-Level PE — Sociology of Sport</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;}
+.header{background:#3b1a1a;color:#fff;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header-title{font-size:17px;font-weight:600;}
+.header-sub{font-size:12px;opacity:.65;margin-top:2px;}
+.header-badge{background:#c9a84c;color:#3b1a1a;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.container{max-width:820px;margin:0 auto;padding:2rem 1.5rem;}
+.tab-bar{display:flex;gap:2px;margin-bottom:1.5rem;background:#e8e7e3;border-radius:10px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;cursor:pointer;border:none;background:transparent;border-radius:8px;color:#555;font-weight:500;}
+.tab.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:1rem;}
+.topic-card{background:#fff;border:1.5px solid #e0dfd8;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s;}
+.topic-card:hover{border-color:#3b1a1a;background:#faf4f4;}
+.topic-card.sel{border-color:#3b1a1a;background:#f7eded;}
+.tc-name{font-size:13px;font-weight:600;margin-bottom:3px;}
+.tc-count{font-size:11px;color:#888;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#1a1a1a;transition:all .15s;}
+.btn:hover{background:#f5f4f0;}
+.btn.primary{background:#3b1a1a;color:#fff;border-color:#3b1a1a;}
+.btn.primary:hover{background:#5a2a2a;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.qbox{background:#f5f4f0;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.65;margin-bottom:1rem;white-space:pre-wrap;}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-bottom:6px;display:block;}
+textarea,input[type="text"]{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;background:#fafaf8;}
+textarea:focus,input:focus{outline:none;border-color:#3b1a1a;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.03em;}
+.b-ao1{background:#dbeafe;color:#1e40af;}
+.b-ao2{background:#fef3c7;color:#92400e;}
+.b-ao3{background:#dcfce7;color:#15803d;}
+.b-m{background:#f0f0ec;color:#555;}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+.er-box{background:#fdf4f4;border:1px solid #f5c6c6;border-radius:8px;padding:.875rem 1rem;margin-top:1rem;}
+.er-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9b1c1c;margin-bottom:5px;}
+.er-text{font-size:13px;color:#7f1d1d;line-height:1.65;}
+.msg{padding:10px 0;border-bottom:1px solid #f0f0ec;}
+.msg:last-child{border-bottom:none;}
+.msg-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#999;margin-bottom:3px;}
+.msg-text{font-size:14px;line-height:1.65;white-space:pre-wrap;}
+.fu-row{display:flex;gap:8px;margin-top:1rem;}
+.fu-row input{flex:1;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:#3b1a1a;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:-1px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.q-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0ec;}
+.q-item:last-child{border-bottom:none;}
+.q-id{font-size:11px;color:#aaa;min-width:28px;padding-top:1px;font-weight:600;}
+.q-txt{font-size:13px;flex:1;line-height:1.4;}
+.q-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.section-title{font-size:14px;font-weight:600;margin-bottom:.75rem;color:#3b1a1a;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="header-title">AQA A-Level PE — Sociology of Sport</div>
+    <div class="header-sub">AI tutor · mark-scheme accurate · examiner report feedback</div>
+  </div>
+  <div class="header-badge">60 QUESTIONS</div>
+</div>
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('practice')">Practice</button>
+    <button class="tab" onclick="switchTab('browse')">All Questions</button>
+  </div>
+  <div id="practice-panel"></div>
+  <div id="browse-panel" style="display:none;"></div>
+</div>
+<script>
+const PROXY='https://keen-sawine-d41a7a.netlify.app/.netlify/functions/proxy';
+const MODEL='claude-sonnet-4-5';
+
+const QS=[
+  // SPORT & SOCIETY
+  {id:"Q1",sub:"Sport & Society",q:"Which one of the following is a function of National Governing Bodies?\nA) Fund elite athletes directly via UK Sport\nB) Organise grassroots competitions\nC) Provide national coaching education only\nD) Set government sport policy",marks:1,ao:"AO1",ms:"C – Organise grassroots competitions\nNGBs organise competitions at all levels, develop pathways, set rules, and promote participation in their sport.",er:"Standard AO1 recall question. Students should know the range of NGB functions including grassroots competition organisation, coaching development, rule-setting and talent pathways.",type:"mcq",answer:"C"},
+
+  {id:"Q2",sub:"Sport & Society",q:"Which one of the following is an example of gamesmanship?\nA) Deliberately fouling an opponent to prevent a goal\nB) Deliberately wasting time by taking a throw-in slowly\nC) Fighting with an opponent\nD) Using performance-enhancing drugs",marks:1,ao:"AO1",ms:"B – Deliberately wasting time by taking a throw-in slowly\nGamesmanship = bending the rules without breaking them. Deliberate fouls and drug use are rule violations. Fighting is violence.",er:"Students must distinguish between gamesmanship (bending rules for advantage without breaking them), deviance (breaking rules), and violence. Time-wasting via legitimate game actions is the classic example of gamesmanship.",type:"mcq",answer:"B"},
+
+  {id:"Q3",sub:"Duty of Care & Law",q:"State three reasonable measures a coach should take to keep performers safe (fulfil their duty of care).",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Keep up-to-date contact details for performers. (1)\n• Keep up-to-date medical records. (1)\n• Keep up-to-date records of attendance. (1)\n• Maintain appropriate supervision ratios. (1)\n• Ensure first-aid provision is available. (1)\n• Ensure all coaches have up-to-date DBS clearance. (1)\n• Ensure completed up-to-date risk assessments. (1)\nMax 3 marks",er:"Standard knowledge recall question. Students should know a range of practical duty of care measures covering safeguarding, medical provision, record-keeping, and risk management.",type:"written"},
+
+  {id:"Q4",sub:"Sport & Society",q:"State two characteristics of physical recreation.",marks:2,ao:"AO1",ms:"Award 1 mark each for any 2 of:\n• Modified/flexible rules. (1)\n• Usually self-officiated. (1)\n• Completed for intrinsic rewards/enjoyment/fun/stress relief/health. (1)\n• Voluntary/leisure time/not time-bound. (1)\n• Low levels of organisation. (1)\nMax 2 marks",er:"Students should be clear on physical recreation characteristics. Key features: informal, voluntary, intrinsic motivation, self-regulated. Do not confuse with sport (formal, extrinsic rewards, structured organisation).",type:"written"},
+
+  {id:"Q5",sub:"Sport & Society",q:"Explain two reasons why someone may choose to take part in sport over physical recreation.",marks:2,ao:"AO2",ms:"Award 1 mark each for any 2 explained reasons:\n• Sport is more competitive → greater challenge. (1)\n• Clearly defined rules/officials → more structure/fairness. (1)\n• Organised by NGBs → development pathways/representative honours. (1)\n• Extrinsic rewards available (medals/trophies) → additional motivation. (1)\n• Access to professional levels as a career pathway. (1)\n• Coaching/training → greater skill development. (1)\nMax 2 marks — must be explained (not just stated)",er:"Students must explain (not just state) reasons. The explanation must connect the characteristic of sport to why this makes it preferable to physical recreation for that individual.",type:"written"},
+
+  {id:"Q6",sub:"Commercialisation",q:"Evaluate the impact of commercialisation on officials in sport.",marks:3,ao:"AO3",ms:"Positives (sub max 2):\n• Increased salary → could become full-time profession/career pathway. (1)\n• More money → investment in supporting technology → better/more accurate decisions. (1)\n• Increased funding → better training/support network for officials. (1)\n• More money/increased status → officials become role models. (1)\nNegatives (sub max 2):\n• Larger sums of money → increased pressure on officials to make correct decisions. (1)\n• More money → increased deviance/gamesmanship from players → harder to officiate. (1)\n• Poor performance/wrong decision could result in losing job. (1)\nMax 3 marks — must include both positives AND negatives with IMPACT stated.",er:"Students must evaluate (positives AND negatives) with the impact on officials stated. Simply listing more money = good is insufficient — must explain the impact on the official's role/career.",type:"written"},
+
+  {id:"Q7",sub:"Drugs in Sport",q:"Which one of the following is a side effect of EPO use?\nA) Blood clotting\nB) Liver damage\nC) Bone density loss\nD) Reduced aggression",marks:1,ao:"AO1",ms:"A – Blood clotting\nEPO increases red blood cell production. Excess RBCs thicken the blood → clotting/stroke risk, especially at rest (e.g. during sleep when heart rate is low).",er:"Students should know EPO's mechanism (increases RBC production → improved oxygen carrying capacity) AND its risks (blood thickening → clotting → potentially fatal).",type:"mcq",answer:"A"},
+
+  {id:"Q8",sub:"Data & Technology",q:"Which one of the following best describes data collected by a GPS device during a football match?\nA) Qualitative and subjective\nB) Qualitative and objective\nC) Quantitative and objective\nD) Quantitative and subjective",marks:1,ao:"AO2",ms:"C – Quantitative and objective\nGPS data (speed, distance, sprint count) is numerical (quantitative) and factually recorded without opinion (objective).",er:"GPS data is numerical (speed in km/h, distance in metres) = quantitative. It is measured by a device without human opinion = objective. Students often confuse quantitative with subjective, or qualitative with objective.",type:"mcq",answer:"C"},
+
+  {id:"Q9",sub:"Elite Sport & UK Sport",q:"The UK Sport World Class Programme has two strands. Name both strands.\nA = ___\nB = ___",marks:2,ao:"AO1",ms:"A = Podium (athletes realistically capable of winning medals at next Olympics/Paralympics). (1)\nB = Podium Potential (athletes targeting medals at the Olympics/Paralympics after next). (1)\nMax 2 marks",er:"UK Sport World Class Programme: Podium = targeting medals in next Olympic cycle. Podium Potential = targeting medals in the cycle after. Students sometimes confuse these or add fictional third categories.",type:"written"},
+
+  {id:"Q10",sub:"Elite Sport & UK Sport",q:"In Hollander's model of personality, the outer layers represent different aspects of personality.\n\nFor a footballer:\nA = the number of core values they have\nB = the number of layers in Hollander's model",marks:2,ao:"AO1",ms:"A = 1/2/3/4 (maximum of 4 core values — sub-max at centre of model). (1)\nB = 4/5/6/7/8 (maximum of 8 — accept any answer that includes the 3 outer rings plus core). (1)\nDo not accept same answer for A and B.\nMax 2 marks",er:"Hollander's model has core personality layers at the centre surrounded by outer rings representing typical responses and role-related behaviour. The exact numbers vary by interpretation but the centre (core) is fewer than the total layers.",type:"written"},
+
+  {id:"Q11",sub:"Data & Technology",q:"Explain three ways a coach can use GPS technology data to make effective decisions before and during a game.",marks:3,ao:"AO2",ms:"Award 1 mark each for any 3 explained points (must use 'which' or equivalent connective):\n• GPS provides speed/distance data which coach uses to identify player strengths/weaknesses. (1)\n• GPS data used to assess fitness levels which allows selection decisions. (1)\n• GPS data for injured player returning which allows coach to decide readiness to compete. (1)\n• GPS data in real time which allows coach to see if player is executing tactics effectively. (1)\n• GPS shows fatigue levels which allows effective substitution decisions. (1)\nMax 3 marks",er:"Students must explain HOW the GPS data is used to inform decisions — not just state what GPS measures. Each answer needs to show the connection between the data collected and the coaching decision made.",type:"written"},
+
+  {id:"Q12",sub:"Data & Technology",q:"Evaluate the impact of technological developments in sport on the audience.",marks:3,ao:"AO3",ms:"Positive impacts (sub max 2):\n• Improves standard of sport → more exciting to watch. (1)\n• Better official decision-making → less frustrating for audience. (1)\n• Involves audience in officiating (e.g. DRS reviews) → more suspense/excitement. (1)\n• Better media technology → more convenient/interactive/personalised audience experience. (1)\nNegative impacts (sub max 2):\n• Technology stoppages in play → boring for spectators. (1)\n• Technology limits skill required for success → changes nature of sport → reduces entertainment. (1)\n• Highlights officials' errors → audience loses respect for officiating. (1)\n• Costs limit technology → inconsistent experience for spectators. (1)\nMax 3 marks — must include both positives AND negatives.",er:"Both positive AND negative impacts must be discussed. Each point must state the impact on the audience specifically — not just describe the technology.",type:"written"},
+
+  {id:"Q13",sub:"Sport & Society",q:"Which one of the following best describes the characteristics of physical education?\nA) Compulsory, formal, pre-planned\nB) Informal, voluntary, participant-led\nC) Organised by NGBs, competitive\nD) Voluntary, extrinsically motivated",marks:1,ao:"AO1",ms:"A – Compulsory, formal, pre-planned\nPhysical education takes place in schools, is compulsory, has a formal curriculum structure, and is pre-planned by teachers.",er:"PE is compulsory, curriculum-based, and formally structured — unlike sport (voluntary/competitive) or physical recreation (informal/participant-led). Students should distinguish clearly between PE, sport, and physical recreation.",type:"mcq",answer:"A"},
+
+  {id:"Q14",sub:"Sport & Society",q:"Which one of the following best defines deviant behaviour in sport?\nA) Behaviour that goes against norms and has a detrimental effect on sport\nB) Behaviour that involves aggressive actions towards opponents\nC) Behaviour that involves rule-breaking only\nD) Behaviour that violates spectator norms",marks:1,ao:"AO2",ms:"A – Behaviour that goes against norms and has a detrimental effect on sport\nDeviance covers any behaviour violating the accepted norms of sport, including positive deviance (playing while injured) and negative deviance (cheating, violence).",er:"Deviance is broader than just rule-breaking or aggression — it includes any behaviour outside accepted norms. Students should note positive deviance (over-conformity to norms) also exists.",type:"mcq",answer:"A"},
+
+  {id:"Q15",sub:"Elite Sport & UK Sport",q:"State three ways the National Institutes of Sport can help to improve the performance of an elite athlete.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Biomechanics — analyse movements. (1)\n• Psychology — help manage stress. (1)\n• Nutrition — advise on diet. (1)\n• Physiology — conduct fitness tests. (1)\n• Performance lifestyle — manage daily challenges. (1)\n• Performance analysis — collect specific performance data. (1)\n• Sports medicine — diagnose medical issues. (1)\n• Physiotherapy — treat injuries. (1)\n• Strength and conditioning — design training programmes. (1)\n• Performance innovation — develop new technologies. (1)\n• High quality facilities. (1)\n• High level coaching. (1)\nMax 3 marks",er:"Students should know the breadth of support available through National Institutes of Sport (e.g. English Institute of Sport). Any three valid support services from across the range of sports science, medicine, and performance support.",type:"written"},
+
+  {id:"Q16",sub:"Duty of Care & Law",q:"Explain three situations where a footballer would be protected by sports legislation.",marks:3,ao:"AO2",ms:"Award 1 mark each for any 3 explained situations:\n• Protected from violent opponents — can prosecute/take legal action decreasing likelihood of violent tackles. (1)\n• Protected from loss of earnings if deliberately injured — can make civil claim against opponent. (1)\n• Contract expired player free to leave — protected by employment law/Bosman ruling. (1)\n• Protected from violent fans/pitch invasions — violent spectators face banning orders. (1)\n• Protected from negligent coaching/officiating — negligence charges can be brought if duty of care not met. (1)\nMax 3 marks",er:"Students must explain a situation AND link it to what the legislation does to protect the footballer. Simply saying 'laws protect players from injury' is insufficient — must specify the mechanism of protection.",type:"written"},
+
+  {id:"Q17",sub:"Drugs in Sport",q:"State one psychological reason why elite performers might use illegal drugs/doping methods.",marks:1,ao:"AO1",ms:"Any ONE of:\n• Steady nerves/reduces anxiety. (1)\n• Improves concentration/focus. (1)\n• Increases aggression. (1)\n• Raises confidence. (1)\nMax 1 mark — must be a PSYCHOLOGICAL reason (not physiological)",er:"The question specifies PSYCHOLOGICAL reasons. Physiological reasons (increased strength, improved oxygen delivery) would not be credited here. Psychological PED effects relate to mental state, confidence, focus and arousal management.",type:"written"},
+
+  {id:"Q18",sub:"Drugs in Sport",q:"Analyse how the physiological effects of each of the following can improve performance:\n• Erythropoietin (EPO) taken by a road cyclist\n• Anabolic steroids taken by a boxer\n• Beta blockers taken by a golfer",marks:3,ao:"AO3",ms:"Award 1 mark each:\n• EPO — causes production of more red blood cells/improves oxygen carrying capacity WHICH allows cyclist to cycle at higher intensities for longer without fatigue. (1)\n• Anabolic steroids — decreases recovery time/promotes muscle growth WHICH allows boxer to punch harder/train harder. (1)\n• Beta blockers — reduces effects of adrenaline/heart rate/tremors WHICH helps golfer putt more accurately. (1)\nMax 3 marks — each must show physiological mechanism AND specific performance impact.",er:"Each answer must show the physiological mechanism AND how this specifically improves performance in the named sport. 'EPO improves cycling performance' gains no marks — must explain the pathway: EPO → more RBCs → more oxygen → can cycle faster for longer.",type:"written"},
+
+  {id:"Q19",sub:"Elite Sport & UK Sport",q:"Which organisation is responsible for distributing lottery funding to elite athletes in the UK?\nA) British Olympic Association\nB) National Governing Bodies\nC) Sport England\nD) UK Sport",marks:1,ao:"AO1",ms:"D – UK Sport\nUK Sport manages the World Class Programme and distributes National Lottery and Exchequer funding to support elite podium athletes.",er:"UK Sport = elite/Olympic funding. Sport England = grassroots/participation funding. BOA = Olympic squad management. NGBs = sport-specific governance and development. Students frequently confuse UK Sport with Sport England.",type:"mcq",answer:"D"},
+
+  {id:"Q20",sub:"Drugs in Sport",q:"According to WADA's prohibited list, which performer would most likely be tested for beta blocker use?\nA) Golfer\nB) Sprinter\nC) Weightlifter\nD) Wrestler",marks:1,ao:"AO2",ms:"A – Golfer\nBeta blockers reduce tremors and steady nerves — beneficial in precision/accuracy sports like golf, archery, shooting. Prohibited in these specific sports. Not prohibited across all sports.",er:"Beta blockers reduce heart rate and tremors — they benefit sports requiring precision and steadiness (golf, archery, shooting). They are on WADA's prohibited list for specific accuracy-based sports only.",type:"mcq",answer:"A"},
+
+  {id:"Q21",sub:"Data & Technology",q:"State three ways to maintain the integrity of athlete data collected by a sports team.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Automatically back up data on hard drive/cloud storage. (1)\n• Use password/antivirus software to secure data. (1)\n• Use spreadsheet that only accepts relevant values to reduce entry errors. (1)\n• Limit how many times data is transferred/shared/copied. (1)\n• Lock screen whenever away from device/data never left unsupervised. (1)\nMax 3 marks",er:"Data integrity = maintaining accuracy, completeness and security of data. Students should know a range of digital security measures. Accept other reasonable methods of maintaining data accuracy and security.",type:"written"},
+
+  {id:"Q22",sub:"Duty of Care & Law",q:"Define negligence in sport.",marks:1,ao:"AO1",ms:"Breaching the duty of care resulting in foreseeable harm. (1)\nOR: Conduct that falls below required standards to maintain safety resulting in foreseeable harm. (1)\nMax 1 mark",er:"Negligence requires: (1) a duty of care exists, (2) that duty was breached, and (3) harm resulted. Students should include 'foreseeable harm' and the concept of falling below a required standard of care.",type:"written"},
+
+  {id:"Q23",sub:"Duty of Care & Law",q:"Give three examples of how a rugby official could be found negligent.",marks:3,ao:"AO2",ms:"Award 1 mark each for any 3:\n• Injury caused by not applying the rules of the game correctly. (1)\n• Injury caused by failure to check clothing/footwear properly. (1)\n• Injury caused by failure to check safety of the surface before a match. (1)\n• Injury caused by failure to check equipment. (1)\n• Failure to stop the game due to injury to a player. (1)\nMax 3 marks",er:"Negligence examples must show HOW the official breached their duty of care, resulting in harm. Students should focus on practical pre-match and in-game responsibilities that officials have.",type:"written"},
+
+  {id:"Q24",sub:"Drugs in Sport",q:"Evaluate the statement: 'Performance-enhancing drugs should be allowed in sport'.",marks:3,ao:"AO3",ms:"Arguments for (sub max 2):\n• Levels playing field if everyone takes them/fairer if all have option. (1)\n• Drug testing expensive/time-consuming/ineffective — eliminated if legal. (1)\n• Health risks could be more closely monitored if permitted. (1)\n• Would make sport more exciting/entertaining. (1)\nArguments against (sub max 2):\n• Not everyone could afford PEDs — still unequal. (1)\n• Would force athletes who don't want to take them into doing so. (1)\n• Long-term health implications from prolonged use. (1)\n• Spectators put off by chemically-enhanced performance. (1)\n• Immoral/unethical — damages sport's reputation. (1)\nMax 3 marks — must include BOTH sides.",er:"Must include both arguments for AND against. Each point must make a full evaluative statement — not just 'it is unfair'. Students who only argue one side are limited to 2 marks maximum.",type:"written"},
+
+  {id:"Q25",sub:"Elite Sport & UK Sport",q:"Which organisation is responsible for funding sport at grassroots level in England?\nA) British Olympic Association\nB) National Governing Bodies\nC) UK Sport\nD) Sport England",marks:1,ao:"AO1",ms:"D – Sport England (note: C is UK Sport — elite funding)\nActually: C = UK Sport (elite). The answer here is Sport England (not listed as C above — it is D). Sport England manages National Lottery funding for community sport and grassroots participation.",er:"UK Sport = elite/Olympic/Paralympic funding. Sport England = grassroots/community sport funding. Students regularly confuse these two organisations — know which is responsible for elite vs participation levels.",type:"mcq",answer:"D"},
+
+  {id:"Q26",sub:"Elite Sport & UK Sport",q:"In the talent development pathway, which level does an athlete enter when they begin competing in organised competitions at club level?\nA) Excellence\nB) Participation\nC) Performance\nD) Podium",marks:1,ao:"AO2",ms:"B – Participation\nThe talent development pathway: Foundation → Participation → Performance → Excellence. Club-level organised competition marks entry into the Participation stage.",er:"The talent pathway stages: Foundation (fundamental movement skills) → Participation (club/organised competition) → Performance (regional/national level) → Excellence (elite/podium). Students often confuse Performance with Participation.",type:"mcq",answer:"B"},
+
+  {id:"Q27",sub:"Spectator Violence",q:"Evaluate the effectiveness of three measures put in place to improve spectator safety at football matches.",marks:3,ao:"AO3",ms:"Award 1 mark each — each measure MUST be evaluated (effectiveness + limitation):\n• All-seater stadia reduce overcrowding/improve safety BUT ensuring all spectators sit is difficult to enforce. (1)\n• Earlier kick-off times reduce pre-match drinking BUT spectators drink after the game instead. (1)\n• Controlled alcohol sales reduce violence BUT spectators drink before entering. (1)\n• Tougher deterrents (fines/bans/imprisonment) BUT hooliganism/racism still occurs. (1)\n• CCTV/increased policing means offenders can be ejected/banned BUT persistent offenders can still enter/escape identification. (1)\n• Segregation prevents in-ground violence BUT rival fans meet outside stadium. (1)\nMax 3 marks — both effectiveness AND limitation must be present for each mark.",er:"Each measure must be EVALUATED — effectiveness + limitation. Simply stating a strategy gains no marks. Students who list three measures without evaluating each cannot access marks.",type:"written"},
+
+  {id:"Q28",sub:"Data & Technology",q:"State two functions of sports analytics.",marks:2,ao:"AO1",ms:"Award 1 mark each for any 2 of:\n• Monitor fitness for performance. (1)\n• Assess development of skill/techniques of a performer. (1)\n• Reduce/prevent injuries. (1)\n• Identify talented individuals/scouting. (1)\nMax 2 marks",er:"Sports analytics functions cover performance monitoring, fitness tracking, injury prevention, talent identification and tactical analysis. Students should know the range of applications.",type:"written"},
+
+  {id:"Q29",sub:"Data & Technology",q:"Explain how technology can be used to carry out game analysis in a team sport.",marks:2,ao:"AO2",ms:"Award 1 mark each for 2 explained uses:\n• Video analysis — assesses individual players' technical performance/passing accuracy/shooting/interceptions. (1)\n• GPS data — assesses effort/distances covered/number of sprints/high intensity efforts. (1)\nMax 2 marks — each must explain what the technology measures AND what this reveals about performance.",er:"Must explain HOW the technology is used AND what information it provides about the team's or individual's performance. Students should reference specific data outputs from each technology.",type:"written"},
+
+  {id:"Q30",sub:"Data & Technology",q:"Describe what a metabolic cart is and explain how it is used to carry out indirect calorimetry.",marks:3,ao:"AO1",ms:"Award 1 mark each for 3 of:\n• Includes headgear, a computer, a screen and breathing tubes. (1)\n• Indirect calorimetry measures the volume of O₂ consumed and CO₂ produced. (1)\n• Can be used to calculate RER — which fuels are being used to sustain activity at a set intensity. (1)\nMax 3 marks",er:"Students should know what a metabolic cart is (equipment) and what indirect calorimetry measures (O₂ and CO₂ analysis to determine substrate use via RER calculation). Both structural knowledge and function are required.",type:"written"},
+
+  {id:"Q31",sub:"Data & Technology",q:"Analyse three possible reasons why performance data collected by a sports team may have had its integrity compromised.",marks:3,ao:"AO3",ms:"Award 1 mark each for any 3 of:\n• Data may have been inputted/recorded incorrectly/misinterpreted. (1)\n• Human error — staff entered data incorrectly onto computer. (1)\n• Software packages affected by virus/bug — altered/compromised accuracy. (1)\n• Computers/software left unsupervised — vulnerable to tampering. (1)\n• Data not saved/stored appropriately/securely — may have been altered. (1)\nMax 3 marks",er:"Data integrity can be compromised through human error, technical failure, security breaches, and poor data management. Students should consider multiple categories of risk. Each answer must identify a specific risk to data accuracy or security.",type:"written"},
+
+  {id:"Q35",sub:"Sport & Society",q:"Define positive deviance in sport.",marks:1,ao:"AO1",ms:"Behaviour which is outside the norms of society but without intent to harm or break the rules / over-adherence to the norms and expectations of sport/sporting ethic. (1)\nMust reference either: (a) no intent to harm OR (b) over-conformity to sporting norms.\nMax 1 mark",er:"Positive deviance is often misunderstood. It is NOT good behaviour — it is OVER-CONFORMITY to sporting norms (e.g. playing through serious injury, over-training). The intent to harm is absent. Students who define it as 'good sportsmanship' gain no marks.",type:"written"},
+
+  {id:"Q36",sub:"Sport & Society",q:"Give one example of positive deviance in sport.",marks:1,ao:"AO2",ms:"Any ONE of:\n• A performer competing despite being injured. (1)\n• A performer over-training/training excessively. (1)\n• A performer causing unintentional injury due to desire to win (e.g. overly aggressive but legal challenge). (1)\nMax 1 mark",er:"Examples of positive deviance show over-commitment to sport. Playing injured is the most commonly cited example. Students should NOT give examples of gamesmanship or deliberate rule-breaking — these are negative deviance.",type:"written"},
+
+  {id:"Q37",sub:"Aggression & Violence",q:"State two causes of aggression in sport and give a sporting example of each.",marks:4,ao:"AO1/AO2",ms:"Award up to 2 marks per cause (1 for cause, 1 for example):\n• Retaliation/abuse/provocation from opponent (AO1) + e.g. player racially abused/reacting to bad tackle (AO2). (2)\n• Win ethic/win at all costs attitude (AO1) + e.g. deliberately injuring player to prevent goal (AO2). (2)\n• Emotional intensity/importance of event/over-arousal (AO1) + e.g. local derby/cup final excitement leading to violent challenge (AO2). (2)\n• Poor officiating/frustration with officials (AO1) + e.g. vital decision perceived as incorrect (AO2). (2)\nMax 4 marks",er:"Must provide BOTH the cause (AO1) AND a specific sporting example (AO2) for each. General examples like 'player gets angry' without a sport-specific context gain only the AO1 mark.",type:"written"},
+
+  // ADDITIONAL QUESTIONS FROM SOCIOLOGY PART 2
+  {id:"Q38",sub:"Participation",q:"Describe two barriers to participation in sport for women.",marks:2,ao:"AO1",ms:"Award 1 mark each for any 2 of:\n• Lack of media coverage of women's sport. (1)\n• Fewer role models in many sports. (1)\n• Stereotyping/perception certain sports are 'for men'. (1)\n• Less funding/sponsorship for women's sport. (1)\n• Lack of accessible childcare limiting time to participate. (1)\n• Low self-esteem/body image concerns. (1)\n• Fewer women-only sessions/clubs. (1)\nMax 2 marks",er:"Students should know a range of barriers across socio-cultural, structural, and psychological categories. Barriers must be specific — not just 'lack of opportunity'.",type:"written"},
+
+  {id:"Q39",sub:"Participation",q:"Explain two strategies that could be used to increase participation in sport among people with disabilities.",marks:2,ao:"AO2",ms:"Award 1 mark each for any 2 explained strategies:\n• Develop adapted equipment (e.g. lightweight wheelchairs for basketball/tennis) → makes participation accessible to more disabled people. (1)\n• Improve accessibility of facilities (ramps/lifts/adjustable equipment) → removes physical barriers to participation. (1)\n• Increase media coverage of Paralympic/disability sport → creates role models and raises profile. (1)\n• Develop more disability-specific competitions/clubs → provides organised opportunities. (1)\nMax 2 marks — must include mechanism showing how strategy increases participation.",er:"Each strategy must include an explanation of HOW it increases participation — not just what the strategy is. Link the strategy to the barrier it addresses.",type:"written"},
+
+  {id:"Q40",sub:"Commercialisation",q:"Explain the term 'golden triangle' in sport.",marks:3,ao:"AO1",ms:"Award marks for explanation of all three elements AND their relationships:\n• Three elements: sport/media/sponsorship (business). (1)\n• Media pays sport for broadcasting rights — gives sport income. (1)\n• Sponsorship companies pay media for advertising space/sport for shirt sponsorship — increases exposure. (1)\n• All three benefit and are interdependent — each drives increased income for the others. (1)\nMax 3 marks",er:"The golden triangle shows the interdependent relationship between sport, media, and sponsorship. Students should explain all three elements AND the relationships/flows of money and exposure between them.",type:"written"},
+
+  {id:"Q41",sub:"Spectator Violence",q:"State three causes of spectator violence at football matches.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Alcohol consumption. (1)\n• Hooliganism/tribal mentality/group identity. (1)\n• Historical rivalry between clubs/fans. (1)\n• Frustration with officials'/players' decisions. (1)\n• Poor policing/stewarding. (1)\n• Social exclusion/unemployment/frustration redirected to sport. (1)\n• Media coverage/glorification of violence. (1)\nMax 3 marks",er:"Students should know a range of causes across alcohol, crowd psychology, historical factors, officiating, and wider social factors. Each cause should be specific — not just 'fan behaviour'.",type:"written"},
+
+  {id:"Q42",sub:"Media & Sport",q:"Evaluate the impact of social media on sport.",marks:3,ao:"AO3",ms:"Positives (sub max 2):\n• Athletes can communicate directly with fans → builds personal brand/fan engagement. (1)\n• Increases exposure for minority/women's sports that receive limited traditional media coverage. (1)\n• Fans can access live updates/highlights instantly → increases engagement. (1)\nNegatives (sub max 2):\n• Athletes exposed to online abuse/cyberbullying → mental health impact. (1)\n• Misinformation can spread rapidly → damage to athletes/organisations reputations. (1)\n• Increases scrutiny of athletes' private lives → invasion of privacy. (1)\nMax 3 marks — must include both positives AND negatives.",er:"Must evaluate (positives AND negatives) with the impact on sport or athletes stated. Students who only discuss positives are limited to a maximum of 2 marks.",type:"written"},
+
+  {id:"Q43",sub:"Drugs in Sport",q:"State three strategies used to eliminate performance-enhancing drug use in sport.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Random/increased testing. (1)\n• Education programmes. (1)\n• Increased investment in testing programmes. (1)\n• Unified policies/stricter punishments. (1)\n• Positive role models/name and shame offenders. (1)\n• WADA/NADA oversight and coordination. (1)\n• Retrospective testing of stored samples. (1)\nMax 3 marks",er:"Students should know a range of anti-doping strategies. Testing, education, policy and sanctions are the main categories. Must be specific — 'stricter testing' is more creditworthy than 'test more athletes'.",type:"written"},
+
+  {id:"Q44",sub:"Participation",q:"Analyse how the media could help to reduce barriers to participation for ethnic minority groups.",marks:3,ao:"AO3",ms:"Award 1 mark each for analysed points:\n• Increased media coverage of ethnic minority athletes → creates role models → increases belief that participation is possible. (1)\n• Representation of diversity in sports broadcasting/punditry → normalises ethnic minority involvement → challenges stereotypes. (1)\n• Media campaigns targeting ethnic minority communities (e.g. community sports programmes) → raises awareness of local opportunities. (1)\n• However, limited media coverage of certain sports popular with ethnic minority communities (e.g. cricket in South Asian communities) still an issue. (1)\nMax 3 marks — each point must include the mechanism of impact (HOW media reduces barriers).",er:"Students must analyse HOW media reduces barriers — not just state that media helps. The causal chain (media action → impact on participation) must be explicit.",type:"written"},
+
+  {id:"Q45",sub:"Sport & Society",q:"Describe the characteristics of sport as opposed to physical recreation.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Highly structured/organised by NGBs. (1)\n• Competitive with clearly defined rules and officials. (1)\n• Extrinsic rewards available (medals, trophies, prize money). (1)\n• Can be professional — sport as a career/vocation. (1)\n• Performance measured/recorded. (1)\n• Training and coaching involved. (1)\nMax 3 marks",er:"Students should contrast sport with physical recreation. Sport is characterised by formal organisation, competition, extrinsic rewards, and the potential to pursue it as a vocation. Physical recreation is informal and intrinsically motivated.",type:"written"},
+
+  // MORE QUESTIONS TO REACH ~60
+  {id:"Q46",sub:"Commercialisation",q:"Describe the positive impacts of commercialisation on sport.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Increased funding → better facilities/equipment. (1)\n• More money → higher professional player wages → attracts best players. (1)\n• More media coverage → raises profile of sport. (1)\n• Increased investment → improved training/coaching standards. (1)\n• Creates employment within sport. (1)\n• More money for grassroots sport through trickle-down effect. (1)\nMax 3 marks",er:"Positive impacts of commercialisation are broad — students should cover multiple areas including facilities, standards, wages, and profile. Avoid focusing only on one aspect.",type:"written"},
+
+  {id:"Q47",sub:"Commercialisation",q:"Describe three negative impacts of commercialisation on sport.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Win ethic intensified → increased deviance/gamesmanship. (1)\n• Rule changes to make sport more TV-friendly → traditionalists unhappy. (1)\n• Ticket prices increase → excludes lower-income fans. (1)\n• TV scheduling dictates kick-off times → inconvenience to fans. (1)\n• Sport loses its original character/ethos. (1)\n• Greater pressure on athletes → mental health issues. (1)\nMax 3 marks",er:"Negative impacts of commercialisation cover deviancy, exclusion, rule changes, and pressure. Students should provide a range of impacts rather than focusing on one theme.",type:"written"},
+
+  {id:"Q48",sub:"Participation",q:"Explain three strategies a governing body could use to increase participation in sport among young people.",marks:3,ao:"AO2",ms:"Award 1 mark each for any 3 explained strategies:\n• School partnership programmes → introduces young people to sport in accessible environment → increases participation. (1)\n• Free/reduced-cost taster sessions → removes financial barrier → enables first participation. (1)\n• Youth competition structures → provides motivating goal → sustains participation. (1)\n• Digital/social media campaigns → reaches young people in spaces they use → raises awareness. (1)\n• Positive role model campaigns → inspires young people to participate. (1)\nMax 3 marks — must explain HOW the strategy increases participation.",er:"Each strategy must be explained — not just stated. The connection between the strategy and the increase in participation among young people must be clear.",type:"written"},
+
+  {id:"Q49",sub:"Media & Sport",q:"Explain how the media has increased the commercialisation of sport.",marks:3,ao:"AO2",ms:"Award 1 mark each for any 3 explained points:\n• TV broadcasting rights → huge income to sport/clubs. (1)\n• Global broadcasting → makes sport accessible worldwide → increases international sponsorship value. (1)\n• Media creates stars/celebrities → sponsors want to associate with high-profile athletes → increases sponsorship income. (1)\n• Social media → direct fan engagement → increases commercial value of athlete/club brands. (1)\n• Media coverage of women's sport increasing → new commercial markets opening up. (1)\nMax 3 marks",er:"Must explain HOW the media action leads to increased commercialisation — not just that media and commercialisation are linked. Each point should show a causal mechanism.",type:"written"},
+
+  {id:"Q50",sub:"Aggression & Violence",q:"Explain the difference between aggression and assertion in sport, giving a sporting example of each.",marks:4,ao:"AO1/AO2",ms:"Aggression: Intentional behaviour to cause harm/injury to another person (AO1). (1)\nExample: e.g. punching an opponent after a tackle (AO2). (1)\nAssertion: Forceful, physically vigorous behaviour but with no intent to harm/within the rules (AO1). (1)\nExample: e.g. a strong but legal shoulder-charge in rugby (AO2). (1)\nMax 4 marks",er:"The key distinction is INTENT TO HARM. Aggression has intent to harm; assertion does not. Examples must clearly reflect this distinction. Students often confuse assertion with aggression by focusing on physical intensity rather than intent.",type:"written"},
+
+  {id:"Q51",sub:"Sport & Society",q:"Describe three differences between amateur and professional sport.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 differences:\n• Amateur: participates for intrinsic rewards. Professional: extrinsic rewards/financial payment. (1)\n• Amateur: sport as leisure/hobby. Professional: sport as primary occupation/career. (1)\n• Amateur: limited/no sponsorship. Professional: commercial sponsorship. (1)\n• Amateur: training around work/life commitments. Professional: full-time training. (1)\n• Amateur: lower performance standards generally. Professional: elite performance standards. (1)\nMax 3 marks",er:"Students should contrast both sides for each difference. Simply stating a characteristic of professional sport without comparing to amateur does not fully address 'differences'.",type:"written"},
+
+  {id:"Q52",sub:"Participation",q:"Explain two reasons why socio-economic status can be a barrier to sport participation.",marks:2,ao:"AO2",ms:"Award 1 mark each for any 2 explained reasons:\n• Cost of equipment/kit → lower income families cannot afford entry costs. (1)\n• Cost of membership/club fees → financially prohibitive for lower income groups. (1)\n• Limited access to transport → facilities not accessible for those without car/money for public transport. (1)\n• Work patterns → shift work/long hours → less time for leisure sport. (1)\nMax 2 marks",er:"Socio-economic barriers are primarily financial and time-based. Students must EXPLAIN how the barrier operates — e.g. 'low income' alone is not enough; must explain what this prevents the individual from doing.",type:"written"},
+
+  {id:"Q53",sub:"Spectator Violence",q:"Describe three strategies to reduce spectator violence at football matches.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• All-seater stadia. (1)\n• Alcohol restrictions/bans near stadia. (1)\n• Earlier kick-off times. (1)\n• Football banning orders. (1)\n• Increased CCTV/policing. (1)\n• Segregation of home and away fans. (1)\n• Family enclosures. (1)\nMax 3 marks",er:"A straightforward knowledge recall question. Students should know a range of strategies from legislation, policing, stadium design, and scheduling. Note: Q27 asks for evaluation — this question only asks for description.",type:"written"},
+
+  {id:"Q54",sub:"Media & Sport",q:"State three ways in which television coverage has changed sport.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Rule changes to make sport more TV-friendly (e.g. introduction of T20 cricket). (1)\n• Increased prize money/salaries in televised sports. (1)\n• Scheduling changes to suit peak viewing times. (1)\n• Increased use of technology in officiating (e.g. VAR, Hawk-Eye). (1)\n• Greater global reach/international following of sports. (1)\n• Minority sports gaining exposure. (1)\nMax 3 marks",er:"Television has transformed sport in numerous ways — scheduling, rules, money, technology and globalisation are the key themes. Students should cover multiple areas.",type:"written"},
+
+  {id:"Q55",sub:"Elite Sport & UK Sport",q:"Describe the role of UK Sport in developing elite athletes.",marks:3,ao:"AO1",ms:"Award 1 mark each for any 3 of:\n• Distributes National Lottery and Exchequer funding to Olympic/Paralympic sports. (1)\n• Manages the World Class Programme (Podium/Podium Potential). (1)\n• Works with NGBs to support talent development pathways. (1)\n• Provides performance support services through National Institutes of Sport. (1)\n• Selects sports for funding based on medal potential. (1)\n• Sets performance targets for funded sports/athletes. (1)\nMax 3 marks",er:"UK Sport's role is specifically around elite/Olympic/Paralympic development and funding. Do not confuse with Sport England (grassroots). Students should cover funding, programme management, and support services.",type:"written"},
+
+  {id:"Q56",sub:"Drugs in Sport",q:"Evaluate the effectiveness of education as a strategy for eliminating drug use in sport.",marks:3,ao:"AO3",ms:"Positives (sub max 2):\n• Educates athletes about what they are putting in their body → reduces accidental positive tests. (1)\n• Long-term behaviour change → athletes choose not to use drugs for ethical reasons. (1)\n• Reaches athletes early in career/at junior level → prevents use from beginning. (1)\nNegatives (sub max 2):\n• Education may not deter athletes motivated purely by financial reward. (1)\n• Hard to reach all athletes globally with consistent education. (1)\n• Education alone insufficient — athletes may still choose to dope if not deterred by punishments. (1)\nMax 3 marks — must include both positives AND negatives with the IMPACT stated.",er:"Both effectiveness AND limitations of education must be evaluated. Students who only argue positives are limited to 2 marks. Each point must include the impact of the strategy on drug use.",type:"written"},
+
+  {id:"Q57",sub:"Participation",q:"Explain how the media can act as both a barrier and a facilitator to participation in sport for women.",marks:4,ao:"AO3",ms:"Barrier (sub max 2):\n• Under-representation/sexualisation of women in sport media → perpetuates stereotype sport is male domain → discourages participation. (1)\n• Limited coverage of women's professional sport → fewer role models → reduces aspiration to participate. (1)\nFacilitator (sub max 2):\n• Increased coverage of women's sport (e.g. Women's World Cup) → creates positive role models → inspires participation. (1)\n• Social media allows women athletes to build profiles independent of traditional media → increases visibility/aspiration. (1)\nMax 4 marks — must include BOTH barrier and facilitator with mechanism stated.",er:"Must cover both sides. Students who only discuss one direction are limited to 2 marks. Each point must explain the mechanism — how the media action leads to the participation outcome.",type:"written"},
+
+  {id:"Q58",sub:"Sport & Society",q:"Explain the concept of sport as a vehicle for social mobility.",marks:2,ao:"AO2",ms:"Award 1 mark each for 2 of:\n• Sport can provide a pathway out of poverty/lower socio-economic background for talented athletes. (1)\n• Scholarships/professional contracts give athletes financial opportunities unavailable otherwise. (1)\n• Sport can build social capital/networks opening doors to wider opportunities. (1)\n• Examples: boxing/football traditionally seen as routes for working-class mobility. (1)\nMax 2 marks",er:"Social mobility through sport means using sporting success to move up social/economic strata. Students should give specific mechanisms (scholarships, professional contracts, media opportunities) rather than vague claims.",type:"written"},
+
+  {id:"Q59",sub:"Media & Sport",q:"Analyse the relationship between sport, media and sponsorship using the concept of the 'golden triangle'.",marks:3,ao:"AO3",ms:"Award 1 mark each for analysed points:\n• Sport needs media — broadcasts reach mass audiences → generates viewing figures/interest. (1)\n• Media needs sport — live sport content drives subscriptions/viewers → advertising revenue. (1)\n• Sponsorship needs media exposure — logo/brand seen by millions → justifies investment. (1)\n• All three are interdependent — without one, the others are weakened (e.g. without TV coverage, sponsorship value drops significantly). (1)\nMax 3 marks",er:"Students must analyse the RELATIONSHIPS between the three elements — not just describe what each does. The interdependency is the key insight: removing one element damages the others.",type:"written"},
+
+  {id:"Q60",sub:"Aggression & Violence",q:"Evaluate the effectiveness of strategies to reduce player violence in sport.",marks:3,ao:"AO3",ms:"Effective strategies (sub max 2):\n• Bans/suspensions deter repeat offenders → financial impact motivates behaviour change. (1)\n• Video technology/retrospective bans → more offences detected → greater deterrent. (1)\n• Code of conduct/respect campaigns → changes culture over time. (1)\nLimited effectiveness (sub max 2):\n• Fines may not deter wealthy professional athletes. (1)\n• In-the-moment aggression may not be controlled by rational deterrence. (1)\n• Officials' inconsistency in applying sanctions → reduces deterrent effect. (1)\nMax 3 marks — both effective AND limited effectiveness must be discussed.",er:"Both the effectiveness AND the limitations of strategies must be covered. Students who only list strategies without evaluating their effectiveness cannot access full marks.",type:"written"},
+];
+
+const SUBTOPICS=[...new Set(QS.map(q=>q.sub))];
+let selSub=null,curQ=null,phase='select',ans='',conv=[],loading=false,currentTab='practice';
+
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='practice')||(i===1&&t==='browse')));
+  document.getElementById('practice-panel').style.display=t==='practice'?'':'none';
+  document.getElementById('browse-panel').style.display=t==='browse'?'':'none';
+  if(t==='browse')renderBrowse();
+  if(t==='practice')renderPractice();
+}
+
+function renderPractice(){
+  const p=document.getElementById('practice-panel');
+  if(phase==='select'){
+    const counts={};QS.forEach(q=>{counts[q.sub]=(counts[q.sub]||0)+1;});
+    p.innerHTML=`<div class="section-title">Select a topic area</div>
+      <div class="topic-grid">${SUBTOPICS.map(s=>`
+        <div class="topic-card${selSub===s?' sel':''}" onclick="selSub='${s}';renderPractice()">
+          <div class="tc-name">${s}</div><div class="tc-count">${counts[s]} question${counts[s]>1?'s':''}</div>
+        </div>`).join('')}
+      </div>
+      ${selSub?`<div class="btn-row"><button class="btn primary" onclick="startQ()">Get a question &rarr;</button><button class="btn" onclick="selSub=null;renderPractice()">Clear</button></div>`:''}`;
+  } else if(phase==='answer'){
+    p.innerHTML=`
+      <div class="meta">
+        <button class="btn" onclick="phase='select';renderPractice()">&#8592; Back</button>
+        <span class="badge b-m">${curQ.marks} mark${curQ.marks>1?'s':''}</span>
+        ${curQ.ao.split('/').map(a=>`<span class="badge b-${a.trim().toLowerCase()}">${a.trim()}</span>`).join('')}
+        <span style="font-size:12px;color:#888;">${curQ.id} &middot; ${curQ.sub}</span>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.type==='mcq'?`
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="label">Select your answer</div>
+          ${['A','B','C','D'].filter(o=>curQ.q.includes(o+')')).map(o=>`
+            <label style="display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:14px;">
+              <input type="radio" name="mcq" value="${o}" style="width:auto;"> ${o})
+            </label>`).join('')}
+        </div>
+        <div class="btn-row"><button class="btn primary" onclick="submitMCQ()">Check answer &rarr;</button><button class="btn" onclick="newQ()">Different question</button></div>`:`
+        <div style="margin-bottom:12px;">
+          <label class="label">Your answer</label>
+          <textarea id="ansbox" rows="${curQ.marks>=4?8:5}" placeholder="Write your answer here...">${ans}</textarea>
+        </div>
+        <div class="btn-row"><button class="btn primary" onclick="submitAns()">Submit for marking &rarr;</button><button class="btn" onclick="newQ()">Different question</button></div>`}`;
+    const box=document.getElementById('ansbox');
+    if(box)box.addEventListener('input',e=>ans=e.target.value);
+  } else if(phase==='feedback'){
+    p.innerHTML=`
+      <div class="meta" style="margin-bottom:1rem;">
+        <button class="btn" onclick="phase='answer';renderPractice()">&#8592; Edit answer</button>
+        <button class="btn" onclick="phase='select';conv=[];ans='';renderPractice()">New topic</button>
+        <button class="btn" onclick="newQ()">Next question</button>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      <div class="card"><div class="msg-role">Your answer</div><div class="msg-text">${ans||'[MCQ]'}</div></div>
+      <div class="card" id="fb-card">
+        <div class="msg-role">Examiner feedback</div>
+        <div id="fb-content" style="font-size:14px;line-height:1.75;white-space:pre-wrap;">${loading?'<span class="spinner"></span>Marking...':''}</div>
+        ${curQ.er?`<div class="er-box" id="er-box" style="display:none;"><div class="er-label">📄 Examiner Report</div><div class="er-text">${curQ.er}</div></div>`:''}
+      </div>
+      ${!loading&&conv.length>0?`
+        <div class="card" id="fu-card" style="display:none;"><div id="fu-msgs"></div></div>
+        <div class="fu-row"><input type="text" id="fu-input" placeholder="Ask a follow-up question..." /><button class="btn primary" onclick="sendFU()">Ask &rarr;</button></div>`:''}`;
+  }
+}
+
+function startQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+function newQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+
+function submitMCQ(){
+  const sel=document.querySelector('input[name="mcq"]:checked');
+  if(!sel)return;
+  ans='Selected: '+sel.value;phase='feedback';loading=false;
+  const isRight=sel.value===curQ.answer;
+  const text=isRight?`CORRECT — ${sel.value} is the right answer.\n\n${curQ.ms}\n\nEXAMINER REPORT:\n${curQ.er}`:
+    `INCORRECT — You selected ${sel.value}, but the correct answer is ${curQ.answer}.\n\nCORRECT ANSWER:\n${curQ.ms}\n\nEXAMINER REPORT:\n${curQ.er}`;
+  conv=[{role:'user',content:`${curQ.id} — selected ${sel.value}`},{role:'assistant',content:text}];
+  renderPractice();
+  const el=document.getElementById('fb-content');if(el)el.textContent=text;
+  const er=document.getElementById('er-box');if(er)er.style.display='';
+  const fu=document.getElementById('fu-card');if(fu)fu.style.display='';
+}
+
+async function submitAns(){
+  if(!ans.trim())return;
+  phase='feedback';loading=true;renderPractice();
+  const sys=`You are an AQA A-Level Physical Education examiner marking Sociology of Sport questions with precision.
+Mark strictly to the mark scheme. Do not award marks for vague or inaccurate statements.
+MARK SCHEME: ${curQ.ms}
+EXAMINER REPORT: ${curQ.er||'No specific examiner report.'}
+FEEDBACK FORMAT:
+MARKS AWARDED: [X] / [${curQ.marks}]
+WHAT YOU GOT RIGHT:
+[Each awarded mark — what the student said and why it earns the mark]
+WHAT WAS MISSING:
+[Each unawarded mark — precisely what was needed]
+EXAMINER REPORT COMMENTARY:
+[How the student's response compares to typical candidates]
+HOW TO IMPROVE (B-U-C):
+Basic | Use knowledge | Connect/contextualise`;
+  const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:800,system:sys,messages})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||JSON.stringify(data);
+    conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
+    loading=false;renderPractice();
+    const el=document.getElementById('fb-content');if(el)el.textContent=text;
+    const er=document.getElementById('er-box');if(er)er.style.display='';
+    const fu=document.getElementById('fu-card');if(fu)fu.style.display='';
+  }catch(e){loading=false;const el=document.getElementById('fb-content');if(el)el.textContent='Error: '+e.message;}
+}
+
+async function sendFU(){
+  const input=document.getElementById('fu-input');
+  if(!input||!input.value.trim())return;
+  const q=input.value.trim();input.value='';
+  const fuMsgs=document.getElementById('fu-msgs');
+  const fuCard=document.getElementById('fu-card');
+  if(fuCard)fuCard.style.display='';
+  if(fuMsgs){fuMsgs.innerHTML+=`<div class="msg"><div class="msg-role">You</div><div class="msg-text">${q}</div></div><div class="msg" id="fu-loading"><div class="msg-role">Tutor</div><div class="msg-text"><span class="spinner"></span>Thinking...</div></div>`;}
+  const sys=`You are an AQA A-Level PE examiner providing follow-up tutoring on Sociology of Sport. The question was: "${curQ.q}". Help the student understand the mark scheme.`;
+  const msgs=conv.map(m=>({role:m.role,content:m.content}));msgs.push({role:'user',content:q});
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:400,system:sys,messages:msgs})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'';
+    conv.push({role:'user',content:q},{role:'assistant',content:text});
+    const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent=text;
+  }catch(e){const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent='Error.';}
+}
+
+function renderBrowse(){
+  const p=document.getElementById('browse-panel');
+  const byTopic={};QS.forEach(q=>{if(!byTopic[q.sub])byTopic[q.sub]=[];byTopic[q.sub].push(q);});
+  p.innerHTML=Object.keys(byTopic).map(sub=>`
+    <div class="section-title">${sub}</div>
+    <div class="card" style="margin-bottom:1.25rem;">${byTopic[sub].map(q=>`
+      <div class="q-item">
+        <div class="q-id">${q.id}</div>
+        <div class="q-txt">${q.q.split('\n')[0].substring(0,85)}...</div>
+        <div class="q-actions">
+          <span class="badge b-m">${q.marks}m</span>
+          ${q.type==='mcq'?'<span class="badge" style="background:#f3e8ff;color:#7c3aed;">MCQ</span>':''}
+          <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="practiseQ('${q.id}')">Practise</button>
+        </div>
+      </div>`).join('')}
+    </div>`).join('');
+}
+
+function practiseQ(id){curQ=QS.find(q=>q.id===id);selSub=curQ.sub;ans='';conv=[];phase='answer';switchTab('practice');}
+renderPractice();
+</script>
+</body>
+</html>

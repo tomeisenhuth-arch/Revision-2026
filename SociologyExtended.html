@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQA A-Level PE — Sociology Extended Responses</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;}
+.header{background:#3b1a1a;color:#fff;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header-title{font-size:17px;font-weight:600;}
+.header-sub{font-size:12px;opacity:.65;margin-top:2px;}
+.header-badge{background:#c9a84c;color:#3b1a1a;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.container{max-width:820px;margin:0 auto;padding:2rem 1.5rem;}
+.tab-bar{display:flex;gap:2px;margin-bottom:1.5rem;background:#e8e7e3;border-radius:10px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;cursor:pointer;border:none;background:transparent;border-radius:8px;color:#555;font-weight:500;}
+.tab.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:1rem;}
+.topic-card{background:#fff;border:1.5px solid #e0dfd8;border-radius:10px;padding:.875rem;cursor:pointer;transition:all .15s;}
+.topic-card:hover{border-color:#3b1a1a;background:#faf4f4;}
+.topic-card.sel{border-color:#3b1a1a;background:#f7eded;}
+.tc-name{font-size:13px;font-weight:600;margin-bottom:3px;}
+.tc-sub{font-size:11px;color:#888;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#1a1a1a;transition:all .15s;}
+.btn:hover{background:#f5f4f0;}
+.btn.primary{background:#3b1a1a;color:#fff;border-color:#3b1a1a;}
+.btn.primary:hover{background:#5a2a2a;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.qbox{background:#f5f4f0;border-radius:8px;padding:1rem 1.25rem;font-size:15px;line-height:1.65;margin-bottom:1rem;white-space:pre-wrap;}
+.level-guide{background:#fff;border:1px solid #e0dfd8;border-radius:8px;margin-bottom:1rem;overflow:hidden;}
+.level-guide-header{background:#3b1a1a;color:#fff;padding:.625rem 1rem;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.level-guide-body{padding:.75rem;display:none;}
+.level-row{display:grid;grid-template-columns:60px 60px 1fr;gap:.5rem;padding:.5rem 0;border-bottom:1px solid #f0f0ec;font-size:12px;line-height:1.5;}
+.level-row:last-child{border-bottom:none;}
+.level-num{font-weight:700;color:#3b1a1a;}
+.level-marks{color:#888;}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#888;margin-bottom:6px;display:block;}
+textarea{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;background:#fafaf8;resize:vertical;}
+textarea:focus{outline:none;border-color:#3b1a1a;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.b-8{background:#dbeafe;color:#1e40af;}
+.b-15{background:#fef3c7;color:#92400e;}
+.b-ao{background:#f0f0ec;color:#555;}
+.b-syn{background:#fce7f3;color:#9d174d;}
+.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:1rem;}
+.er-box{background:#fdf4f4;border:1px solid #f5c6c6;border-radius:8px;padding:.875rem 1rem;margin-top:1rem;}
+.er-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9b1c1c;margin-bottom:5px;}
+.er-text{font-size:13px;color:#7f1d1d;line-height:1.65;}
+.msg{padding:10px 0;border-bottom:1px solid #f0f0ec;}
+.msg:last-child{border-bottom:none;}
+.msg-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#999;margin-bottom:3px;}
+.msg-text{font-size:14px;line-height:1.65;white-space:pre-wrap;}
+.fu-row{display:flex;gap:8px;margin-top:1rem;}
+.fu-row input{flex:1;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;background:#fafaf8;}
+.fu-row input:focus{outline:none;border-color:#3b1a1a;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:#3b1a1a;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:-1px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.q-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0ec;}
+.q-item:last-child{border-bottom:none;}
+.q-num{font-size:11px;color:#aaa;min-width:28px;padding-top:1px;font-weight:600;}
+.q-txt{font-size:13px;flex:1;line-height:1.4;}
+.q-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.section-title{font-size:14px;font-weight:600;margin-bottom:.75rem;color:#3b1a1a;}
+.tip-box{background:#fdf4f4;border:1px solid #f5c6c6;border-radius:8px;padding:.875rem 1rem;margin-bottom:1rem;font-size:13px;line-height:1.6;color:#7f1d1d;}
+.tip-label{font-size:11px;font-weight:700;text-transform:uppercase;color:#9b1c1c;margin-bottom:4px;}
+table.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:.75rem 0;}
+table.data-table th,table.data-table td{border:1px solid #ddd;padding:6px 10px;text-align:center;}
+table.data-table th{background:#3b1a1a;color:#fff;font-weight:600;}
+table.data-table td:first-child{font-weight:600;text-align:left;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="header-title">AQA A-Level PE — Sociology Extended Responses</div>
+    <div class="header-sub">Level-descriptor marking · AO1/AO2/AO3 balance · Examiner report feedback</div>
+  </div>
+  <div class="header-badge">11 QUESTIONS</div>
+</div>
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('practice')">Practice</button>
+    <button class="tab" onclick="switchTab('browse')">All Questions</button>
+  </div>
+  <div id="practice-panel"></div>
+  <div id="browse-panel" style="display:none;"></div>
+</div>
+<script>
+const PROXY='https://keen-sawine-d41a7a.netlify.app/.netlify/functions/proxy';
+const MODEL='claude-sonnet-4-5';
+
+const L4=[
+  {l:4,r:"7-8",d:"Knowledge consistently accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology consistently used. Answer almost always demonstrates substantiated reasoning, clarity, structure and focus."},
+  {l:3,r:"5-6",d:"Knowledge usually accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology often used."},
+  {l:2,r:"3-4",d:"Knowledge sometimes accurate with some detail. Application sometimes evident. Evaluation sometimes made but may lack coherence. Terminology sometimes used."},
+  {l:1,r:"1-2",d:"Knowledge may be limited. Application may be limited or not evident. Little or no evaluation. Terminology occasionally used."}
+];
+const L5=[
+  {l:5,r:"13-15",d:"Knowledge consistently comprehensive, accurate and well detailed. Application of breadth or depth clearly evident. Evaluation coherently and consistently made. Terminology almost always used. High level of substantiated reasoning, clarity, structure and focus."},
+  {l:4,r:"10-12",d:"Knowledge usually comprehensive, accurate and detailed. Application often evident. Evaluation often made and usually coherent. Terminology usually used."},
+  {l:3,r:"7-9",d:"Knowledge generally accurate and sometimes detailed. Application sometimes evident. Some evaluation made but may sometimes lack coherence. Terminology used but may sometimes be missing."},
+  {l:2,r:"4-6",d:"Knowledge sometimes accurate but may lack detail. Application occasionally evident. Evaluation attempted but likely to lack coherence. Terminology occasionally used."},
+  {l:1,r:"1-3",d:"Knowledge limited and may lack accuracy and detail. Application likely to be limited or not evident. Very little or no evaluation. Terminology very occasionally used."}
+];
+
+const DOPING_TABLE=`<table class="data-table"><thead><tr><th>Olympic Games</th><th>2000</th><th>2004</th><th>2008</th><th>2012</th><th>2016</th><th>2020</th></tr></thead><tbody><tr><td>Positive results</td><td>15</td><td>37</td><td>91</td><td>132</td><td>16</td><td>9</td></tr></tbody></table>`;
+
+const DISABILITY_TABLE=`<table class="data-table"><thead><tr><th>Year</th><th>Inactivity rate (%)</th></tr></thead><tbody><tr><td>2015-2016</td><td>43.3</td></tr><tr><td>2016-2017</td><td>43.4</td></tr><tr><td>2017-2018</td><td>42.0</td></tr><tr><td>2018-2019</td><td>39.8</td></tr></tbody></table>`;
+
+const QS=[
+  {id:"Q1",sub:"Technology in Sport",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:"Analyse the ways technology has helped cyclists to break the World Hour Record.\n\nThe record was broken by Victor Campenaerts in 2019 and again by Dan Bigham in 2022.",
+  levels:L4,
+  ms:`AO1: Video/analysis programmes. Testing/recording equipment. GPS/motion tracking. Monitor fitness. Injury prevention. Material technology on equipment. Improved facilities (velodromes).
+AO2: Video analysis → optimum riding position. Metabolic cart → calculate RER/VO2 max. GPS/motion tracking → analyse biomechanics. Monitor aerobic fitness progress. Injury prevention → cyclist stays healthy. Material technology → lighter/more aerodynamic bikes. More velodromes available.
+AO3: Video analysis → minimises drag → faster for same energy output. Metabolic cart → calculate lactate threshold → target correct power output for whole hour. GPS/biomechanics analysis → fine-tune technique → maximise power per pedal stroke. Fitness monitoring → set SMARTER goals to progress toward attempt. Injury prevention → avoids reversibility from missed training. Lighter bikes → same power = faster speed. More velodromes → practice under race conditions locally.`,
+  er:"No specific examiner report. Must analyse (not just describe) — each point should show HOW the technology helps the cyclist break the record, not just what the technology does. Application to cycling specifically is required throughout."},
+
+  {id:"Q2",sub:"Drugs in Sport",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:"Evaluate the effectiveness of the strategies used for the elimination of performance enhancing drugs in the Olympic Games.\n\nRefer to the data in the table below in your answer.",
+  diagram:DOPING_TABLE,
+  levels:L5,
+  ms:`AO1: Random testing/more testing. Education programmes. Increased investment in testing. Unified policies/stricter punishments. Positive role models/name and shame offenders. Stricter punishments.
+AO2: Random testing — any athlete tested at any time/Whereabouts programme. Education — athletes responsible for what enters their body abroad. Retrospective testing — positive results from previous games. Unified policies — Russia banned. Role models — Jessica Ennis-Hill vs Dwayne Chambers. Immediate bans during games if positive test.
+AO3: Data shows decrease since 2012 peak → strategies appear effective. Athletes more likely to be caught → less likely to risk doping. Education reduces accidental positives. HOWEVER sharp decline may reflect improved masking/new undetected drugs. Retrospective testing may see recent numbers increase — strategies less effective than they seem. Russia banning effective → forced clean athletes to prove innocence → large decrease after ban.`,
+  er:"Two theories of aggression were named — students who referenced the table data added an extra evaluative dimension. As with many extended questions, many failed to show detailed AO3 evaluation. Must reference specific data points from the table."},
+
+  {id:"Q3",sub:"Stress Management",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:true,
+  q:"Evaluate the use of thought stopping AND beta blockers to reduce the effects of anxiety and improve the golfer's performance in their next competition.\n\nThe golfer is struggling with their putting because of cognitive and somatic anxiety.",
+  levels:L4,
+  ms:`AO1: Thought stopping = saying a word/carrying out action to divert attention from negative thoughts. Beta blockers = block effects of adrenalin/slow sympathetic nervous system/slow heart rate/lower blood pressure. Somatic anxiety = physiological reactions (increased heart rate/sweaty palms). Cognitive anxiety = psychological reactions (unpleasant thoughts).
+AO2: Thought stopping — when golfer suffers cognitive anxiety ('I'm going to miss') use cue word 'stop'/tap putter on ground. Stopping negative thoughts → increases confidence/decreases cognitive anxiety. Beta blockers → decrease somatic/physiological effects.
+AO3 THOUGHT STOPPING Positives: Decreases cognitive anxiety → also decreases somatic anxiety → more successful putting. Quick/simple — includable in routine. NEGATIVES: Must be learnt — takes time. Effectiveness linked to golfer's ability to use under highest anxiety.
+BETA BLOCKERS Positives: Reduces tremors → improves accuracy. Effect reliable even under high anxiety. NEGATIVES: Only addresses somatic anxiety — cognitive anxiety still affects putting. BANNED SUBSTANCE → risk of ban/loss of income/reputational damage. Increased risk of dizziness/circulatory problems/trouble sleeping.`,
+  er:"⚡ SYNOPTIC — draws on Sport Psychology (anxiety management) and Sociology (drugs/ethics). Beta blockers being a banned substance is the key AO3 evaluative point linking to sociology content. Both thought stopping AND beta blockers must be evaluated with positives and negatives."},
+
+  {id:"Q4",sub:"Spectator Violence",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:"Evaluate whether strategies used to prevent spectator violence were successful in reducing the number of football-related arrests between 1990 and 2000.\n\nRefer to the data showing the total number of football-related arrests in England and Wales for 10 seasons between 1990 and 2000 in your answer.",
+  levels:L5,
+  ms:`AO1: Control/ban alcohol sales. Increased CCTV. Severe punishments for spectators. Earlier kick-off times. Legislation to allow prosecution. All-seater stadia.
+AO2: No alcohol taken into stadia/alcohol not taken into seating area/police segregate pubs. CCTV identifies known troublemakers/quickly ejects. Football banning orders prevent re-entry. Noon kick-offs limit drinking opportunity. Laws preventing pitch invasions. All-seater stadia segregate rival fans/family enclosures.
+AO3: Overall downward trend in arrests 1990-2000 → strategies have worked. Where arrests increased, may be due to wider CCTV/improved police liaison rather than more incidents. Large number of arrests in 1999-2000 shows strategies may have reached effectiveness limit/violence continues. Earlier kick-offs limit pre-match drinking but many fans drink earlier/elsewhere. All-seater/CCTV reduced incidents in ground but incidents still occur in town centres/pubs/stations.`,
+  er:"Must explicitly reference the data in the evaluation. A downward trend is evident but arrests did not drop to zero — this tension is the key evaluative insight. Students should discuss both WHY strategies worked AND why they were not fully effective."},
+
+  {id:"Q5",sub:"Disability & Participation",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:"Evaluate the impact that the development of new technology and equipment has had on enabling people with disabilities to overcome barriers to participation.\n\nRefer to the data in the table below in your answer.",
+  diagram:DISABILITY_TABLE,
+  levels:L4,
+  ms:`AO1: Barriers: low income/lack of access/negative self-image/lack of clubs/no role models/media absence/lack of specialist coaches. Technology: specialist wheelchairs/advanced prosthetics/adapted skis/adapted facilities.
+AO2: Specialist wheelchairs for basketball/tennis/athletics. Prosthetics improve gait efficiency for amputee athletes. Adapted equipment increases range of accessible activities. Modernised facilities (2012 Olympics) — ramps/lifts/adjustable pool depth.
+AO3: Range of adapted equipment appears to be reducing inactivity — drop from 43.3% to 39.8%. Despite improvements, inactivity increased in 2016-17 — impact may be questionable. Technology doesn't address ALL barriers — inactivity still ~40% in 2018/19. Cost of adapted equipment prohibitive to many — only available to wealthy/Paralympic athletes. Data only 4 years — hard to see long-term impact. Increased media/role models may have caused decrease in inactivity rather than technology alone.`,
+  er:"Must reference the DATA throughout. The trend is downward but inactivity remains high and one year showed an increase — this must be evaluated. Technology alone cannot overcome all barriers — financial and social barriers remain."},
+
+  {id:"Q6",sub:"Commercialisation",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:"Evaluate the impact of the increased commercialisation of sport on coaches AND the audience.\n\nUse sporting examples in your answer.",
+  levels:L5,
+  ms:`AO1: Commercialisation = using sport to make a profit/sport as commodity. Involves golden triangle (sport/media/sponsorship). Includes high numbers of professionals, sport as entertainment.
+AO2: More entertainment at events (cheerleaders/half-time). More sport variations (T20/The Hundred). More technology (Hawk-Eye/VAR). Pre/post-match interviews for coaches. Better facilities (St Georges Park). More televised sport (Women's Super League). More financial investment.
+AO3 FOR AUDIENCE Positives: More TV sport → greater understanding. More money → higher standard of play. Technology gives audience insight into decisions. Role models created. More entertainment. NEGATIVES: Subscription channels → not everyone can afford. Ad breaks → disjointed viewing. TV dictates scheduling — not convenient. Rule changes alienate traditionalists. Increased deviance (diving/doping) → reduces enjoyment.
+AO3 FOR COACH Positives: Raises coach profile → role models. Increased salaries/full-time job. Better facilities/equipment → higher standards achievable. NEGATIVES: Increased expectations/pressure to win → job losses. Increased media scrutiny → invasion of privacy. Media obligations → time pressure on coaches.`,
+  er:"Must evaluate BOTH coaches AND audience. Best answers evaluated the impact on each group separately with specific sporting examples throughout. Evaluation must include both positive and negative impacts for each group."},
+
+  {id:"Q7",sub:"Ethics & Fair Play",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:"Evaluate which sporting ethic — sportsmanship or the win ethic — is more evident in professional football.",
+  levels:L4,
+  ms:`AO1: Sportsmanship = abiding by written and unwritten rules/maintaining self-control/fair play/respect for opponents and officials. Win ethic = winning at all costs including increased deviance/gamesmanship. Gamesmanship = bending rules without breaking them.
+AO2 Sportsmanship in football: shaking hands/kicking ball out for injured player/returning ball to opposition/helping injured player up/accepting referee's decisions.
+Win ethic/gamesmanship: deliberate deception/overreacting to challenges/diving for penalties/time-wasting.
+AO3 SPORTSMANSHIP more important: Still encouraged/highlighted in media. Consequences for failing to show sportsmanship (bookings for time-wasting). FIFA Fair Play Award — valued by governing body. Respect campaign — sportsmanship still important.
+WIN ETHIC more important: Large financial rewards → greater win ethic. Increased professionalism → more pressure → more deviance. Win ethic is the most frequently occurring sporting ethic in professional football. Overall, sportsmanship is becoming much less common.`,
+  er:"Must evaluate BOTH sportsmanship and win ethic — and take a position on which is MORE evident in professional football. Best answers acknowledged elements of both but made a clear evaluative judgment. Application must be specific to professional football."},
+
+  {id:"Q8",sub:"Media & Self-Efficacy",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:true,
+  q:"Evaluate the impact the media may have on a professional tennis player's self-efficacy in an upcoming match.\n\nRefer to Bandura's model of self-efficacy in your answer.",
+  levels:L5,
+  ms:`AO1 MEDIA: Radio/TV/satellite/internet/social media. SELF-EFFICACY: Belief in your ability to master a specific sporting situation. BANDURA'S MODEL: Performance accomplishments (most dependable). Vicarious experiences (seeing others do the task). Verbal persuasion. Emotional arousal (interpretation of anxiety effects).
+AO2 Media in tennis: Regularly on TV/major tournaments high viewing figures/players high-profile celebrities/highlights across internet.
+Self-efficacy applied: Performance accomplishments — player previously beaten upcoming opponent. Vicarious — sees similarly ranked player beat upcoming opponent. Verbal persuasion — coach encourages before match. Emotional arousal — player uses stress management for optimal arousal.
+AO3 POSITIVE IMPACT: Performance accomplishments — media highlights player has never lost to opponent (last 10 meetings) → increases self-efficacy. Vicarious — watches similar player beat upcoming opponent on TV → increases self-efficacy. Verbal persuasion — commentators predict player will win → increases self-efficacy. Emotional arousal — autonomous player → increased TV audience → social facilitation → increased self-efficacy.
+NEGATIVE IMPACT: Highlights never beaten opponent → decreases self-efficacy. Vicarious — watches player of similar rank lose to upcoming opponent → decreases self-efficacy. Commentators predict player will lose → decreases self-efficacy. Emotional arousal — autonomous but no experience of large TV audience → too high arousal → decreased self-efficacy.`,
+  er:"⚡ SYNOPTIC — draws on Sport Psychology (Bandura's self-efficacy model) and Sociology (media). Both positive AND negative impacts of media must be evaluated through all four of Bandura's sources. The synoptic link must be explicit — not just two separate sections."},
+
+  {id:"Q9",sub:"Drugs in Sport",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:false,
+  q:"Evaluate the choice made by a professional cyclist to inject EPO rather than just relying on altitude training alone.",
+  levels:L4,
+  ms:`AO1: Altitude training carried out at 2500m+ above sea level — lower pO2 → increased EPO production → increased RBC/haemoglobin/O2 capacity. Synthetic EPO can be manufactured. EPO increases RBC count/oxygen carrying capacity.
+AO2: EPO/altitude training → greater aerobic capacity → maintain speed throughout a stage/race. EPO/altitude → maintain sprint at finish. EPO/altitude → recover more quickly following sprint/hill climb. EPO/altitude → maintain higher intensities longer without fatigue.
+AO3 WHY CHOOSE EPO INJECTION: Can be injected simply/quickly → no interruption to training. Avoids acclimatisation period/sickness/initial reversibility of altitude training. Benefits sustained for long periods → avoids difficulty of peaking with altitude. Avoids long periods away from home → no psychological impact of being away from family/cost of travel.
+WHY NOT CHOOSE EPO INJECTION: BANNED SUBSTANCE → risk of ban/loss of income/damaged reputation. Gives unfair advantage → immoral/unethical/against fair play. Increased risk of blood clots/stroke/fatality.`,
+  er:"Must evaluate BOTH reasons to inject EPO AND reasons not to. Both the practical advantages over altitude training AND the ethical/health/legal reasons against must be covered for top marks."},
+
+  {id:"Q10",sub:"Elite Sport & Support",marks:15,ao:"AO1=4 AO2=5 AO3=6",synoptic:false,
+  q:"Analyse how the support provided by the National Institutes of Sport has helped to improve the performance of elite track cyclists.",
+  levels:L5,
+  ms:`AO1: Sports science support (physiologists/psychologists/biomechanists/performance analysts/nutritionists). Sports medicine and rehabilitation. Lifestyle support/financial advice. High quality facilities. High quality coaching. Cutting edge research and innovation.
+AO2: Sports science → analyse fitness/lactate threshold. Psychology → devise strategies for cyclists' unique needs. Nutritionists → individualised nutritional strategy. Physiotherapy → minimise injury impact. S&C coaches → bespoke periodised programmes. Lifestyle support → sponsorship/media/budgeting. Access to Olympic velodromes. Cutting edge clothing/bikes.
+AO3: Regular fitness monitoring → training effective/peak condition for important competitions. Psychological strategies → cope with pressure → perform at best when it matters. Bespoke nutrition → optimal body composition/recovery from training. Minimising injuries → avoids reversibility → fit to compete at highest level. Bespoke S&C → optimise power-to-weight ratio → cycle faster. Sponsorship/media support → focus fully on training → best performance. Training at Olympic venues → familiar with environment → comfortable when competing. Technical coaching → maximise progress in each session. Cutting edge technology → improved times/average speeds.`,
+  er:"No specific examiner report. Must cover multiple support services and analyse specifically how each leads to improved track cycling performance. AO3 must show the chain: support service → mechanism → specific performance benefit."},
+
+  {id:"Q11",sub:"Media & Participation",marks:8,ao:"AO1=2 AO2=3 AO3=3",synoptic:true,
+  q:"Analyse the positive impacts of increased media coverage of association football on the standard of young players' performances.\n\nRefer to Bandura's observational learning theory in your answer.",
+  levels:L4,
+  ms:`AO1 MEDIA: TV coverage/broadcasting via terrestrial/SKY/BT/internet. Increased coverage through varying media/social media platforms.
+BANDURA'S 4 STAGES: Attention — observer attracted to watch. Retention — learner able to recall the behaviour. Motor reproduction — learner reproduces the behaviour. Motivation — learner is encouraged to repeat behaviour.
+AO2: Attention — Premier League/Champions League significance makes games viewable/well branded. Young players watch role models performing skills/scoring goals. Retention — media coverage repeated/shared reinforces skills. Pundits reinforce/aid retention. Motor reproduction — young players emulate skills/moves of role models. Motivation — coaches/parents encourage/reward imitation of role model skills.
+AO3: Players more effective at dribbling/passing/beating opponents. Greater tactical awareness from watching high-level games. Improved technical range — skills replicated that may not have been taught formally. Role models from diverse backgrounds → increased participation. Increased media = increased desire to emulate = higher personal standards. LIMITATIONS: May also learn negative behaviours (diving/simulation) from role models. Needs reinforcement from coaches for correct motor reproduction.`,
+  er:"⚡ SYNOPTIC — draws on Sport Psychology (Bandura's observational learning) and Sociology (media coverage). Must explicitly link each stage of Bandura's model to how media coverage creates the conditions for that stage. Both the positive impacts AND any limitations should be analysed."},
+];
+
+const SUBTOPICS=[...new Set(QS.map(q=>q.sub))];
+let selSub=null,curQ=null,phase='select',ans='',conv=[],loading=false,currentTab='practice';
+
+function switchTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='practice')||(i===1&&t==='browse')));
+  document.getElementById('practice-panel').style.display=t==='practice'?'':'none';
+  document.getElementById('browse-panel').style.display=t==='browse'?'':'none';
+  if(t==='browse')renderBrowse();
+  if(t==='practice')renderPractice();
+}
+
+function toggleLevelGuide(){
+  const body=document.getElementById('level-guide-body');
+  const arrow=document.getElementById('level-arrow');
+  if(body){body.style.display=body.style.display==='none'?'block':'none';}
+  if(arrow){arrow.textContent=body.style.display==='none'?'▼':'▲';}
+}
+
+function renderPractice(){
+  const p=document.getElementById('practice-panel');
+  if(phase==='select'){
+    const counts={};QS.forEach(q=>{counts[q.sub]=(counts[q.sub]||0)+1;});
+    p.innerHTML=`
+      <div class="tip-box"><div class="tip-label">💡 Extended Response Marking</div>These questions are marked holistically using level descriptors. Aim to blend AO1+AO2+AO3 within sentences. Synoptic questions (⚡) draw on content from more than one topic area.</div>
+      <div class="section-title">Select a topic area</div>
+      <div class="topic-grid">${SUBTOPICS.map(s=>{const qs=QS.filter(q=>q.sub===s);const has8=qs.some(q=>q.marks===8);const has15=qs.some(q=>q.marks===15);const hasSyn=qs.some(q=>q.synoptic);return`
+        <div class="topic-card${selSub===s?' sel':''}" onclick="selSub='${s}';renderPractice()">
+          <div class="tc-name">${s}</div>
+          <div class="tc-sub">${qs.length} question${qs.length>1?'s':''}${has8&&has15?' · 8 & 15m':has15?' · 15 mark':' · 8 mark'}${hasSyn?' · ⚡':''}</div>
+        </div>`;}).join('')}
+      </div>
+      <div style="font-size:12px;color:#888;margin-top:.25rem;">⚡ = synoptic question</div>
+      ${selSub?`<div class="btn-row" style="margin-top:.75rem;"><button class="btn primary" onclick="startQ()">Get a question &rarr;</button><button class="btn" onclick="selSub=null;renderPractice()">Clear</button></div>`:''}`;
+  } else if(phase==='answer'){
+    const levelRows=curQ.levels.map(l=>`<div class="level-row"><div class="level-num">Level ${l.l}</div><div class="level-marks">${l.r} marks</div><div>${l.d}</div></div>`).join('');
+    p.innerHTML=`
+      <div class="meta">
+        <button class="btn" onclick="phase='select';renderPractice()">&#8592; Back</button>
+        <span class="badge ${curQ.marks===8?'b-8':'b-15'}">${curQ.marks} marks</span>
+        <span class="badge b-ao">${curQ.ao}</span>
+        ${curQ.synoptic?'<span class="badge b-syn">⚡ Synoptic</span>':''}
+        <span style="font-size:12px;color:#888;">${curQ.id} &middot; ${curQ.sub}</span>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="level-guide">
+        <div class="level-guide-header" onclick="toggleLevelGuide()"><span>Level Descriptors</span><span id="level-arrow">▼</span></div>
+        <div class="level-guide-body" id="level-guide-body">${levelRows}</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label class="label">Your answer — write in continuous prose (aim for ${curQ.marks===8?'~200-250':'~350-450'} words)</label>
+        <textarea id="ansbox" rows="${curQ.marks===8?10:15}" placeholder="Write your answer here...">${ans}</textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" onclick="submitAns()">Submit for marking &rarr;</button>
+        <button class="btn" onclick="newQ()">Different question</button>
+      </div>`;
+    const box=document.getElementById('ansbox');
+    if(box)box.addEventListener('input',e=>ans=e.target.value);
+  } else if(phase==='feedback'){
+    p.innerHTML=`
+      <div class="meta" style="margin-bottom:1rem;">
+        <button class="btn" onclick="phase='answer';renderPractice()">&#8592; Edit answer</button>
+        <button class="btn" onclick="phase='select';conv=[];ans='';renderPractice()">New topic</button>
+        <button class="btn" onclick="newQ()">Next question</button>
+      </div>
+      <div class="qbox">${curQ.q}</div>
+      ${curQ.diagram?`<div style="background:#fff;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;">${curQ.diagram}</div>`:''}
+      <div class="card"><div class="msg-role">Your answer</div><div class="msg-text">${ans}</div></div>
+      <div class="card" id="fb-card">
+        <div class="msg-role">Examiner feedback</div>
+        <div id="fb-content" style="font-size:14px;line-height:1.75;white-space:pre-wrap;">${loading?'<span class="spinner"></span>Applying level descriptors...':''}</div>
+        ${curQ.er?`<div class="er-box" id="er-box" style="display:none;"><div class="er-label">📄 Examiner Report</div><div class="er-text">${curQ.er}</div></div>`:''}
+      </div>
+      ${!loading&&conv.length>0?`
+        <div class="card" id="fu-card" style="display:none;"><div id="fu-msgs"></div></div>
+        <div class="fu-row"><input type="text" id="fu-input" placeholder="Ask a follow-up question..." /><button class="btn primary" onclick="sendFU()">Ask &rarr;</button></div>`:''}`;
+  }
+}
+
+function startQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+function newQ(){const pool=QS.filter(q=>q.sub===selSub);curQ=pool[Math.floor(Math.random()*pool.length)];ans='';conv=[];phase='answer';renderPractice();}
+
+async function submitAns(){
+  if(!ans.trim())return;
+  phase='feedback';loading=true;renderPractice();
+  const levelDescriptors=curQ.levels.map(l=>`Level ${l.l} (${l.r} marks): ${l.d}`).join('\n');
+  const sys=`You are an experienced AQA A-Level Physical Education senior examiner, expert in extended response marking for Sociology of Sport.
+CRITICAL: This is a LEVEL-MARKED question. Mark HOLISTICALLY using level descriptors. Do NOT count individual points.
+QUESTION: ${curQ.q}
+TOTAL MARKS: ${curQ.marks}
+AO BREAKDOWN: ${curQ.ao}
+${curQ.marks===8?'This is a 4-level question.':'This is a 5-level question.'}
+${curQ.synoptic?'SYNOPTIC QUESTION: This draws on content from more than one area of the specification. Strong answers must integrate knowledge from both areas explicitly.':''}
+LEVEL DESCRIPTORS:
+${levelDescriptors}
+KEY PRINCIPLES: AO1=knowledge accuracy/detail. AO2=application to specific context. AO3=coherent evaluation/analysis. BLENDING AO1+AO2+AO3 in same sentences = top levels.
+MARK SCHEME:
+${curQ.ms}
+EXAMINER REPORT:
+${curQ.er}
+FEEDBACK FORMAT:
+LEVEL AWARDED: Level [X] — [X] / ${curQ.marks} marks
+WHY THIS LEVEL: [Holistic explanation referencing specific things the student wrote]
+WHAT KEPT THIS FROM A HIGHER LEVEL: [Precise gap]
+AO BALANCE:
+AO1 Knowledge: [Weak/Developing/Secure/Strong]
+AO2 Application: [Weak/Developing/Secure/Strong]
+AO3 Evaluation: [Weak/Developing/Secure/Strong]
+EXAMINER REPORT COMMENTARY: [How student compares to typical candidates]
+TO REACH THE NEXT LEVEL: [Specific advice with an example of how to upgrade one of their existing points]`;
+  const messages=[{role:'user',content:`Question ${curQ.id} (${curQ.marks} marks, ${curQ.ao}):\n${curQ.q}\n\nStudent's answer:\n${ans}`}];
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:1000,system:sys,messages})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||JSON.stringify(data);
+    conv=[{role:'user',content:messages[0].content},{role:'assistant',content:text}];
+    loading=false;renderPractice();
+    const el=document.getElementById('fb-content');if(el)el.textContent=text;
+    const er=document.getElementById('er-box');if(er)er.style.display='';
+    const fu=document.getElementById('fu-card');if(fu)fu.style.display='';
+  }catch(e){loading=false;const el=document.getElementById('fb-content');if(el)el.textContent='Error: '+e.message;}
+}
+
+async function sendFU(){
+  const input=document.getElementById('fu-input');
+  if(!input||!input.value.trim())return;
+  const q=input.value.trim();input.value='';
+  const fuMsgs=document.getElementById('fu-msgs');
+  const fuCard=document.getElementById('fu-card');
+  if(fuCard)fuCard.style.display='';
+  if(fuMsgs){fuMsgs.innerHTML+=`<div class="msg"><div class="msg-role">You</div><div class="msg-text">${q}</div></div><div class="msg" id="fu-loading"><div class="msg-role">Tutor</div><div class="msg-text"><span class="spinner"></span>Thinking...</div></div>`;}
+  const sys=`You are an AQA A-Level PE senior examiner providing follow-up tutoring on Sociology extended responses. The question was: "${curQ.q}" (${curQ.marks} marks). Help the student understand how to improve their level placement.`;
+  const msgs=conv.map(m=>({role:m.role,content:m.content}));msgs.push({role:'user',content:q});
+  try{
+    const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:500,system:sys,messages:msgs})});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'';
+    conv.push({role:'user',content:q},{role:'assistant',content:text});
+    const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent=text;
+  }catch(e){const l=document.getElementById('fu-loading');if(l)l.querySelector('.msg-text').textContent='Error.';}
+}
+
+function renderBrowse(){
+  const p=document.getElementById('browse-panel');
+  const byTopic={};QS.forEach(q=>{if(!byTopic[q.sub])byTopic[q.sub]=[];byTopic[q.sub].push(q);});
+  p.innerHTML=Object.keys(byTopic).map(sub=>`
+    <div class="section-title">${sub}</div>
+    <div class="card" style="margin-bottom:1.25rem;">${byTopic[sub].map(q=>`
+      <div class="q-item">
+        <div class="q-num">${q.id}</div>
+        <div class="q-txt">${q.q.split('\n')[0].substring(0,80)}...</div>
+        <div class="q-actions">
+          <span class="badge ${q.marks===8?'b-8':'b-15'}">${q.marks}m</span>
+          ${q.synoptic?'<span class="badge b-syn">⚡</span>':''}
+          <button class="btn" style="font-size:12px;padding:4px 10px;" onclick="practiseQ('${q.id}')">Practise</button>
+        </div>
+      </div>`).join('')}
+    </div>`).join('');
+}
+
+function practiseQ(id){curQ=QS.find(q=>q.id===id);selSub=curQ.sub;ans='';conv=[];phase='answer';switchTab('practice');}
+renderPractice();
+</script>
+</body>
+</html>
