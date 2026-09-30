@@ -101,9 +101,14 @@ const AREA_KEY='skill', AREA_AO=2;
 const _tp=new URLSearchParams(location.search);
 const STU_ID=_tp.get('sid'), STU_PIN=_tp.get('pin');
 function extractPct(t){
-  var m=t.match(/AWARDED:?\s*\[?(\d+)\]?\s*\/\s*\[?(\d+)\]?/i);
-  if(!m) m=t.match(/(\d+)\s*\/\s*(\d+)\s*marks/i);
-  if(!m) m=t.match(/[\u2014-]\s*(\d+)\s*\/\s*(\d+)/);
+  var norm=t.replace(/\[|\]/g,'').replace(/\bout of\b/gi,'/');
+  var lv=norm.match(/LEVEL\s+AWARDED:?\s*Level\s*\d+\s*[\u2014\u2013-]\s*(\d+)\s*marks?\s*\/\s*(\d+)/i);
+  if(!lv) lv=norm.match(/LEVEL\s+AWARDED:?\s*Level\s*\d+\s*[\u2014\u2013-]\s*(\d+)\s*\/\s*(\d+)\s*marks?/i);
+  if(lv){var a=+lv[1],b=+lv[2];if(b>0)return Math.round(a/b*100);}
+  var m=norm.match(/AWARDED:?\s*(\d+)\s*\/\s*(\d+)/i);
+  if(!m) m=norm.match(/(\d+)\s*marks?\s*\/\s*(\d+)/i);
+  if(!m) m=norm.match(/(\d+)\s*\/\s*(\d+)\s*marks/i);
+  if(!m) m=norm.match(/[\u2014\u2013-]\s*(\d+)\s*\/\s*(\d+)/);
   if(m){var a=+m[1],b=+m[2];if(b>0)return Math.round(a/b*100);}
   return null;
 }
